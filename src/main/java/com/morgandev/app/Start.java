@@ -1,7 +1,7 @@
 package com.morgandev.app;
 
-import com.morgandev.app.gen.SQLiteLexer;
-import com.morgandev.app.gen.SQLiteParser;
+import com.morgandev.app.gen.MapleLexer;
+import com.morgandev.app.gen.MapleParser;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -11,13 +11,13 @@ public class Start {
 
     public static void main(String[] args) {
         try {
-            CharStream cs = CharStreams.fromString("SELECT nombre, apellido FROM personas p WHERE name = 'asd' AND apellido = 'bah';");
-            SQLiteLexer lexer = new SQLiteLexer(cs);
+            CharStream cs = CharStreams.fromString("Personas > nombre, (dni > numero) <> Alumno a <> Colegio;");
+            MapleLexer lexer = new MapleLexer(cs);
             CommonTokenStream token = new CommonTokenStream(lexer);
-            SQLiteParser parser = new SQLiteParser(token);
-            ParseTree tree = parser.select_or_values();
+            MapleParser parser = new MapleParser(token);
+            ParseTree tree = parser.maple_stmt();
 
-            CustomVisitor visitor = new CustomVisitor();
+            MapleCustomVisitor visitor = new MapleCustomVisitor();
             String val = visitor.visit(tree);
             System.out.println(val);
 

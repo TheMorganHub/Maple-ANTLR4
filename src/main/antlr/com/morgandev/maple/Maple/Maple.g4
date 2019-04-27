@@ -5,10 +5,15 @@ maple_stmt_list
  ;
 
 maple_stmt
- : ( select_stmt
+ : ( create_table_stmt
+ | select_stmt
  | insert_stmt
  | update_stmt
- | embedded_sql)
+ | embedded_sql )
+ ;
+
+create_table_stmt
+ : table_name K_CREATE_TABLE ( any_column_definition ( ',' any_column_definition )*? )*?
  ;
 
 update_stmt
@@ -26,7 +31,12 @@ insert_stmt
  ;
 
 select_stmt
- : table_name table_alias? (K_SELECT result_column ( ',' result_column )*?)? (conditional)?
+ : table_name table_alias? ( K_SELECT result_column ( ',' result_column )*? )? (join_stmt)*? (conditional)?
+ ;
+
+ join_stmt
+ : K_JOIN ('(' select_stmt ')' table_alias
+ | table_name table_alias? )
  ;
 
 conditional
@@ -41,7 +51,7 @@ expr
   | expr ( '+' | '-' ) expr
   | expr ( '<<' | '>>' | '&' | '|' ) expr
   | expr ( '<' | '<=' | '>' | '>=' ) expr
-  | expr ( '=' | '==' | '!=' | '<>' | K_IS | K_IS K_NOT | K_IN | K_LIKE | K_GLOB | K_MATCH | K_REGEXP ) expr
+  | expr ( '=' | '==' | '!=' | K_IS | K_IS K_NOT | K_IN | K_LIKE | K_MATCH | K_REGEXP ) expr
   | expr 'AND' expr
   | expr 'OR' expr
   | function_name '(' ( expr ( ',' expr )* | '*')? ')'
@@ -62,6 +72,15 @@ result_column
  : '*'
  | table_name '.' '*'
  | expr
+ ;
+
+any_column_definition
+ : ( column_name
+ | null_column_name ) ( '(' any_stmt ')' )
+ ;
+
+null_column_name
+ : column_name '?'
  ;
 
 column_name
@@ -94,16 +113,18 @@ any_name
  ;
 
 embedded_sql
- : K_OPEN_SQL_STMT any_sql_stmt K_CLOSE_SQL_STMT
+ : K_OPEN_SQL_STMT any_stmt K_CLOSE_SQL_STMT
  ;
 
-any_sql_stmt
+any_stmt
  : .*?
  ;
 
 K_SELECT : '>';
 K_INSERT : '<';
 K_UPDATE : '<<';
+K_JOIN : '<>';
+K_CREATE_TABLE : '+';
 K_OPEN_SQL_STMT : '<?';
 K_CLOSE_SQL_STMT : '?>';
 
