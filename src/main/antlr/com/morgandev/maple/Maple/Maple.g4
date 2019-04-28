@@ -46,18 +46,15 @@ conditional
 expr
   : literal_value
   | ( ( database_name '.' )? table_name '.' )? column_name
-  | expr '||' expr
-  | expr ( '*' | '/' | '%' ) expr
-  | expr ( '+' | '-' ) expr
-  | expr ( '<<' | '>>' | '&' | '|' ) expr
-  | expr ( '<' | '<=' | '>' | '>=' ) expr
-  | expr ( '=' | '==' | '!=' | K_IS | K_IS K_NOT | K_IN | K_LIKE | K_MATCH | K_REGEXP ) expr
-  | expr 'AND' expr
-  | expr 'OR' expr
+  | left=expr operator=( '*' | '/' | '%' ) right=expr
+  | left=expr operator=( '+' | '-' ) right=expr
+  | left=expr operator=( '=' | '==' | '!=' | '<' | '<=' | '>' | '>=' | K_IS | K_IN | K_LIKE ) right=expr
+  | left=expr operator='AND' right=expr
+  | left=expr operator='OR' right=expr
   | function_name '(' ( expr ( ',' expr )* | '*')? ')'
   | '(' select_stmt ')'
   | '(' expr ')'
-  | expr K_NOT? ( K_LIKE | K_GLOB | K_REGEXP | K_MATCH ) expr ( K_ESCAPE expr )?
+  | expr K_NOT? ( K_LIKE ) expr
   | expr ( K_ISNULL | K_NOTNULL | K_NOT K_NULL )
   | expr K_IS K_NOT? expr
   | expr K_NOT? K_BETWEEN expr K_AND expr
@@ -127,8 +124,11 @@ K_JOIN : '<>';
 K_CREATE_TABLE : '+';
 K_OPEN_SQL_STMT : '<?';
 K_CLOSE_SQL_STMT : '?>';
+K_EQUALS : '=';
+K_WHERE : '?';
 
 K_AND : A N D;
+K_BETWEEN : B E T W E E N;
 K_IN : I N;
 K_INNER : I N N E R;
 K_INTO : I N T O;
@@ -147,7 +147,6 @@ K_ON : O N;
 K_OR : O R;
 K_VIRTUAL : V I R T U A L;
 K_WHEN : W H E N;
-K_WHERE : '?';
 K_WITH : W I T H;
 K_WITHOUT : W I T H O U T;
 

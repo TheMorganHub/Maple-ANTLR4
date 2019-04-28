@@ -19,12 +19,12 @@ public class MapleLexer extends Lexer {
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
 		T__9=10, T__10=11, T__11=12, T__12=13, T__13=14, T__14=15, T__15=16, T__16=17, 
-		T__17=18, T__18=19, T__19=20, K_SELECT=21, K_INSERT=22, K_UPDATE=23, K_JOIN=24, 
-		K_CREATE_TABLE=25, K_OPEN_SQL_STMT=26, K_CLOSE_SQL_STMT=27, K_AND=28, 
-		K_IN=29, K_INNER=30, K_INTO=31, K_IS=32, K_ISNULL=33, K_LIKE=34, K_LIMIT=35, 
-		K_MATCH=36, K_NATURAL=37, K_NO=38, K_NOT=39, K_NOTNULL=40, K_NULL=41, 
-		K_OF=42, K_ON=43, K_OR=44, K_VIRTUAL=45, K_WHEN=46, K_WHERE=47, K_WITH=48, 
-		K_WITHOUT=49, NUMERIC_LITERAL=50, STRING_LITERAL=51, SINGLE_LINE_COMMENT=52, 
+		T__17=18, T__18=19, K_SELECT=20, K_INSERT=21, K_UPDATE=22, K_JOIN=23, 
+		K_CREATE_TABLE=24, K_OPEN_SQL_STMT=25, K_CLOSE_SQL_STMT=26, K_EQUALS=27, 
+		K_AND=28, K_IN=29, K_INNER=30, K_INTO=31, K_IS=32, K_ISNULL=33, K_LIKE=34, 
+		K_LIMIT=35, K_MATCH=36, K_NATURAL=37, K_NO=38, K_NOT=39, K_NOTNULL=40, 
+		K_NULL=41, K_OF=42, K_ON=43, K_OR=44, K_VIRTUAL=45, K_WHEN=46, K_WHERE=47, 
+		K_WITH=48, K_WITHOUT=49, NUMERIC_LITERAL=50, STRING_LITERAL=51, SINGLE_LINE_COMMENT=52, 
 		MULTILINE_COMMENT=53, SPACES=54, WORD=55, DIGIT=56;
 	public static String[] channelNames = {
 		"DEFAULT_TOKEN_CHANNEL", "HIDDEN"
@@ -38,15 +38,14 @@ public class MapleLexer extends Lexer {
 		return new String[] {
 			"T__0", "T__1", "T__2", "T__3", "T__4", "T__5", "T__6", "T__7", "T__8", 
 			"T__9", "T__10", "T__11", "T__12", "T__13", "T__14", "T__15", "T__16", 
-			"T__17", "T__18", "T__19", "K_SELECT", "K_INSERT", "K_UPDATE", "K_JOIN", 
-			"K_CREATE_TABLE", "K_OPEN_SQL_STMT", "K_CLOSE_SQL_STMT", "K_AND", "K_IN", 
-			"K_INNER", "K_INTO", "K_IS", "K_ISNULL", "K_LIKE", "K_LIMIT", "K_MATCH", 
-			"K_NATURAL", "K_NO", "K_NOT", "K_NOTNULL", "K_NULL", "K_OF", "K_ON", 
-			"K_OR", "K_VIRTUAL", "K_WHEN", "K_WHERE", "K_WITH", "K_WITHOUT", "NUMERIC_LITERAL", 
-			"STRING_LITERAL", "SINGLE_LINE_COMMENT", "MULTILINE_COMMENT", "SPACES", 
-			"WORD", "DIGIT", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", 
-			"L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", 
-			"Z"
+			"T__17", "T__18", "K_SELECT", "K_INSERT", "K_UPDATE", "K_JOIN", "K_CREATE_TABLE", 
+			"K_OPEN_SQL_STMT", "K_CLOSE_SQL_STMT", "K_EQUALS", "K_AND", "K_IN", "K_INNER", 
+			"K_INTO", "K_IS", "K_ISNULL", "K_LIKE", "K_LIMIT", "K_MATCH", "K_NATURAL", 
+			"K_NO", "K_NOT", "K_NOTNULL", "K_NULL", "K_OF", "K_ON", "K_OR", "K_VIRTUAL", 
+			"K_WHEN", "K_WHERE", "K_WITH", "K_WITHOUT", "NUMERIC_LITERAL", "STRING_LITERAL", 
+			"SINGLE_LINE_COMMENT", "MULTILINE_COMMENT", "SPACES", "WORD", "DIGIT", 
+			"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", 
+			"O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
@@ -54,23 +53,23 @@ public class MapleLexer extends Lexer {
 	private static String[] makeLiteralNames() {
 		return new String[] {
 			null, "';'", "','", "'.'", "'('", "')'", "'||'", "'*'", "'/'", "'%'", 
-			"'-'", "'>>'", "'&'", "'|'", "'<='", "'>='", "'='", "'=='", "'!='", "'AND'", 
-			"'OR'", "'>'", "'<'", "'<<'", "'<>'", "'+'", "'<?'", "'?>'", null, null, 
+			"'-'", "'>>'", "'&'", "'|'", "'=='", "'!='", "'<='", "'>='", "'AND'", 
+			"'OR'", "'>'", "'<'", "'<<'", "'<>'", "'+'", "'<?'", "'?>'", "'='", null, 
 			null, null, null, null, null, null, null, null, null, null, null, null, 
-			null, null, null, null, null, "'?'"
+			null, null, null, null, null, null, "'?'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
 			null, null, null, null, null, null, null, null, null, null, null, null, 
-			null, null, null, null, null, null, null, null, null, "K_SELECT", "K_INSERT", 
+			null, null, null, null, null, null, null, null, "K_SELECT", "K_INSERT", 
 			"K_UPDATE", "K_JOIN", "K_CREATE_TABLE", "K_OPEN_SQL_STMT", "K_CLOSE_SQL_STMT", 
-			"K_AND", "K_IN", "K_INNER", "K_INTO", "K_IS", "K_ISNULL", "K_LIKE", "K_LIMIT", 
-			"K_MATCH", "K_NATURAL", "K_NO", "K_NOT", "K_NOTNULL", "K_NULL", "K_OF", 
-			"K_ON", "K_OR", "K_VIRTUAL", "K_WHEN", "K_WHERE", "K_WITH", "K_WITHOUT", 
-			"NUMERIC_LITERAL", "STRING_LITERAL", "SINGLE_LINE_COMMENT", "MULTILINE_COMMENT", 
-			"SPACES", "WORD", "DIGIT"
+			"K_EQUALS", "K_AND", "K_IN", "K_INNER", "K_INTO", "K_IS", "K_ISNULL", 
+			"K_LIKE", "K_LIMIT", "K_MATCH", "K_NATURAL", "K_NO", "K_NOT", "K_NOTNULL", 
+			"K_NULL", "K_OF", "K_ON", "K_OR", "K_VIRTUAL", "K_WHEN", "K_WHERE", "K_WITH", 
+			"K_WITHOUT", "NUMERIC_LITERAL", "STRING_LITERAL", "SINGLE_LINE_COMMENT", 
+			"MULTILINE_COMMENT", "SPACES", "WORD", "DIGIT"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -144,9 +143,9 @@ public class MapleLexer extends Lexer {
 		"\tI\4J\tJ\4K\tK\4L\tL\4M\tM\4N\tN\4O\tO\4P\tP\4Q\tQ\4R\tR\4S\tS\3\2\3"+
 		"\2\3\3\3\3\3\4\3\4\3\5\3\5\3\6\3\6\3\7\3\7\3\7\3\b\3\b\3\t\3\t\3\n\3\n"+
 		"\3\13\3\13\3\f\3\f\3\f\3\r\3\r\3\16\3\16\3\17\3\17\3\17\3\20\3\20\3\20"+
-		"\3\21\3\21\3\22\3\22\3\22\3\23\3\23\3\23\3\24\3\24\3\24\3\24\3\25\3\25"+
-		"\3\25\3\26\3\26\3\27\3\27\3\30\3\30\3\30\3\31\3\31\3\31\3\32\3\32\3\33"+
-		"\3\33\3\33\3\34\3\34\3\34\3\35\3\35\3\35\3\35\3\36\3\36\3\36\3\37\3\37"+
+		"\3\21\3\21\3\21\3\22\3\22\3\22\3\23\3\23\3\23\3\23\3\24\3\24\3\24\3\25"+
+		"\3\25\3\26\3\26\3\27\3\27\3\27\3\30\3\30\3\30\3\31\3\31\3\32\3\32\3\32"+
+		"\3\33\3\33\3\33\3\34\3\34\3\35\3\35\3\35\3\35\3\36\3\36\3\36\3\37\3\37"+
 		"\3\37\3\37\3\37\3\37\3 \3 \3 \3 \3 \3!\3!\3!\3\"\3\"\3\"\3\"\3\"\3\"\3"+
 		"\"\3#\3#\3#\3#\3#\3$\3$\3$\3$\3$\3$\3%\3%\3%\3%\3%\3%\3&\3&\3&\3&\3&\3"+
 		"&\3&\3&\3\'\3\'\3\'\3(\3(\3(\3(\3)\3)\3)\3)\3)\3)\3)\3)\3*\3*\3*\3*\3"+
@@ -186,9 +185,9 @@ public class MapleLexer extends Lexer {
 		"\2\t\u00ad\3\2\2\2\13\u00af\3\2\2\2\r\u00b1\3\2\2\2\17\u00b4\3\2\2\2\21"+
 		"\u00b6\3\2\2\2\23\u00b8\3\2\2\2\25\u00ba\3\2\2\2\27\u00bc\3\2\2\2\31\u00bf"+
 		"\3\2\2\2\33\u00c1\3\2\2\2\35\u00c3\3\2\2\2\37\u00c6\3\2\2\2!\u00c9\3\2"+
-		"\2\2#\u00cb\3\2\2\2%\u00ce\3\2\2\2\'\u00d1\3\2\2\2)\u00d5\3\2\2\2+\u00d8"+
-		"\3\2\2\2-\u00da\3\2\2\2/\u00dc\3\2\2\2\61\u00df\3\2\2\2\63\u00e2\3\2\2"+
-		"\2\65\u00e4\3\2\2\2\67\u00e7\3\2\2\29\u00ea\3\2\2\2;\u00ee\3\2\2\2=\u00f1"+
+		"\2\2#\u00cc\3\2\2\2%\u00cf\3\2\2\2\'\u00d3\3\2\2\2)\u00d6\3\2\2\2+\u00d8"+
+		"\3\2\2\2-\u00da\3\2\2\2/\u00dd\3\2\2\2\61\u00e0\3\2\2\2\63\u00e2\3\2\2"+
+		"\2\65\u00e5\3\2\2\2\67\u00e8\3\2\2\29\u00ea\3\2\2\2;\u00ee\3\2\2\2=\u00f1"+
 		"\3\2\2\2?\u00f7\3\2\2\2A\u00fc\3\2\2\2C\u00ff\3\2\2\2E\u0106\3\2\2\2G"+
 		"\u010b\3\2\2\2I\u0111\3\2\2\2K\u0117\3\2\2\2M\u011f\3\2\2\2O\u0122\3\2"+
 		"\2\2Q\u0126\3\2\2\2S\u012e\3\2\2\2U\u0133\3\2\2\2W\u0136\3\2\2\2Y\u0139"+
@@ -208,26 +207,26 @@ public class MapleLexer extends Lexer {
 		"\u00b5\7,\2\2\u00b5\20\3\2\2\2\u00b6\u00b7\7\61\2\2\u00b7\22\3\2\2\2\u00b8"+
 		"\u00b9\7\'\2\2\u00b9\24\3\2\2\2\u00ba\u00bb\7/\2\2\u00bb\26\3\2\2\2\u00bc"+
 		"\u00bd\7@\2\2\u00bd\u00be\7@\2\2\u00be\30\3\2\2\2\u00bf\u00c0\7(\2\2\u00c0"+
-		"\32\3\2\2\2\u00c1\u00c2\7~\2\2\u00c2\34\3\2\2\2\u00c3\u00c4\7>\2\2\u00c4"+
-		"\u00c5\7?\2\2\u00c5\36\3\2\2\2\u00c6\u00c7\7@\2\2\u00c7\u00c8\7?\2\2\u00c8"+
-		" \3\2\2\2\u00c9\u00ca\7?\2\2\u00ca\"\3\2\2\2\u00cb\u00cc\7?\2\2\u00cc"+
-		"\u00cd\7?\2\2\u00cd$\3\2\2\2\u00ce\u00cf\7#\2\2\u00cf\u00d0\7?\2\2\u00d0"+
-		"&\3\2\2\2\u00d1\u00d2\7C\2\2\u00d2\u00d3\7P\2\2\u00d3\u00d4\7F\2\2\u00d4"+
-		"(\3\2\2\2\u00d5\u00d6\7Q\2\2\u00d6\u00d7\7T\2\2\u00d7*\3\2\2\2\u00d8\u00d9"+
-		"\7@\2\2\u00d9,\3\2\2\2\u00da\u00db\7>\2\2\u00db.\3\2\2\2\u00dc\u00dd\7"+
-		">\2\2\u00dd\u00de\7>\2\2\u00de\60\3\2\2\2\u00df\u00e0\7>\2\2\u00e0\u00e1"+
-		"\7@\2\2\u00e1\62\3\2\2\2\u00e2\u00e3\7-\2\2\u00e3\64\3\2\2\2\u00e4\u00e5"+
-		"\7>\2\2\u00e5\u00e6\7A\2\2\u00e6\66\3\2\2\2\u00e7\u00e8\7A\2\2\u00e8\u00e9"+
-		"\7@\2\2\u00e98\3\2\2\2\u00ea\u00eb\5s:\2\u00eb\u00ec\5\u008dG\2\u00ec"+
-		"\u00ed\5y=\2\u00ed:\3\2\2\2\u00ee\u00ef\5\u0083B\2\u00ef\u00f0\5\u008d"+
-		"G\2\u00f0<\3\2\2\2\u00f1\u00f2\5\u0083B\2\u00f2\u00f3\5\u008dG\2\u00f3"+
-		"\u00f4\5\u008dG\2\u00f4\u00f5\5{>\2\u00f5\u00f6\5\u0095K\2\u00f6>\3\2"+
-		"\2\2\u00f7\u00f8\5\u0083B\2\u00f8\u00f9\5\u008dG\2\u00f9\u00fa\5\u0099"+
-		"M\2\u00fa\u00fb\5\u008fH\2\u00fb@\3\2\2\2\u00fc\u00fd\5\u0083B\2\u00fd"+
-		"\u00fe\5\u0097L\2\u00feB\3\2\2\2\u00ff\u0100\5\u0083B\2\u0100\u0101\5"+
-		"\u0097L\2\u0101\u0102\5\u008dG\2\u0102\u0103\5\u009bN\2\u0103\u0104\5"+
-		"\u0089E\2\u0104\u0105\5\u0089E\2\u0105D\3\2\2\2\u0106\u0107\5\u0089E\2"+
-		"\u0107\u0108\5\u0083B\2\u0108\u0109\5\u0087D\2\u0109\u010a\5{>\2\u010a"+
+		"\32\3\2\2\2\u00c1\u00c2\7~\2\2\u00c2\34\3\2\2\2\u00c3\u00c4\7?\2\2\u00c4"+
+		"\u00c5\7?\2\2\u00c5\36\3\2\2\2\u00c6\u00c7\7#\2\2\u00c7\u00c8\7?\2\2\u00c8"+
+		" \3\2\2\2\u00c9\u00ca\7>\2\2\u00ca\u00cb\7?\2\2\u00cb\"\3\2\2\2\u00cc"+
+		"\u00cd\7@\2\2\u00cd\u00ce\7?\2\2\u00ce$\3\2\2\2\u00cf\u00d0\7C\2\2\u00d0"+
+		"\u00d1\7P\2\2\u00d1\u00d2\7F\2\2\u00d2&\3\2\2\2\u00d3\u00d4\7Q\2\2\u00d4"+
+		"\u00d5\7T\2\2\u00d5(\3\2\2\2\u00d6\u00d7\7@\2\2\u00d7*\3\2\2\2\u00d8\u00d9"+
+		"\7>\2\2\u00d9,\3\2\2\2\u00da\u00db\7>\2\2\u00db\u00dc\7>\2\2\u00dc.\3"+
+		"\2\2\2\u00dd\u00de\7>\2\2\u00de\u00df\7@\2\2\u00df\60\3\2\2\2\u00e0\u00e1"+
+		"\7-\2\2\u00e1\62\3\2\2\2\u00e2\u00e3\7>\2\2\u00e3\u00e4\7A\2\2\u00e4\64"+
+		"\3\2\2\2\u00e5\u00e6\7A\2\2\u00e6\u00e7\7@\2\2\u00e7\66\3\2\2\2\u00e8"+
+		"\u00e9\7?\2\2\u00e98\3\2\2\2\u00ea\u00eb\5s:\2\u00eb\u00ec\5\u008dG\2"+
+		"\u00ec\u00ed\5y=\2\u00ed:\3\2\2\2\u00ee\u00ef\5\u0083B\2\u00ef\u00f0\5"+
+		"\u008dG\2\u00f0<\3\2\2\2\u00f1\u00f2\5\u0083B\2\u00f2\u00f3\5\u008dG\2"+
+		"\u00f3\u00f4\5\u008dG\2\u00f4\u00f5\5{>\2\u00f5\u00f6\5\u0095K\2\u00f6"+
+		">\3\2\2\2\u00f7\u00f8\5\u0083B\2\u00f8\u00f9\5\u008dG\2\u00f9\u00fa\5"+
+		"\u0099M\2\u00fa\u00fb\5\u008fH\2\u00fb@\3\2\2\2\u00fc\u00fd\5\u0083B\2"+
+		"\u00fd\u00fe\5\u0097L\2\u00feB\3\2\2\2\u00ff\u0100\5\u0083B\2\u0100\u0101"+
+		"\5\u0097L\2\u0101\u0102\5\u008dG\2\u0102\u0103\5\u009bN\2\u0103\u0104"+
+		"\5\u0089E\2\u0104\u0105\5\u0089E\2\u0105D\3\2\2\2\u0106\u0107\5\u0089"+
+		"E\2\u0107\u0108\5\u0083B\2\u0108\u0109\5\u0087D\2\u0109\u010a\5{>\2\u010a"+
 		"F\3\2\2\2\u010b\u010c\5\u0089E\2\u010c\u010d\5\u0083B\2\u010d\u010e\5"+
 		"\u008bF\2\u010e\u010f\5\u0083B\2\u010f\u0110\5\u0099M\2\u0110H\3\2\2\2"+
 		"\u0111\u0112\5\u008bF\2\u0112\u0113\5s:\2\u0113\u0114\5\u0099M\2\u0114"+

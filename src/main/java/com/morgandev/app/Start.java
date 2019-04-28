@@ -11,7 +11,7 @@ public class Start {
 
     public static void main(String[] args) {
         try {
-            CharStream cs = CharStreams.fromString("Personas > nombre, (dni > numero) <> Alumno a <> Colegio;");
+            CharStream cs = CharStreams.fromString("Personas p > nombre, apellido ? p.id > 4;");
             MapleLexer lexer = new MapleLexer(cs);
             CommonTokenStream token = new CommonTokenStream(lexer);
             MapleParser parser = new MapleParser(token);

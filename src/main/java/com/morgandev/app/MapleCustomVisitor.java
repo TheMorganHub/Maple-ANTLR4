@@ -43,12 +43,17 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
             i++;
         }
 
-        selectStmt += " FROM " + tableName + " " + tableAlias;
+        selectStmt += " FROM " + tableName + " " + (tableAlias.isEmpty() ? "" : tableAlias + " ");
 
         List<MapleParser.Join_stmtContext> joinContexts = ctx.join_stmt();
 
         for (MapleParser.Join_stmtContext joinCtx : joinContexts) {
             selectStmt += visit(joinCtx);
+        }
+
+        MapleParser.ConditionalContext conditionalContext = ctx.conditional();
+        if (conditionalContext != null) {
+            selectStmt += visit(conditionalContext);
         }
 
         return selectStmt;
@@ -89,7 +94,7 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
             join += "(" + visit(selectStmtCtx) + ") ";
         }
 
-        join += " ON " + lastVisitedTable + ".id_" + currentTable + " = " + currentTable + ".id";
+        join += " ON " + lastVisitedTable + ".id_" + currentTable + " = " + currentTable + ".id ";
 
         return join;
     }
@@ -108,5 +113,19 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
         lastTableAlias = currentTableAlias == null ? tableAlias : currentTableAlias;
         currentTableAlias = tableAlias;
         return tableAlias;
+    }
+
+    @Override
+    public String visitConditional(MapleParser.ConditionalContext ctx) {
+        return "WHERE (" + visit(ctx.expr()) + ")";
+    }
+
+    @Override
+    public String visitExpr(MapleParser.ExprContext ctx) {
+        if (ctx.select_stmt() != null) {
+            return "(" + visit(ctx.select_stmt()) + ")";
+        }
+
+        return (ctx.left != null ? visit(ctx.left) : ctx.getText()) + (ctx.operator != null ? ctx.operator.getText() : "") + " " + (ctx.right != null ? visit(ctx.right) : "");
     }
 }
