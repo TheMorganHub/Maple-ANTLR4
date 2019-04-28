@@ -45,24 +45,15 @@ conditional
 
 expr
   : literal_value
-  | ( ( database_name '.' )? table_name '.' )? column_name
+  | ( ( database_name '.' )? table_name operator='.' )? column_name
   | left=expr operator=( '*' | '/' | '%' ) right=expr
   | left=expr operator=( '+' | '-' ) right=expr
-  | left=expr operator=( '=' | '==' | '!=' | '<' | '<=' | '>' | '>=' | K_IS | K_IN | K_LIKE ) right=expr
+  | left=expr operator=( '=' | '==' | '!=' | '<' | '<=' | '>' | '>=' | K_IS | K_ISNOT | K_LIKE | K_ISNOTNULL | K_ISNULL | K_NOTLIKE | K_NOTIN | K_IN | K_BETWEEN | K_NOTBETWEEN ) right=expr
   | left=expr operator='AND' right=expr
   | left=expr operator='OR' right=expr
   | function
   | '(' select_stmt ')'
   | '(' expr ')'
-  | expr K_NOT? ( K_LIKE ) expr
-  | expr ( K_ISNULL | K_NOTNULL | K_NOT K_NULL )
-  | expr K_IS K_NOT? expr
-  | expr K_NOT? K_BETWEEN expr K_AND expr
-  | expr K_NOT? K_IN ( '(' ( select_stmt
-                           | expr ( ',' expr )*
-                           )?
-                       ')'
-                     | ( database_name '.' )? table_name )
   ;
 
 function
@@ -131,24 +122,25 @@ K_CLOSE_SQL_STMT : '?>';
 K_WHERE : '?';
 
 K_AND : A N D;
+K_NOTBETWEEN : K_NOT SPACES+ K_BETWEEN;
 K_BETWEEN : B E T W E E N;
 K_IN : I N;
 K_INNER : I N N E R;
 K_INTO : I N T O;
 K_IS : I S;
-K_ISNULL : I S N U L L;
+K_ISNULL : I S SPACES+ N U L L;
+K_ISNOTNULL : K_ISNOT K_NULL;
+K_ISNOT : I S SPACES+ N O T;
+K_NOTIN: N O T SPACES+ I N;
+K_NOTLIKE: N O T SPACES+ K_LIKE;
 K_LIKE : L I K E;
 K_LIMIT : L I M I T;
-K_MATCH : M A T C H;
-K_NATURAL : N A T U R A L;
-K_NO : N O;
 K_NOT : N O T;
-K_NOTNULL : N O T N U L L;
+K_NOTNULL : N O T SPACES+ N U L L;
 K_NULL : N U L L;
 K_OF : O F;
 K_ON : O N;
 K_OR : O R;
-K_VIRTUAL : V I R T U A L;
 K_WHEN : W H E N;
 K_WITH : W I T H;
 K_WITHOUT : W I T H O U T;

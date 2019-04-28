@@ -125,6 +125,18 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
         if (ctx.function() != null) {
             return visit(ctx.function());
         }
+        if (ctx.database_name() != null || ctx.table_name() != null || ctx.column_name() != null) {
+            MapleParser.Database_nameContext databaseName = ctx.database_name();
+            MapleParser.Table_nameContext tableName = ctx.table_name();
+            MapleParser.Column_nameContext columnName = ctx.column_name();
+
+            return (databaseName != null ? databaseName.getText() + "." : "")
+                    + (tableName != null ? tableName.getText() + "." : "")
+                    + (columnName != null ? columnName.getText() : "");
+        }
+        if (ctx.table_name() != null) {
+            return ctx.table_name().getText() + ".";
+        }
         if (ctx.column_name() != null) {
             return ctx.column_name().getText();
         }
