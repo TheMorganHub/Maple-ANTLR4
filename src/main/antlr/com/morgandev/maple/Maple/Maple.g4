@@ -51,7 +51,7 @@ expr
   | left=expr operator=( '=' | '==' | '!=' | '<' | '<=' | '>' | '>=' | K_IS | K_IN | K_LIKE ) right=expr
   | left=expr operator='AND' right=expr
   | left=expr operator='OR' right=expr
-  | function_name '(' ( expr ( ',' expr )* | '*')? ')'
+  | function
   | '(' select_stmt ')'
   | '(' expr ')'
   | expr K_NOT? ( K_LIKE ) expr
@@ -64,6 +64,10 @@ expr
                        ')'
                      | ( database_name '.' )? table_name )
   ;
+
+function
+ : function_name '(' ( expr ( ',' expr )* | '*')? ')'
+ ;
 
 result_column
  : '*'
@@ -124,7 +128,6 @@ K_JOIN : '<>';
 K_CREATE_TABLE : '+';
 K_OPEN_SQL_STMT : '<?';
 K_CLOSE_SQL_STMT : '?>';
-K_EQUALS : '=';
 K_WHERE : '?';
 
 K_AND : A N D;

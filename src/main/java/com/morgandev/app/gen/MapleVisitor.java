@@ -65,6 +65,12 @@ public interface MapleVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExpr(MapleParser.ExprContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link MapleParser#function}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunction(MapleParser.FunctionContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link MapleParser#result_column}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

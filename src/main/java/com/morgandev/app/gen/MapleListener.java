@@ -98,6 +98,16 @@ public interface MapleListener extends ParseTreeListener {
 	 */
 	void exitExpr(MapleParser.ExprContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link MapleParser#function}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunction(MapleParser.FunctionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MapleParser#function}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunction(MapleParser.FunctionContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link MapleParser#result_column}.
 	 * @param ctx the parse tree
 	 */
