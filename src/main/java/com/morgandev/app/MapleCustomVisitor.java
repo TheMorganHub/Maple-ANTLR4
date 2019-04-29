@@ -2,11 +2,12 @@ package com.morgandev.app;
 
 import com.morgandev.app.gen.MapleBaseVisitor;
 import com.morgandev.app.gen.MapleParser;
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.misc.Interval;
 
 import java.util.List;
 
 public class MapleCustomVisitor extends MapleBaseVisitor<String> {
-
 
     private String lastVisitedTable;
     private String currentTable;
@@ -15,23 +16,31 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
 
     @Override
     public String visitMaple_stmt_list(MapleParser.Maple_stmt_listContext ctx) {
-        String mapleStmts = "";
+        StringBuilder mapleStmts = new StringBuilder();
         List<MapleParser.Maple_stmtContext> mapleStmtsContexts = ctx.maple_stmt();
         for (MapleParser.Maple_stmtContext mapleStmtCtx : mapleStmtsContexts) {
-
+            mapleStmts.append(visit(mapleStmtCtx)).append(";");
         }
-        return mapleStmts;
+        return mapleStmts.toString();
     }
 
     @Override
     public String visitEmbedded_sql(MapleParser.Embedded_sqlContext ctx) {
-        return ctx.getText();
+        CharStream cs = ctx.start.getTokenSource().getInputStream();
+        return cs.getText(new Interval(ctx.start.getStopIndex() + 1, ctx.stop.getStartIndex() - 1));
     }
 
     @Override
     public String visitMaple_stmt(MapleParser.Maple_stmtContext ctx) {
         MapleParser.Select_stmtContext select_stmt = ctx.select_stmt();
-        return visit(select_stmt) + ";";
+        MapleParser.Embedded_sqlContext embeddedSqlCtx = ctx.embedded_sql();
+        if (select_stmt != null) {
+            return visit(select_stmt);
+        }
+        if (embeddedSqlCtx != null) {
+            return visit(embeddedSqlCtx);
+        }
+        return "";
     }
 
     @Override
@@ -134,22 +143,13 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
                     + (tableName != null ? tableName.getText() + "." : "")
                     + (columnName != null ? columnName.getText() : "");
         }
-        if (ctx.table_name() != null) {
-            return ctx.table_name().getText() + ".";
-        }
-        if (ctx.column_name() != null) {
-            return ctx.column_name().getText();
-        }
         if (ctx.literal_value() != null) {
             return ctx.literal_value().getText();
         }
 
         //an expression enclosed in parentheses would fall into this category
         if (ctx.left == null && ctx.right == null && ctx.operator == null) {
-            List<MapleParser.ExprContext> exprContexts = ctx.expr();
-            for (MapleParser.ExprContext exprCtx : exprContexts) {
-                return "(" + visit(exprCtx) + ")";
-            }
+            return "(" + visit(ctx.expr(0)) + ")";
         }
 
         return (ctx.left != null ? visit(ctx.left) : ctx.getText()) + (ctx.operator != null ? " " + ctx.operator.getText() : "") + (ctx.right != null ? " " + visit(ctx.right) : "");

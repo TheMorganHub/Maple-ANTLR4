@@ -45,7 +45,7 @@ conditional
 
 expr
   : literal_value
-  | ( ( database_name '.' )? table_name operator='.' )? column_name
+  | ( ( database_name '.' )? table_name '.' )? column_name
   | left=expr operator=( '*' | '/' | '%' ) right=expr
   | left=expr operator=( '+' | '-' ) right=expr
   | left=expr operator=( '=' | '==' | '!=' | '<' | '<=' | '>' | '>=' | K_IS | K_ISNOT | K_LIKE | K_ISNOTNULL | K_ISNULL | K_NOTLIKE | K_NOTIN | K_IN | K_BETWEEN | K_NOTBETWEEN ) right=expr
@@ -76,7 +76,7 @@ null_column_name
  ;
 
 column_name
- : any_name
+ : any_name | '*'
  ;
 
 table_name

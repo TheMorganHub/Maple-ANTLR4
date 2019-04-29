@@ -11,11 +11,11 @@ public class Start {
 
     public static void main(String[] args) {
         try {
-            CharStream cs = CharStreams.fromString("Personas p > nombre ? nombre NOT BETWEEN 'asd' AND 'das' OR bewerk > 5");
+            CharStream cs = CharStreams.fromString("Personas;");
             MapleLexer lexer = new MapleLexer(cs);
             CommonTokenStream token = new CommonTokenStream(lexer);
             MapleParser parser = new MapleParser(token);
-            ParseTree tree = parser.maple_stmt();
+            ParseTree tree = parser.maple_stmt_list();
 
             MapleCustomVisitor visitor = new MapleCustomVisitor();
             String val = visitor.visit(tree);
