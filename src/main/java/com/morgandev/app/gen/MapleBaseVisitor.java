@@ -1,4 +1,4 @@
-// Generated from C:/Users/Morgan/IdeaProjects/AntlrProj/src/main/antlr/com/morgandev/maple/Maple\Maple.g4 by ANTLR 4.7.2
+// Generated from C:/Users/Morgan/IdeaProjects/MapleAntlr/src/main/antlr/com/morgandev/maple/Maple\Maple.g4 by ANTLR 4.7.2
 package com.morgandev.app.gen;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
