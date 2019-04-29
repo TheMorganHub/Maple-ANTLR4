@@ -26,7 +26,7 @@ public class MapleParser extends Parser {
 		K_NOTLIKE=40, K_LIKE=41, K_LIMIT=42, K_NOT=43, K_NOTNULL=44, K_NULL=45, 
 		K_OF=46, K_ON=47, K_OR=48, K_WHEN=49, K_WITH=50, K_WITHOUT=51, NUMERIC_LITERAL=52, 
 		STRING_LITERAL=53, SINGLE_LINE_COMMENT=54, MULTILINE_COMMENT=55, SPACES=56, 
-		UNEXPECTED_CHAR=57, WORD=58, DIGIT=59;
+		WORD=57, UNEXPECTED_CHAR=58;
 	public static final int
 		RULE_parse = 0, RULE_error = 1, RULE_maple_stmt_list = 2, RULE_maple_stmt = 3, 
 		RULE_create_table_stmt = 4, RULE_update_stmt = 5, RULE_insert_stmt = 6, 
@@ -65,7 +65,7 @@ public class MapleParser extends Parser {
 			"K_NOTIN", "K_NOTLIKE", "K_LIKE", "K_LIMIT", "K_NOT", "K_NOTNULL", "K_NULL", 
 			"K_OF", "K_ON", "K_OR", "K_WHEN", "K_WITH", "K_WITHOUT", "NUMERIC_LITERAL", 
 			"STRING_LITERAL", "SINGLE_LINE_COMMENT", "MULTILINE_COMMENT", "SPACES", 
-			"UNEXPECTED_CHAR", "WORD", "DIGIT"
+			"WORD", "UNEXPECTED_CHAR"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -162,7 +162,7 @@ public class MapleParser extends Parser {
 			setState(52);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__0) | (1L << K_OPEN_SQL_STMT) | (1L << UNEXPECTED_CHAR) | (1L << WORD))) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__0) | (1L << K_OPEN_SQL_STMT) | (1L << WORD) | (1L << UNEXPECTED_CHAR))) != 0)) {
 				{
 				setState(50);
 				_errHandler.sync(this);
@@ -2180,7 +2180,7 @@ public class MapleParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3=\u0163\4\2\t\2\4"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3<\u0163\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
@@ -2215,7 +2215,7 @@ public class MapleParser extends Parser {
 		"\u014c\3\2\2\2$\u014e\3\2\2\2&\u0150\3\2\2\2(\u0152\3\2\2\2*\u0154\3\2"+
 		"\2\2,\u0156\3\2\2\2.\u0158\3\2\2\2\60\u015f\3\2\2\2\62\65\5\6\4\2\63\65"+
 		"\5\4\3\2\64\62\3\2\2\2\64\63\3\2\2\2\658\3\2\2\2\66\64\3\2\2\2\66\67\3"+
-		"\2\2\2\679\3\2\2\28\66\3\2\2\29:\7\2\2\3:\3\3\2\2\2;<\7;\2\2<=\b\3\1\2"+
+		"\2\2\2\679\3\2\2\28\66\3\2\2\29:\7\2\2\3:\3\3\2\2\2;<\7<\2\2<=\b\3\1\2"+
 		"=\5\3\2\2\2>@\7\3\2\2?>\3\2\2\2@C\3\2\2\2A?\3\2\2\2AB\3\2\2\2BD\3\2\2"+
 		"\2CA\3\2\2\2DM\5\b\5\2EG\7\3\2\2FE\3\2\2\2GH\3\2\2\2HF\3\2\2\2HI\3\2\2"+
 		"\2IJ\3\2\2\2JL\5\b\5\2KF\3\2\2\2LO\3\2\2\2MK\3\2\2\2MN\3\2\2\2NS\3\2\2"+
@@ -2298,7 +2298,7 @@ public class MapleParser extends Parser {
 		"\2\u0149\u014b\7\b\2\2\u014a\u0148\3\2\2\2\u014a\u0149\3\2\2\2\u014b!"+
 		"\3\2\2\2\u014c\u014d\5,\27\2\u014d#\3\2\2\2\u014e\u014f\5,\27\2\u014f"+
 		"%\3\2\2\2\u0150\u0151\5,\27\2\u0151\'\3\2\2\2\u0152\u0153\5,\27\2\u0153"+
-		")\3\2\2\2\u0154\u0155\t\5\2\2\u0155+\3\2\2\2\u0156\u0157\7<\2\2\u0157"+
+		")\3\2\2\2\u0154\u0155\t\5\2\2\u0155+\3\2\2\2\u0156\u0157\7;\2\2\u0157"+
 		"-\3\2\2\2\u0158\u0159\7\34\2\2\u0159\u015a\5\60\31\2\u015a\u015b\7\35"+
 		"\2\2\u015b/\3\2\2\2\u015c\u015e\13\2\2\2\u015d\u015c\3\2\2\2\u015e\u0161"+
 		"\3\2\2\2\u015f\u0160\3\2\2\2\u015f\u015d\3\2\2\2\u0160\61\3\2\2\2\u0161"+

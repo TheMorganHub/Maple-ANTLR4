@@ -179,12 +179,13 @@ SPACES
  : [ \u000B\t\r\n] -> channel(HIDDEN)
  ;
 
+WORD : ('a'..'z' | 'A'..'Z')+;
+
 UNEXPECTED_CHAR
  : .
  ;
 
-WORD : ('a'..'z' | 'A'..'Z')+;
-DIGIT : [0-9];
+fragment DIGIT : [0-9];
 fragment A : [aA];
 fragment B : [bB];
 fragment C : [cC];
