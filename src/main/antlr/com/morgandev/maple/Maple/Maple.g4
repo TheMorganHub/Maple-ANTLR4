@@ -112,9 +112,11 @@ any_stmt
  : .*?
  ;
 
-K_SELECT : '>';
-K_INSERT : '<';
-K_UPDATE : '<<';
+K_SELECT : '->';
+K_INSERT : '<-';
+K_UPDATE : '<<-';
+K_LEFT_JOIN : '<<>';
+K_RIGHT_JOIN : '<>>';
 K_JOIN : '<>';
 K_CREATE_TABLE : '+';
 K_OPEN_SQL_STMT : '<?';
