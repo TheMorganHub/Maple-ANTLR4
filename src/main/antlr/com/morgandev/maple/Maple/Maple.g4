@@ -1,5 +1,16 @@
 grammar Maple;
 
+parse
+ : ( maple_stmt_list | error )* EOF
+ ;
+
+error
+ : UNEXPECTED_CHAR
+   {
+     throw new RuntimeException("UNEXPECTED_CHAR=" + $UNEXPECTED_CHAR.text);
+   }
+ ;
+
 maple_stmt_list
  : ';'* maple_stmt ( ';'+ maple_stmt )* ';'*
  ;
@@ -166,6 +177,10 @@ MULTILINE_COMMENT
 
 SPACES
  : [ \u000B\t\r\n] -> channel(HIDDEN)
+ ;
+
+UNEXPECTED_CHAR
+ : .
  ;
 
 WORD : ('a'..'z' | 'A'..'Z')+;

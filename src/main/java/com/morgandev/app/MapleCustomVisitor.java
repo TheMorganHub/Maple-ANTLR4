@@ -15,6 +15,11 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
     private String currentTableAlias;
 
     @Override
+    public String visitParse(MapleParser.ParseContext ctx) {
+        return visit(ctx.maple_stmt_list(0));
+    }
+
+    @Override
     public String visitMaple_stmt_list(MapleParser.Maple_stmt_listContext ctx) {
         StringBuilder mapleStmts = new StringBuilder();
         List<MapleParser.Maple_stmtContext> mapleStmtsContexts = ctx.maple_stmt();

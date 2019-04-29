@@ -11,11 +11,11 @@ public class Start {
 
     public static void main(String[] args) {
         try {
-            CharStream cs = CharStreams.fromString("Personas -> nombre ? (nombre > 5 AND (Personas -> nombre) < 5);");
+            CharStream cs = CharStreams.fromString("Personas -> nombre ? (nombre > 5 AND (Personas -> nombre) < 5);Personas;");
             MapleLexer lexer = new MapleLexer(cs);
             CommonTokenStream token = new CommonTokenStream(lexer);
             MapleParser parser = new MapleParser(token);
-            ParseTree tree = parser.maple_stmt_list();
+            ParseTree tree = parser.parse();
 
             MapleCustomVisitor visitor = new MapleCustomVisitor();
             String val = visitor.visit(tree);

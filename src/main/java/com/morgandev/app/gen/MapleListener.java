@@ -8,6 +8,26 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  */
 public interface MapleListener extends ParseTreeListener {
 	/**
+	 * Enter a parse tree produced by {@link MapleParser#parse}.
+	 * @param ctx the parse tree
+	 */
+	void enterParse(MapleParser.ParseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MapleParser#parse}.
+	 * @param ctx the parse tree
+	 */
+	void exitParse(MapleParser.ParseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MapleParser#error}.
+	 * @param ctx the parse tree
+	 */
+	void enterError(MapleParser.ErrorContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MapleParser#error}.
+	 * @param ctx the parse tree
+	 */
+	void exitError(MapleParser.ErrorContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link MapleParser#maple_stmt_list}.
 	 * @param ctx the parse tree
 	 */

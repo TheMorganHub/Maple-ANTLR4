@@ -11,6 +11,18 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  */
 public interface MapleVisitor<T> extends ParseTreeVisitor<T> {
 	/**
+	 * Visit a parse tree produced by {@link MapleParser#parse}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitParse(MapleParser.ParseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MapleParser#error}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitError(MapleParser.ErrorContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link MapleParser#maple_stmt_list}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
