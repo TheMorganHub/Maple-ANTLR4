@@ -12,19 +12,31 @@ error
  ;
 
 maple_stmt_list
- : ';'* maple_stmt ( ';'+ maple_stmt )* ';'*
+ : maple_stmt+
  ;
 
 maple_stmt
- : ( create_table_stmt
- | select_stmt
+ : ( select_stmt
+ | create_table_stmt
  | insert_stmt
  | update_stmt
- | embedded_sql )
+ | embedded_sql ) ';'
  ;
 
+/*
+Personas (
+    nombre? int 5,
+    apellido varchar(255) 'dorquin',
+    grade varchar(255)
+)
+*/
+
 create_table_stmt
- : table_name K_CREATE_TABLE ( any_column_definition ( ',' any_column_definition )*? )*?
+ : table_name '(' ( column_def ( ',' column_def )*? )*? ')' ( foreign_key_create_table )*?
+ ;
+
+foreign_key_create_table
+ : K_JOIN table_name
  ;
 
 update_stmt
@@ -45,7 +57,7 @@ select_stmt
  : table_name table_alias? ( K_SELECT result_column ( ',' result_column )*? )? (join_stmt)*? (conditional)?
  ;
 
- join_stmt
+join_stmt
  : K_JOIN ('(' select_stmt ')' table_alias
  | table_name table_alias? )
  ;
@@ -54,40 +66,51 @@ conditional
  : K_WHERE expr
  ;
 
+column_def
+ : column_name ( column_modifier )? column_type ( default_value )?
+ ;
+
+column_type
+ : ( any_name ( '(' signed_number ')'
+         | '(' signed_number ',' signed_number ')' )? )
+ ;
+
+default_value
+ : ( STRING_LITERAL | NUMERIC_LITERAL )
+ ;
+
 expr
-  : literal_value
-  | ( ( database_name '.' )? table_name '.' )? column_name
-  | left=expr operator=( '*' | '/' | '%' ) right=expr
-  | left=expr operator=( '+' | '-' ) right=expr
-  | left=expr operator=( '=' | '==' | '!=' | '<' | '<=' | '>' | '>=' | K_IS | K_ISNOT | K_LIKE | K_ISNOTNULL | K_ISNULL | K_NOTLIKE | K_NOTIN | K_IN | K_BETWEEN | K_NOTBETWEEN ) right=expr
-  | left=expr operator='AND' right=expr
-  | left=expr operator='OR' right=expr
-  | function
-  | '(' select_stmt ')'
-  | '(' expr ')'
-  ;
+ : literal_value
+ | ( ( database_name '.' )? table_name '.' )? ( column_name )
+ | left=expr operator=( '*' | '/' | '%' ) right=expr
+ | left=expr operator=( '+' | '-' ) right=expr
+ | left=expr operator=( '=' | '==' | '!=' | '<' | '<=' | '>' | '>=' | K_IS | K_ISNOT | K_LIKE | K_ISNOTNULL | K_ISNULL | K_NOTLIKE | K_NOTIN | K_IN | K_BETWEEN | K_NOTBETWEEN ) right=expr
+ | left=expr operator='AND' right=expr
+ | left=expr operator='OR' right=expr
+ | function
+ | '(' select_stmt ')'
+ | '(' expr ')'
+ ;
 
 function
  : function_name '(' ( expr ( ',' expr )* | '*')? ')'
  ;
 
 result_column
- : '*'
- | table_name '.' '*'
- | expr
+ : expr
  ;
 
-any_column_definition
- : ( column_name
- | null_column_name ) ( '(' any_stmt ')' )
- ;
-
-null_column_name
- : column_name '?'
+column_modifier
+ : nullable_column='?'
+ | primary_key='$'
  ;
 
 column_name
- : any_name | '*'
+ : simple_column_name | '*'
+ ;
+
+simple_column_name
+ : any_name
  ;
 
 table_name
@@ -106,13 +129,18 @@ function_name
  : any_name
  ;
 
+signed_number
+ : ( '+' | '-' )? NUMERIC_LITERAL
+ ;
+
 literal_value
  : NUMERIC_LITERAL
  | STRING_LITERAL
  ;
 
 any_name
- : WORD
+ : IDENTIFIER
+ | '(' any_name ')'
  ;
 
 embedded_sql
@@ -123,16 +151,22 @@ any_stmt
  : .*?
  ;
 
+IDENTIFIER
+ : '"' (~'"' | '""')* '"'
+ | '`' (~'`' | '``')* '`'
+ | [a-zA-Z_] [a-zA-Z_0-9]*
+ ;
+
 K_SELECT : '->';
 K_INSERT : '<-';
 K_UPDATE : '<<-';
 K_LEFT_JOIN : '<<>';
 K_RIGHT_JOIN : '<>>';
 K_JOIN : '<>';
-K_CREATE_TABLE : '+';
 K_OPEN_SQL_STMT : '<?';
 K_CLOSE_SQL_STMT : '?>';
 K_WHERE : '?';
+K_PK : '$';
 
 K_AND : A N D;
 K_NOTBETWEEN : K_NOT SPACES+ K_BETWEEN;
@@ -178,8 +212,6 @@ MULTILINE_COMMENT
 SPACES
  : [ \u000B\t\r\n] -> channel(HIDDEN)
  ;
-
-WORD : ('a'..'z' | 'A'..'Z')+;
 
 UNEXPECTED_CHAR
  : .

@@ -41,6 +41,12 @@ public interface MapleVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCreate_table_stmt(MapleParser.Create_table_stmtContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link MapleParser#foreign_key_create_table}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitForeign_key_create_table(MapleParser.Foreign_key_create_tableContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link MapleParser#update_stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -71,6 +77,24 @@ public interface MapleVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitConditional(MapleParser.ConditionalContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link MapleParser#column_def}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitColumn_def(MapleParser.Column_defContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MapleParser#column_type}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitColumn_type(MapleParser.Column_typeContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MapleParser#default_value}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDefault_value(MapleParser.Default_valueContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link MapleParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -89,23 +113,23 @@ public interface MapleVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitResult_column(MapleParser.Result_columnContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link MapleParser#any_column_definition}.
+	 * Visit a parse tree produced by {@link MapleParser#column_modifier}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAny_column_definition(MapleParser.Any_column_definitionContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link MapleParser#null_column_name}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitNull_column_name(MapleParser.Null_column_nameContext ctx);
+	T visitColumn_modifier(MapleParser.Column_modifierContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MapleParser#column_name}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitColumn_name(MapleParser.Column_nameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MapleParser#simple_column_name}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSimple_column_name(MapleParser.Simple_column_nameContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MapleParser#table_name}.
 	 * @param ctx the parse tree
@@ -130,6 +154,12 @@ public interface MapleVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitFunction_name(MapleParser.Function_nameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MapleParser#signed_number}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSigned_number(MapleParser.Signed_numberContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MapleParser#literal_value}.
 	 * @param ctx the parse tree

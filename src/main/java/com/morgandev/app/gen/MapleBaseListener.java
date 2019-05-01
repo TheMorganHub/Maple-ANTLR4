@@ -76,6 +76,18 @@ public class MapleBaseListener implements MapleListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterForeign_key_create_table(MapleParser.Foreign_key_create_tableContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitForeign_key_create_table(MapleParser.Foreign_key_create_tableContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterUpdate_stmt(MapleParser.Update_stmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -136,6 +148,42 @@ public class MapleBaseListener implements MapleListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterColumn_def(MapleParser.Column_defContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitColumn_def(MapleParser.Column_defContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterColumn_type(MapleParser.Column_typeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitColumn_type(MapleParser.Column_typeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDefault_value(MapleParser.Default_valueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDefault_value(MapleParser.Default_valueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterExpr(MapleParser.ExprContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -172,25 +220,13 @@ public class MapleBaseListener implements MapleListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAny_column_definition(MapleParser.Any_column_definitionContext ctx) { }
+	@Override public void enterColumn_modifier(MapleParser.Column_modifierContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAny_column_definition(MapleParser.Any_column_definitionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterNull_column_name(MapleParser.Null_column_nameContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitNull_column_name(MapleParser.Null_column_nameContext ctx) { }
+	@Override public void exitColumn_modifier(MapleParser.Column_modifierContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -203,6 +239,18 @@ public class MapleBaseListener implements MapleListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitColumn_name(MapleParser.Column_nameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSimple_column_name(MapleParser.Simple_column_nameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSimple_column_name(MapleParser.Simple_column_nameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -251,6 +299,18 @@ public class MapleBaseListener implements MapleListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitFunction_name(MapleParser.Function_nameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSigned_number(MapleParser.Signed_numberContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSigned_number(MapleParser.Signed_numberContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

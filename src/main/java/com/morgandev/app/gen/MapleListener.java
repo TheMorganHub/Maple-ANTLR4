@@ -58,6 +58,16 @@ public interface MapleListener extends ParseTreeListener {
 	 */
 	void exitCreate_table_stmt(MapleParser.Create_table_stmtContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link MapleParser#foreign_key_create_table}.
+	 * @param ctx the parse tree
+	 */
+	void enterForeign_key_create_table(MapleParser.Foreign_key_create_tableContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MapleParser#foreign_key_create_table}.
+	 * @param ctx the parse tree
+	 */
+	void exitForeign_key_create_table(MapleParser.Foreign_key_create_tableContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link MapleParser#update_stmt}.
 	 * @param ctx the parse tree
 	 */
@@ -108,6 +118,36 @@ public interface MapleListener extends ParseTreeListener {
 	 */
 	void exitConditional(MapleParser.ConditionalContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link MapleParser#column_def}.
+	 * @param ctx the parse tree
+	 */
+	void enterColumn_def(MapleParser.Column_defContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MapleParser#column_def}.
+	 * @param ctx the parse tree
+	 */
+	void exitColumn_def(MapleParser.Column_defContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MapleParser#column_type}.
+	 * @param ctx the parse tree
+	 */
+	void enterColumn_type(MapleParser.Column_typeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MapleParser#column_type}.
+	 * @param ctx the parse tree
+	 */
+	void exitColumn_type(MapleParser.Column_typeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MapleParser#default_value}.
+	 * @param ctx the parse tree
+	 */
+	void enterDefault_value(MapleParser.Default_valueContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MapleParser#default_value}.
+	 * @param ctx the parse tree
+	 */
+	void exitDefault_value(MapleParser.Default_valueContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link MapleParser#expr}.
 	 * @param ctx the parse tree
 	 */
@@ -138,25 +178,15 @@ public interface MapleListener extends ParseTreeListener {
 	 */
 	void exitResult_column(MapleParser.Result_columnContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MapleParser#any_column_definition}.
+	 * Enter a parse tree produced by {@link MapleParser#column_modifier}.
 	 * @param ctx the parse tree
 	 */
-	void enterAny_column_definition(MapleParser.Any_column_definitionContext ctx);
+	void enterColumn_modifier(MapleParser.Column_modifierContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MapleParser#any_column_definition}.
+	 * Exit a parse tree produced by {@link MapleParser#column_modifier}.
 	 * @param ctx the parse tree
 	 */
-	void exitAny_column_definition(MapleParser.Any_column_definitionContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link MapleParser#null_column_name}.
-	 * @param ctx the parse tree
-	 */
-	void enterNull_column_name(MapleParser.Null_column_nameContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MapleParser#null_column_name}.
-	 * @param ctx the parse tree
-	 */
-	void exitNull_column_name(MapleParser.Null_column_nameContext ctx);
+	void exitColumn_modifier(MapleParser.Column_modifierContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MapleParser#column_name}.
 	 * @param ctx the parse tree
@@ -167,6 +197,16 @@ public interface MapleListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitColumn_name(MapleParser.Column_nameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MapleParser#simple_column_name}.
+	 * @param ctx the parse tree
+	 */
+	void enterSimple_column_name(MapleParser.Simple_column_nameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MapleParser#simple_column_name}.
+	 * @param ctx the parse tree
+	 */
+	void exitSimple_column_name(MapleParser.Simple_column_nameContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MapleParser#table_name}.
 	 * @param ctx the parse tree
@@ -207,6 +247,16 @@ public interface MapleListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFunction_name(MapleParser.Function_nameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MapleParser#signed_number}.
+	 * @param ctx the parse tree
+	 */
+	void enterSigned_number(MapleParser.Signed_numberContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MapleParser#signed_number}.
+	 * @param ctx the parse tree
+	 */
+	void exitSigned_number(MapleParser.Signed_numberContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MapleParser#literal_value}.
 	 * @param ctx the parse tree

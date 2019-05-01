@@ -5,6 +5,7 @@ import com.morgandev.app.gen.MapleParser;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.misc.Interval;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MapleCustomVisitor extends MapleBaseVisitor<String> {
@@ -24,7 +25,7 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
         StringBuilder mapleStmts = new StringBuilder();
         List<MapleParser.Maple_stmtContext> mapleStmtsContexts = ctx.maple_stmt();
         for (MapleParser.Maple_stmtContext mapleStmtCtx : mapleStmtsContexts) {
-            mapleStmts.append(visit(mapleStmtCtx)).append(";");
+            mapleStmts.append(visit(mapleStmtCtx)).append(";\n");
         }
         return mapleStmts.toString();
     }
@@ -37,15 +38,89 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
 
     @Override
     public String visitMaple_stmt(MapleParser.Maple_stmtContext ctx) {
-        MapleParser.Select_stmtContext select_stmt = ctx.select_stmt();
+        MapleParser.Select_stmtContext select_stmtContext = ctx.select_stmt();
+        MapleParser.Create_table_stmtContext create_table_stmtContext = ctx.create_table_stmt();
         MapleParser.Embedded_sqlContext embeddedSqlCtx = ctx.embedded_sql();
-        if (select_stmt != null) {
-            return visit(select_stmt);
-        }
-        if (embeddedSqlCtx != null) {
+        if (select_stmtContext != null) {
+            return visit(select_stmtContext);
+        } else if (embeddedSqlCtx != null) {
             return visit(embeddedSqlCtx);
+        } else if (create_table_stmtContext != null) {
+            return visit(create_table_stmtContext);
         }
         return "";
+    }
+
+    @Override
+    public String visitCreate_table_stmt(MapleParser.Create_table_stmtContext ctx) {
+        String newTableName = ctx.table_name().getText();
+        List<MapleParser.Column_defContext> columnDefContexts = ctx.column_def();
+        StringBuilder columnDefinitionsStmt = new StringBuilder();
+        int definitions = 0;
+        List<String> pkColumns = new ArrayList<>();
+        for (MapleParser.Column_defContext columnDefCtx : columnDefContexts) {
+            columnDefinitionsStmt.append(definitions == 0 ? "" : ",\n").append(visit(columnDefCtx));
+            if (columnDefCtx.column_modifier() != null) {
+                switch (columnDefCtx.column_modifier().getText()) {
+                    case "$":
+                        pkColumns.add(columnDefCtx.column_name().getText());
+                        break;
+                }
+            } else {
+                columnDefinitionsStmt.append(" NOT NULL ");
+            }
+            String defaultVal = columnDefCtx.default_value() != null ? "DEFAULT " + columnDefCtx.default_value().getText() : "";
+            columnDefinitionsStmt.append(defaultVal);
+            definitions++;
+        }
+
+        if (!pkColumns.isEmpty()) {
+            StringBuilder pkStmt = new StringBuilder(",\nPRIMARY KEY(");
+            int pks = 0;
+            for (String pkColumnName : pkColumns) {
+                pkStmt.append(pks == 0 ? "" : ",").append("`").append(pkColumnName).append("`");
+                pks++;
+            }
+            pkStmt.append(")\n");
+            columnDefinitionsStmt.append(pkStmt);
+        } else {
+            columnDefinitionsStmt.insert(0, "`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY" + (columnDefinitionsStmt.length() == 0 ? "" : ",\n"));
+        }
+        return "CREATE TABLE `" + newTableName + "` (\n" + columnDefinitionsStmt.toString() + "\n)";
+    }
+
+    @Override
+    public String visitColumn_def(MapleParser.Column_defContext ctx) {
+        String columnName = "`" + ctx.column_name().getText() + "`";
+        String type = " " + visit(ctx.column_type());
+        return columnName + type;
+    }
+
+    @Override
+    public String visitColumn_type(MapleParser.Column_typeContext ctx) {
+        String dataTypeName = ctx.any_name().getText();
+        StringBuilder dataTypeLength = new StringBuilder();
+        List<MapleParser.Signed_numberContext> signedNumberContexts = ctx.signed_number();
+        if (signedNumberContexts.isEmpty()) {
+            switch (dataTypeName) {
+                case "varchar":
+                    dataTypeLength = new StringBuilder("255");
+                    break;
+                case "int":
+                    dataTypeLength = new StringBuilder("11");
+                    break;
+                case "double":
+                    dataTypeLength = new StringBuilder("10,2");
+                    break;
+            }
+        } else {
+            int numbers = 0;
+            for (MapleParser.Signed_numberContext numberContext : signedNumberContexts) {
+                dataTypeLength.append(numbers == 0 ? "" : ",").append(numberContext.getText());
+                numbers++;
+            }
+        }
+        return dataTypeName + (dataTypeLength.length() == 0 ? "" : "(" + dataTypeLength + ")");
     }
 
     @Override
