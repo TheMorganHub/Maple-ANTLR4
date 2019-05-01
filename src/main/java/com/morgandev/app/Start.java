@@ -11,7 +11,7 @@ public class Start {
 
     public static void main(String[] args) {
         try {
-            String mapleStatement = "personas(nombre$ varchar 'da', apellido varchar);";
+            String mapleStatement = "personas;";
             if (args.length > 0) {
                 mapleStatement = args[0];
             }

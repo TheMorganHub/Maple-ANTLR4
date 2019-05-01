@@ -54,7 +54,7 @@ insert_stmt
  ;
 
 select_stmt
- : table_name table_alias? ( K_SELECT result_column ( ',' result_column )*? )? (join_stmt)*? (conditional)?
+ : table_name table_alias? ( K_SELECT ( result_column ( ',' result_column )*? )? (join_stmt)*? (conditional)? )?
  ;
 
 join_stmt
@@ -81,7 +81,7 @@ default_value
 
 expr
  : literal_value
- | ( ( database_name '.' )? table_name '.' )? ( column_name )
+ | ( ( database_name '.' )? table_name '.' )? column_name
  | left=expr operator=( '*' | '/' | '%' ) right=expr
  | left=expr operator=( '+' | '-' ) right=expr
  | left=expr operator=( '=' | '==' | '!=' | '<' | '<=' | '>' | '>=' | K_IS | K_ISNOT | K_LIKE | K_ISNOTNULL | K_ISNULL | K_NOTLIKE | K_NOTIN | K_IN | K_BETWEEN | K_NOTBETWEEN ) right=expr
