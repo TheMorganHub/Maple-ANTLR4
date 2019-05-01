@@ -61,15 +61,11 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
         for (MapleParser.Column_defContext columnDefCtx : columnDefContexts) {
             columnDefinitionsStmt.append(definitions == 0 ? "" : ",\n").append(visit(columnDefCtx));
             if (columnDefCtx.column_modifier() != null) {
-                switch (columnDefCtx.column_modifier().getText()) {
-                    case "$":
-                        pkColumns.add(columnDefCtx.column_name().getText());
-                        break;
+                if ("$".equals(columnDefCtx.column_modifier().getText())) {
+                    pkColumns.add(columnDefCtx.column_name().getText());
                 }
-            } else {
-                columnDefinitionsStmt.append(" NOT NULL ");
             }
-            String defaultVal = columnDefCtx.default_value() != null ? "DEFAULT " + columnDefCtx.default_value().getText() : "";
+            String defaultVal = columnDefCtx.default_value() != null ? " DEFAULT " + columnDefCtx.default_value().getText() : "";
             columnDefinitionsStmt.append(defaultVal);
             definitions++;
         }
@@ -93,7 +89,8 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
     public String visitColumn_def(MapleParser.Column_defContext ctx) {
         String columnName = "`" + ctx.column_name().getText() + "`";
         String type = " " + visit(ctx.column_type());
-        return columnName + type;
+        String nullable = ctx.column_modifier() != null && ctx.column_modifier().getText().equals("?") ? "" : " NOT NULL";
+        return columnName + type + nullable;
     }
 
     @Override

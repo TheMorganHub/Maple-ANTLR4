@@ -198,16 +198,6 @@ public interface MapleListener extends ParseTreeListener {
 	 */
 	void exitColumn_name(MapleParser.Column_nameContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MapleParser#simple_column_name}.
-	 * @param ctx the parse tree
-	 */
-	void enterSimple_column_name(MapleParser.Simple_column_nameContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MapleParser#simple_column_name}.
-	 * @param ctx the parse tree
-	 */
-	void exitSimple_column_name(MapleParser.Simple_column_nameContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link MapleParser#table_name}.
 	 * @param ctx the parse tree
 	 */

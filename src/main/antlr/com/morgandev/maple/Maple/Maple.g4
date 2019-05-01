@@ -106,11 +106,7 @@ column_modifier
  ;
 
 column_name
- : simple_column_name | '*'
- ;
-
-simple_column_name
- : any_name
+ : any_name | '*'
  ;
 
 table_name

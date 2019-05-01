@@ -11,7 +11,11 @@ public class Start {
 
     public static void main(String[] args) {
         try {
-            CharStream cs = CharStreams.fromString("Personas p -> p.*, COUNT(COUNT((Colegio -> nombre ? nombre > 5)));");
+            String mapleStatement = "personas(nombre$ varchar 'da', apellido varchar);";
+            if (args.length > 0) {
+                mapleStatement = args[0];
+            }
+            CharStream cs = CharStreams.fromString(mapleStatement);
             MapleLexer lexer = new MapleLexer(cs);
             CommonTokenStream token = new CommonTokenStream(lexer);
             MapleParser parser = new MapleParser(token);
