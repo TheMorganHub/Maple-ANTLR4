@@ -88,6 +88,26 @@ public interface MapleListener extends ParseTreeListener {
 	 */
 	void exitInsert_stmt(MapleParser.Insert_stmtContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link MapleParser#insert_value_set}.
+	 * @param ctx the parse tree
+	 */
+	void enterInsert_value_set(MapleParser.Insert_value_setContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MapleParser#insert_value_set}.
+	 * @param ctx the parse tree
+	 */
+	void exitInsert_value_set(MapleParser.Insert_value_setContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MapleParser#update_value_set}.
+	 * @param ctx the parse tree
+	 */
+	void enterUpdate_value_set(MapleParser.Update_value_setContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MapleParser#update_value_set}.
+	 * @param ctx the parse tree
+	 */
+	void exitUpdate_value_set(MapleParser.Update_value_setContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link MapleParser#select_stmt}.
 	 * @param ctx the parse tree
 	 */

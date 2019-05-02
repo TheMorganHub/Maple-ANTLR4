@@ -59,6 +59,18 @@ public interface MapleVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitInsert_stmt(MapleParser.Insert_stmtContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link MapleParser#insert_value_set}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInsert_value_set(MapleParser.Insert_value_setContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MapleParser#update_value_set}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUpdate_value_set(MapleParser.Update_value_setContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link MapleParser#select_stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

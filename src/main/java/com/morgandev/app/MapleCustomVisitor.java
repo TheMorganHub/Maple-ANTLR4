@@ -38,17 +38,77 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
 
     @Override
     public String visitMaple_stmt(MapleParser.Maple_stmtContext ctx) {
-        MapleParser.Select_stmtContext select_stmtContext = ctx.select_stmt();
-        MapleParser.Create_table_stmtContext create_table_stmtContext = ctx.create_table_stmt();
+        MapleParser.Select_stmtContext selectStmtContext = ctx.select_stmt();
+        MapleParser.Create_table_stmtContext createTableStmtContext = ctx.create_table_stmt();
+        MapleParser.Insert_stmtContext insertStmtContext = ctx.insert_stmt();
         MapleParser.Embedded_sqlContext embeddedSqlCtx = ctx.embedded_sql();
-        if (select_stmtContext != null) {
-            return visit(select_stmtContext);
+        MapleParser.Update_stmtContext updateStmtContext = ctx.update_stmt();
+        if (selectStmtContext != null) {
+            return visit(selectStmtContext);
         } else if (embeddedSqlCtx != null) {
             return visit(embeddedSqlCtx);
-        } else if (create_table_stmtContext != null) {
-            return visit(create_table_stmtContext);
+        } else if (createTableStmtContext != null) {
+            return visit(createTableStmtContext);
+        } else if (insertStmtContext != null) {
+            return visit(insertStmtContext);
+        } else if (updateStmtContext != null) {
+            return visit(updateStmtContext);
         }
         return "";
+    }
+
+    @Override
+    public String visitUpdate_stmt(MapleParser.Update_stmtContext ctx) {
+        StringBuilder updateStmt = new StringBuilder("UPDATE `" + (ctx.table_name().getText()) + "` SET ");
+        List<MapleParser.Column_nameContext> columnNameContexts = ctx.column_name();
+        List<MapleParser.ExprContext> exprContexts = ctx.update_value_set().expr();
+        if (exprContexts.size() != columnNameContexts.size()) {
+            //TODO: ERROR hay más valores que columnas o viceversa
+        }
+        int columnCount = 0;
+        for (MapleParser.Column_nameContext columnNameCtx : columnNameContexts) {
+            updateStmt.append(columnCount == 0 ? "" : ", ").append("`").append(columnNameCtx.getText()).append("`").append(" = ").append(visit(exprContexts.get(columnCount)));
+            columnCount++;
+        }
+        if (ctx.conditional() != null) {
+            updateStmt.append(" ").append(visit(ctx.conditional()));
+        }
+        return updateStmt.toString();
+    }
+
+    @Override
+    public String visitInsert_stmt(MapleParser.Insert_stmtContext ctx) {
+        StringBuilder insertStmt = new StringBuilder("INSERT INTO `" + (ctx.table_name().getText()) + "` ");
+        if (!ctx.column_name().isEmpty()) {
+            List<MapleParser.Column_nameContext> columnNameContexts = ctx.column_name();
+            int columns = 0;
+            insertStmt.append("(");
+            for (MapleParser.Column_nameContext columnNameCtx : columnNameContexts) {
+                insertStmt.append(columns == 0 ? "" : ", ").append("`").append(columnNameCtx.getText()).append("`");
+                columns++;
+            }
+            insertStmt.append(") ");
+        }
+
+        insertStmt.append("VALUES ");
+        List<MapleParser.Insert_value_setContext> valueSetsContexts = ctx.insert_value_set();
+        int valueSets = 0;
+        for (MapleParser.Insert_value_setContext valueSetCtx : valueSetsContexts) {
+            insertStmt.append(valueSets == 0 ? "" : ", ").append(visit(valueSetCtx));
+            valueSets++;
+        }
+        return insertStmt.toString();
+    }
+
+    @Override
+    public String visitInsert_value_set(MapleParser.Insert_value_setContext ctx) {
+        StringBuilder valueSet = new StringBuilder("(");
+        int expressions = 0;
+        for (MapleParser.ExprContext exprCtx : ctx.expr()) {
+            valueSet.append(expressions == 0 ? "" : ", ").append(visit(exprCtx));
+            expressions++;
+        }
+        return valueSet.append(")").toString();
     }
 
     @Override

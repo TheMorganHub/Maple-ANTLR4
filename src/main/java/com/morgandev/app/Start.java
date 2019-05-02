@@ -11,7 +11,7 @@ public class Start {
 
     public static void main(String[] args) {
         try {
-            String mapleStatement = "personas;";
+            String mapleStatement = "personas(nombre, apellido) <<- 'David' ? id < 5;";
             if (args.length > 0) {
                 mapleStatement = args[0];
             }

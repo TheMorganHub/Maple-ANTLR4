@@ -40,17 +40,24 @@ foreign_key_create_table
  ;
 
 update_stmt
- : ( database_name '.' )? table_name ( '(' column_name ( ',' column_name )* ')' )?
- ( K_UPDATE '(' expr ( ',' expr )* ')' ( ',' '(' expr ( ',' expr )* ')' )*
- | select_stmt
- ) (conditional)?
+ : ( database_name '.' )? table_name ( '(' column_name ( ',' column_name )* ')' )
+ ( K_UPDATE update_value_set | select_stmt ) conditional?
  ;
 
+//personas(nombre, apellido) <- ('va', 5);
 insert_stmt
  : ( database_name '.' )? table_name ( '(' column_name ( ',' column_name )* ')' )?
- ( K_INSERT '(' expr ( ',' expr )* ')' ( ',' '(' expr ( ',' expr )* ')' )*
+ ( K_INSERT insert_value_set ( ',' insert_value_set )*?
  | select_stmt
  )
+ ;
+
+insert_value_set
+ : '(' expr ( ',' expr )*? ')'
+ ;
+
+update_value_set
+ : expr ( ',' expr )*?
  ;
 
 select_stmt
