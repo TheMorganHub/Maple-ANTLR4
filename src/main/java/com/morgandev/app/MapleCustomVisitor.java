@@ -193,8 +193,8 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
 
         selectStmt.append(" FROM ").append(tableName).append(" ").append(tableAlias.isEmpty() ? "" : tableAlias + " ");
 
-        selectStmt.append(processImplicitJoins(columnContexts, tableName, tableAlias));
         selectStmt.append(processExplicitJoins(ctx.join_stmt()));
+        selectStmt.append(processImplicitJoins(columnContexts, tableName, tableAlias));
 
         MapleParser.ConditionalContext conditionalContext = ctx.conditional();
         if (conditionalContext != null) {

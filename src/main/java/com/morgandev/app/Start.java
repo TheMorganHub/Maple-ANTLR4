@@ -16,7 +16,7 @@ public class Start {
             if (args.length > 0) {
                 startFromCmd();
             } else {
-                String mapleStatement = "personas p -> nombre <> col c on c.id = c.bwork;";
+                String mapleStatement = "personas p -> nombre, ciudad.id <> colegio c on p.colegio_id = c.id;";
                 start(mapleStatement);
             }
         } catch (Exception e) {
