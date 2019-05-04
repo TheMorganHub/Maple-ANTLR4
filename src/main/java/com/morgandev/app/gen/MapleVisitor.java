@@ -83,6 +83,12 @@ public interface MapleVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitJoin_stmt(MapleParser.Join_stmtContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link MapleParser#join_constraint}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJoin_constraint(MapleParser.Join_constraintContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link MapleParser#conditional}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

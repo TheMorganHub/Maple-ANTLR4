@@ -160,6 +160,18 @@ public class MapleBaseListener implements MapleListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterJoin_constraint(MapleParser.Join_constraintContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitJoin_constraint(MapleParser.Join_constraintContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterConditional(MapleParser.ConditionalContext ctx) { }
 	/**
 	 * {@inheritDoc}

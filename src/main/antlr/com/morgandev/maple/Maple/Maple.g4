@@ -65,8 +65,12 @@ select_stmt
  ;
 
 join_stmt
- : K_JOIN ('(' select_stmt ')' table_alias
- | table_name table_alias? )
+ : ( K_JOIN | left=K_LEFT_JOIN | right=K_RIGHT_JOIN ) ('(' select_stmt ')' table_alias
+ | table_name table_alias? ) join_constraint?
+ ;
+
+join_constraint
+ : K_ON expr
  ;
 
 conditional
@@ -158,12 +162,6 @@ any_stmt
  : .*?
  ;
 
-IDENTIFIER
- : '"' (~'"' | '""')* '"'
- | '`' (~'`' | '``')* '`'
- | [a-zA-Z_] [a-zA-Z_0-9]*
- ;
-
 K_SELECT : '->';
 K_INSERT : '<-';
 K_UPDATE : '<<-';
@@ -183,7 +181,7 @@ K_INNER : I N N E R;
 K_INTO : I N T O;
 K_IS : I S;
 K_ISNULL : I S SPACES+ N U L L;
-K_ISNOTNULL : K_ISNOT K_NULL;
+K_ISNOTNULL : K_ISNOT SPACES+ K_NULL;
 K_ISNOT : I S SPACES+ N O T;
 K_NOTIN: N O T SPACES+ I N;
 K_NOTLIKE: N O T SPACES+ K_LIKE;
@@ -198,6 +196,12 @@ K_OR : O R;
 K_WHEN : W H E N;
 K_WITH : W I T H;
 K_WITHOUT : W I T H O U T;
+
+IDENTIFIER
+ : '"' (~'"' | '""')* '"'
+ | '`' (~'`' | '``')* '`'
+ | [a-zA-Z_] [a-zA-Z_0-9]*
+ ;
 
 NUMERIC_LITERAL
  : DIGIT+ ( '.' DIGIT* )? ( E [-+]? DIGIT+ )?

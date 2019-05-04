@@ -128,6 +128,16 @@ public interface MapleListener extends ParseTreeListener {
 	 */
 	void exitJoin_stmt(MapleParser.Join_stmtContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link MapleParser#join_constraint}.
+	 * @param ctx the parse tree
+	 */
+	void enterJoin_constraint(MapleParser.Join_constraintContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MapleParser#join_constraint}.
+	 * @param ctx the parse tree
+	 */
+	void exitJoin_constraint(MapleParser.Join_constraintContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link MapleParser#conditional}.
 	 * @param ctx the parse tree
 	 */

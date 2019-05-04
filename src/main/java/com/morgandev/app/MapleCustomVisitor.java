@@ -199,16 +199,25 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
         selectStmt.append(" FROM ").append(tableName).append(" ").append(tableAlias.isEmpty() ? "" : tableAlias + " ");
 
         selectStmt.append(processImplicitJoins(columnContexts, tableName, tableAlias));
-        List<MapleParser.Join_stmtContext> joinContexts = ctx.join_stmt();
-        for (MapleParser.Join_stmtContext joinCtx : joinContexts) {
-            selectStmt.append(visit(joinCtx));
-        }
+        selectStmt.append(processExplicitJoins(ctx.join_stmt()));
 
         MapleParser.ConditionalContext conditionalContext = ctx.conditional();
         if (conditionalContext != null) {
             selectStmt.append(visit(conditionalContext));
         }
         return selectStmt.toString();
+    }
+
+    public String processExplicitJoins(List<MapleParser.Join_stmtContext> joinContexts) {
+        if (joinContexts.isEmpty()) {
+            return "";
+        }
+
+        StringBuilder joinStmts = new StringBuilder();
+        for (MapleParser.Join_stmtContext joinCtx : joinContexts) {
+            joinStmts.append(visit(joinCtx));
+        }
+        return joinStmts.toString();
     }
 
     public String processImplicitJoins(List<MapleParser.Result_columnContext> resultColumnContexts, String mainTableName, String mainTableAlias) {
@@ -247,7 +256,7 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
 
     @Override
     public String visitJoin_stmt(MapleParser.Join_stmtContext ctx) {
-        String join = " INNER JOIN ";
+        String join = (ctx.left != null ? " LEFT JOIN " : ctx.right != null ? " RIGHT JOIN " : " INNER JOIN ");
         MapleParser.Table_nameContext tableName = ctx.table_name();
         MapleParser.Table_aliasContext tableAlias = ctx.table_alias();
         String tableNameAndAlias = "";
