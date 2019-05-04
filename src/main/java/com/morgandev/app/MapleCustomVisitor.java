@@ -198,6 +198,7 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
 
         selectStmt.append(" FROM ").append(tableName).append(" ").append(tableAlias.isEmpty() ? "" : tableAlias + " ");
 
+        selectStmt.append(processImplicitJoins(columnContexts, tableName, tableAlias));
         List<MapleParser.Join_stmtContext> joinContexts = ctx.join_stmt();
         for (MapleParser.Join_stmtContext joinCtx : joinContexts) {
             selectStmt.append(visit(joinCtx));
@@ -210,9 +211,38 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
         return selectStmt.toString();
     }
 
+    public String processImplicitJoins(List<MapleParser.Result_columnContext> resultColumnContexts, String mainTableName, String mainTableAlias) {
+        if (resultColumnContexts.isEmpty()) {
+            return "";
+        }
+        String innerJoins = "";
+        List<String> tableJoins = new ArrayList<>();
+        List<String> tableAliases = new ArrayList<>();
+        int joins = 0;
+        for (MapleParser.Result_columnContext resultColumn : resultColumnContexts) {
+            if (resultColumn.expr().table_name() == null) {
+                continue;
+            }
+
+            String tableName = resultColumn.expr().table_name().getText();
+            if (!tableName.equals(mainTableName)
+                    && !tableName.equals(mainTableAlias)
+                    && !tableJoins.contains(tableName)
+                    && !tableAliases.contains(tableName)) {
+                tableJoins.add(tableName);
+                String tableAlias = Utils.createTableAlias(tableName);
+                tableAliases.add(tableAlias);
+                innerJoins += "\nINNER JOIN " + tableName + " " + tableAlias + " ON id_" + tableName + " = " + tableAlias + ".id " + (joins == 0 ? "" : "\n");
+            }
+            joins++;
+        }
+
+        return innerJoins;
+    }
+
     @Override
     public String visitResult_column(MapleParser.Result_columnContext ctx) {
-        return visit(ctx.expr());
+        return visit(ctx.expr()) + (ctx.column_alias() != null ? " " + ctx.column_alias().getText() : "");
     }
 
     @Override

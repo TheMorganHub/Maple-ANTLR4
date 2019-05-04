@@ -149,6 +149,12 @@ public interface MapleVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitTable_alias(MapleParser.Table_aliasContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link MapleParser#column_alias}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitColumn_alias(MapleParser.Column_aliasContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link MapleParser#database_name}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

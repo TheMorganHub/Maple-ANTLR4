@@ -178,6 +178,13 @@ public class MapleBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitColumn_alias(MapleParser.Column_aliasContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitDatabase_name(MapleParser.Database_nameContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}

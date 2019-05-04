@@ -104,7 +104,7 @@ function
  ;
 
 result_column
- : expr
+ : expr column_alias?
  ;
 
 column_modifier
@@ -121,6 +121,10 @@ table_name
  ;
 
 table_alias
+ : any_name
+ ;
+
+column_alias
  : any_name
  ;
 

@@ -292,6 +292,18 @@ public class MapleBaseListener implements MapleListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterColumn_alias(MapleParser.Column_aliasContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitColumn_alias(MapleParser.Column_aliasContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterDatabase_name(MapleParser.Database_nameContext ctx) { }
 	/**
 	 * {@inheritDoc}

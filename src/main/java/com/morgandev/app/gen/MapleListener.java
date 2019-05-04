@@ -238,6 +238,16 @@ public interface MapleListener extends ParseTreeListener {
 	 */
 	void exitTable_alias(MapleParser.Table_aliasContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link MapleParser#column_alias}.
+	 * @param ctx the parse tree
+	 */
+	void enterColumn_alias(MapleParser.Column_aliasContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MapleParser#column_alias}.
+	 * @param ctx the parse tree
+	 */
+	void exitColumn_alias(MapleParser.Column_aliasContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link MapleParser#database_name}.
 	 * @param ctx the parse tree
 	 */
