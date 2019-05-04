@@ -10,11 +10,6 @@ import java.util.List;
 
 public class MapleCustomVisitor extends MapleBaseVisitor<String> {
 
-    private String lastVisitedTable;
-    private String currentTable;
-    private String lastTableAlias;
-    private String currentTableAlias;
-
     @Override
     public String visitParse(MapleParser.ParseContext ctx) {
         return visit(ctx.maple_stmt_list(0));
@@ -276,24 +271,27 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
             join += "(" + visit(selectStmtCtx) + ") ";
         }
 
-        join += " ON " + lastVisitedTable + ".id_" + currentTable + " = " + currentTable + ".id ";
+        if (ctx.join_constraint() != null) {
+            join += visit(ctx.join_constraint());
+        }
 
         return join;
     }
 
     @Override
+    public String visitJoin_constraint(MapleParser.Join_constraintContext ctx) {
+        return " ON " + visit(ctx.expr());
+    }
+
+    @Override
     public String visitTable_name(MapleParser.Table_nameContext ctx) {
         String tableName = ctx.getText();
-        lastVisitedTable = currentTable == null ? tableName : currentTable;
-        currentTable = tableName;
         return tableName;
     }
 
     @Override
     public String visitTable_alias(MapleParser.Table_aliasContext ctx) {
         String tableAlias = ctx.getText();
-        lastTableAlias = currentTableAlias == null ? tableAlias : currentTableAlias;
-        currentTableAlias = tableAlias;
         return tableAlias;
     }
 
