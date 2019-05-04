@@ -16,7 +16,7 @@ public class Start {
             if (args.length > 0) {
                 startFromCmd();
             } else {
-                String mapleStatement = "personas p ->;";
+                String mapleStatement = "personas p -> nombre <> col c on c.id = c.bwork;";
                 start(mapleStatement);
             }
         } catch (Exception e) {

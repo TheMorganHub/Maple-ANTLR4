@@ -236,7 +236,7 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
                 tableJoins.add(tableName);
                 String tableAlias = Utils.createTableAlias(tableName);
                 tableAliases.add(tableAlias);
-                innerJoins += "\nINNER JOIN " + tableName + " " + tableAlias + " ON id_" + tableName + " = " + tableAlias + ".id " + (joins == 0 ? "" : "\n");
+                innerJoins += "\nJOIN " + tableName + " " + tableAlias + " ON id_" + tableName + " = " + tableAlias + ".id " + (joins == 0 ? "" : "\n");
             }
             joins++;
         }
@@ -251,24 +251,20 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
 
     @Override
     public String visitJoin_stmt(MapleParser.Join_stmtContext ctx) {
-        String join = (ctx.left != null ? " LEFT JOIN " : ctx.right != null ? " RIGHT JOIN " : " INNER JOIN ");
-        MapleParser.Table_nameContext tableName = ctx.table_name();
-        MapleParser.Table_aliasContext tableAlias = ctx.table_alias();
-        String tableNameAndAlias = "";
-        if (tableName != null) {
-            tableNameAndAlias += visit(tableName);
-        }
+        String join = (ctx.left != null ? "LEFT JOIN " : ctx.right != null ? "RIGHT JOIN " : "INNER JOIN ");
 
-        if (tableAlias != null) {
-            tableNameAndAlias += " " + visit(tableAlias);
-        }
-
-        if (!tableNameAndAlias.isEmpty()) {
-            join += tableNameAndAlias;
-        }
         MapleParser.Select_stmtContext selectStmtCtx = ctx.select_stmt();
+
+        if (ctx.table_name() != null) {
+            join += ctx.table_name().getText();
+        }
+
         if (selectStmtCtx != null) {
-            join += "(" + visit(selectStmtCtx) + ") ";
+            join += "(" + visit(selectStmtCtx) + ")";
+        }
+
+        if (ctx.table_alias() != null) {
+            join += " " + ctx.table_alias().getText();
         }
 
         if (ctx.join_constraint() != null) {
