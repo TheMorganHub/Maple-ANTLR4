@@ -108,7 +108,7 @@ function
  ;
 
 result_column
- : expr column_alias?
+ : expr | expr column_alias?
  ;
 
 column_modifier

@@ -8,7 +8,7 @@ public class Start {
         if (args.length > 0) {
             startFromCmd();
         } else {
-            String mapleStatement = "personas p -> nombre, ciudad.id <> colegio c on p.colegio_id = c.id;";
+            String mapleStatement = "personas -> SUM(edad), nombre;";
             start(mapleStatement);
         }
     }
