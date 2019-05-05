@@ -96,8 +96,8 @@ expr
  | left=expr operator=( '*' | '/' | '%' ) right=expr
  | left=expr operator=( '+' | '-' ) right=expr
  | left=expr operator=( '=' | '==' | '!=' | '<' | '<=' | '>' | '>=' | K_IS | K_ISNOT | K_LIKE | K_ISNOTNULL | K_ISNULL | K_NOTLIKE | K_NOTIN | K_IN | K_BETWEEN | K_NOTBETWEEN ) right=expr
- | left=expr operator='AND' right=expr
- | left=expr operator='OR' right=expr
+ | left=expr operator=K_AND right=expr
+ | left=expr operator=K_OR right=expr
  | function
  | '(' select_stmt ')'
  | '(' expr ')'
