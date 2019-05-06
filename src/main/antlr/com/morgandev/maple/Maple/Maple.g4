@@ -95,7 +95,8 @@ expr
  | ( ( database_name '.' )? table_name '.' )? column_name
  | left=expr operator=( '*' | '/' | '%' ) right=expr
  | left=expr operator=( '+' | '-' ) right=expr
- | left=expr operator=( '=' | '==' | '!=' | '<' | '<=' | '>' | '>=' | K_IS | K_ISNOT | K_LIKE | K_ISNOTNULL | K_ISNULL | K_NOTLIKE | K_NOTIN | K_IN | K_BETWEEN | K_NOTBETWEEN ) right=expr
+ | left=expr operator=( '=' | '==' | '!=' | '<' | '<=' | '>' | '>=' | K_IS | K_ISNOT | K_LIKE | K_NOTLIKE | K_NOTIN | K_IN | K_BETWEEN | K_NOTBETWEEN ) right=expr
+ | left=expr operator=( K_ISNOTNULL | K_ISNULL )
  | left=expr operator=K_AND right=expr
  | left=expr operator=K_OR right=expr
  | function
