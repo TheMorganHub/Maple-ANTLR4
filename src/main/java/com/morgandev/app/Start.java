@@ -8,7 +8,7 @@ public class Start {
         if (args.length > 0) {
             startFromCmd();
         } else {
-            String mapleStatement = "personas(estado, dinero) <<- 'Menor', 0;";
+            String mapleStatement = "personas();";
             start(mapleStatement);
         }
     }

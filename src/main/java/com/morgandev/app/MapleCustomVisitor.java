@@ -100,7 +100,7 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
         StringBuilder valueSet = new StringBuilder("(");
         int expressions = 0;
         for (MapleParser.ExprContext exprCtx : ctx.expr()) {
-            valueSet.append(expressions == 0 ? "" : ", ").append(visit(exprCtx));
+            valueSet.append(expressions == 0 ? "" : ", ").append(visit(exprCtx).trim());
             expressions++;
         }
         return valueSet.append(")").toString();
