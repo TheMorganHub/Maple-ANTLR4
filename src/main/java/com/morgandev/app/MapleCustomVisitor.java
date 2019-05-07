@@ -62,7 +62,7 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
         }
         int columnCount = 0;
         for (MapleParser.Column_nameContext columnNameCtx : columnNameContexts) {
-            updateStmt.append(columnCount == 0 ? "" : ", ").append("`").append(columnNameCtx.getText()).append("`").append(" = ").append(visit(exprContexts.get(columnCount)));
+            updateStmt.append(columnCount == 0 ? "" : ", ").append("`").append(columnNameCtx.getText()).append("`").append(" =").append(visit(exprContexts.get(columnCount)));
             columnCount++;
         }
         if (ctx.conditional() != null) {
@@ -193,7 +193,7 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
             }
         }
 
-        selectStmt.append(" FROM").append(" ").append(tableName).append(tableAlias.isEmpty() ? "" : " " + tableAlias);
+        selectStmt.append(" FROM").append(" ").append("`").append(tableName).append("`").append(tableAlias.isEmpty() ? "" : " " + tableAlias);
 
         selectStmt.append(processExplicitJoins(ctx.join_stmt()));
         selectStmt.append(processImplicitJoins(columnContexts, tableName, tableAlias));
@@ -237,7 +237,7 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
                 tableJoins.add(tableName);
                 String tableAlias = Utils.createTableAlias(tableName);
                 tableAliases.add(tableAlias);
-                innerJoins += "\nJOIN " + tableName + (tableAlias.equals("") ? "" : " " + tableAlias) + " ON id_" + tableName + " = " + (tableAlias.equals("") ? tableName : tableAlias) + ".id";
+                innerJoins += "\nJOIN `" + tableName + "`" + (tableAlias.equals("") ? "" : " " + tableAlias) + " ON id_" + tableName + " = " + (tableAlias.equals("") ? tableName : tableAlias) + ".id";
             }
         }
 
@@ -256,7 +256,7 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
         MapleParser.Select_stmtContext selectStmtCtx = ctx.select_stmt();
 
         if (ctx.table_name() != null) {
-            join += " " + ctx.table_name().getText();
+            join += " `" + ctx.table_name().getText() + "`";
         }
 
         if (selectStmtCtx != null) {
