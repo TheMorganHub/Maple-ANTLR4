@@ -1,4 +1,4 @@
-// Generated from C:/Users/Morgan/IdeaProjects/MapleAntlr/src/main/antlr/com/morgandev/maple/Maple\Maple.g4 by ANTLR 4.7.2
+// Generated from /home/david/IdeaProjects/Maple-ANTLR4/src/main/antlr/com/morgandev/maple/Maple/Maple.g4 by ANTLR 4.7.2
 package com.morgandev.app.gen;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
@@ -988,6 +988,9 @@ public class MapleParser extends Parser {
 			return getRuleContext(Table_aliasContext.class,0);
 		}
 		public TerminalNode K_SELECT() { return getToken(MapleParser.K_SELECT, 0); }
+		public ConditionalContext conditional() {
+			return getRuleContext(ConditionalContext.class,0);
+		}
 		public List<Result_columnContext> result_column() {
 			return getRuleContexts(Result_columnContext.class);
 		}
@@ -999,9 +1002,6 @@ public class MapleParser extends Parser {
 		}
 		public Join_stmtContext join_stmt(int i) {
 			return getRuleContext(Join_stmtContext.class,i);
-		}
-		public ConditionalContext conditional() {
-			return getRuleContext(ConditionalContext.class,0);
 		}
 		public Select_stmtContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1042,7 +1042,7 @@ public class MapleParser extends Parser {
 				}
 			}
 
-			setState(214);
+			setState(211);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==K_SELECT) {
@@ -1093,19 +1093,19 @@ public class MapleParser extends Parser {
 					_errHandler.sync(this);
 					_alt = getInterpreter().adaptivePredict(_input,21,_ctx);
 				}
-				setState(212);
-				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,22,_ctx) ) {
-				case 1:
-					{
-					setState(211);
-					conditional();
-					}
-					break;
-				}
 				}
 			}
 
+			setState(214);
+			_errHandler.sync(this);
+			switch ( getInterpreter().adaptivePredict(_input,23,_ctx) ) {
+			case 1:
+				{
+				setState(213);
+				conditional();
+				}
+				break;
+			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -2657,13 +2657,13 @@ public class MapleParser extends Parser {
 		"\16\t\u00a9\13\t\3\t\5\t\u00ac\n\t\3\n\3\n\3\n\3\n\7\n\u00b2\n\n\f\n\16"+
 		"\n\u00b5\13\n\3\n\3\n\3\13\3\13\3\13\7\13\u00bc\n\13\f\13\16\13\u00bf"+
 		"\13\13\3\f\3\f\5\f\u00c3\n\f\3\f\3\f\3\f\3\f\7\f\u00c9\n\f\f\f\16\f\u00cc"+
-		"\13\f\5\f\u00ce\n\f\3\f\7\f\u00d1\n\f\f\f\16\f\u00d4\13\f\3\f\5\f\u00d7"+
-		"\n\f\5\f\u00d9\n\f\3\r\3\r\3\r\5\r\u00de\n\r\3\r\3\r\3\r\3\r\3\r\3\r\3"+
-		"\r\5\r\u00e7\n\r\5\r\u00e9\n\r\3\r\5\r\u00ec\n\r\3\16\3\16\3\16\3\17\3"+
-		"\17\3\17\3\20\3\20\5\20\u00f6\n\20\3\20\3\20\5\20\u00fa\n\20\3\21\3\21"+
-		"\3\21\3\21\3\21\3\21\3\21\3\21\3\21\3\21\3\21\5\21\u0107\n\21\3\22\3\22"+
-		"\3\23\3\23\3\23\3\23\3\23\5\23\u0110\n\23\3\23\3\23\3\23\5\23\u0115\n"+
-		"\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\5\23\u0121\n\23"+
+		"\13\f\5\f\u00ce\n\f\3\f\7\f\u00d1\n\f\f\f\16\f\u00d4\13\f\5\f\u00d6\n"+
+		"\f\3\f\5\f\u00d9\n\f\3\r\3\r\3\r\5\r\u00de\n\r\3\r\3\r\3\r\3\r\3\r\3\r"+
+		"\3\r\5\r\u00e7\n\r\5\r\u00e9\n\r\3\r\5\r\u00ec\n\r\3\16\3\16\3\16\3\17"+
+		"\3\17\3\17\3\20\3\20\5\20\u00f6\n\20\3\20\3\20\5\20\u00fa\n\20\3\21\3"+
+		"\21\3\21\3\21\3\21\3\21\3\21\3\21\3\21\3\21\3\21\5\21\u0107\n\21\3\22"+
+		"\3\22\3\23\3\23\3\23\3\23\3\23\5\23\u0110\n\23\3\23\3\23\3\23\5\23\u0115"+
+		"\n\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\5\23\u0121\n\23"+
 		"\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23"+
 		"\3\23\3\23\3\23\7\23\u0134\n\23\f\23\16\23\u0137\13\23\3\24\3\24\3\24"+
 		"\3\24\3\24\7\24\u013e\n\24\f\24\16\24\u0141\13\24\3\24\5\24\u0144\n\24"+
@@ -2713,15 +2713,15 @@ public class MapleParser extends Parser {
 		"\2\u00b9\u00ba\7\5\2\2\u00ba\u00bc\5$\23\2\u00bb\u00b9\3\2\2\2\u00bc\u00bf"+
 		"\3\2\2\2\u00bd\u00be\3\2\2\2\u00bd\u00bb\3\2\2\2\u00be\25\3\2\2\2\u00bf"+
 		"\u00bd\3\2\2\2\u00c0\u00c2\5.\30\2\u00c1\u00c3\5\60\31\2\u00c2\u00c1\3"+
-		"\2\2\2\u00c2\u00c3\3\2\2\2\u00c3\u00d8\3\2\2\2\u00c4\u00cd\7\24\2\2\u00c5"+
+		"\2\2\2\u00c2\u00c3\3\2\2\2\u00c3\u00d5\3\2\2\2\u00c4\u00cd\7\24\2\2\u00c5"+
 		"\u00ca\5(\25\2\u00c6\u00c7\7\5\2\2\u00c7\u00c9\5(\25\2\u00c8\u00c6\3\2"+
 		"\2\2\u00c9\u00cc\3\2\2\2\u00ca\u00cb\3\2\2\2\u00ca\u00c8\3\2\2\2\u00cb"+
 		"\u00ce\3\2\2\2\u00cc\u00ca\3\2\2\2\u00cd\u00c5\3\2\2\2\u00cd\u00ce\3\2"+
 		"\2\2\u00ce\u00d2\3\2\2\2\u00cf\u00d1\5\30\r\2\u00d0\u00cf\3\2\2\2\u00d1"+
 		"\u00d4\3\2\2\2\u00d2\u00d3\3\2\2\2\u00d2\u00d0\3\2\2\2\u00d3\u00d6\3\2"+
-		"\2\2\u00d4\u00d2\3\2\2\2\u00d5\u00d7\5\34\17\2\u00d6\u00d5\3\2\2\2\u00d6"+
-		"\u00d7\3\2\2\2\u00d7\u00d9\3\2\2\2\u00d8\u00c4\3\2\2\2\u00d8\u00d9\3\2"+
-		"\2\2\u00d9\27\3\2\2\2\u00da\u00de\7\31\2\2\u00db\u00de\7\27\2\2\u00dc"+
+		"\2\2\u00d4\u00d2\3\2\2\2\u00d5\u00c4\3\2\2\2\u00d5\u00d6\3\2\2\2\u00d6"+
+		"\u00d8\3\2\2\2\u00d7\u00d9\5\34\17\2\u00d8\u00d7\3\2\2\2\u00d8\u00d9\3"+
+		"\2\2\2\u00d9\27\3\2\2\2\u00da\u00de\7\31\2\2\u00db\u00de\7\27\2\2\u00dc"+
 		"\u00de\7\30\2\2\u00dd\u00da\3\2\2\2\u00dd\u00db\3\2\2\2\u00dd\u00dc\3"+
 		"\2\2\2\u00de\u00e8\3\2\2\2\u00df\u00e0\7\4\2\2\u00e0\u00e1\5\26\f\2\u00e1"+
 		"\u00e2\7\6\2\2\u00e2\u00e3\5\60\31\2\u00e3\u00e9\3\2\2\2\u00e4\u00e6\5"+
@@ -2775,7 +2775,7 @@ public class MapleParser extends Parser {
 		"\2\2\2\u0172\u0174\13\2\2\2\u0173\u0172\3\2\2\2\u0174\u0177\3\2\2\2\u0175"+
 		"\u0176\3\2\2\2\u0175\u0173\3\2\2\2\u0176A\3\2\2\2\u0177\u0175\3\2\2\2"+
 		"/DFQXchox\u0081\u0089\u008c\u0091\u009a\u009f\u00a7\u00ab\u00b3\u00bd"+
-		"\u00c2\u00ca\u00cd\u00d2\u00d6\u00d8\u00dd\u00e6\u00e8\u00eb\u00f5\u00f9"+
+		"\u00c2\u00ca\u00cd\u00d2\u00d5\u00d8\u00dd\u00e6\u00e8\u00eb\u00f5\u00f9"+
 		"\u0106\u010f\u0114\u0120\u0133\u0135\u013f\u0143\u014a\u014c\u0150\u0154"+
 		"\u0161\u016c\u0175";
 	public static final ATN _ATN =

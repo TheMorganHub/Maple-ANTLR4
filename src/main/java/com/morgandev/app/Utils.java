@@ -12,8 +12,6 @@ public class Utils {
         } else {
             if (tableName.length() > 3) {
                 alias += tableName.substring(0, 2) + tableName.charAt(tableName.length() - 1);
-            } else {
-                alias = tableName;
             }
         }
 

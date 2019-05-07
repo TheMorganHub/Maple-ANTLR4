@@ -61,7 +61,7 @@ update_value_set
  ;
 
 select_stmt
- : table_name table_alias? ( K_SELECT ( result_column ( ',' result_column )*? )? (join_stmt)*? (conditional)? )?
+ : table_name table_alias? ( K_SELECT ( result_column ( ',' result_column )*? )? ( join_stmt )*? )? ( conditional )?
  ;
 
 join_stmt

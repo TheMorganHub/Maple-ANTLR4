@@ -73,7 +73,7 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
 
     @Override
     public String visitInsert_stmt(MapleParser.Insert_stmtContext ctx) {
-        StringBuilder insertStmt = new StringBuilder("INSERT INTO `" + (ctx.table_name().getText()) + "` ");
+        StringBuilder insertStmt = new StringBuilder("INSERT INTO `" + (ctx.table_name().getText()) + "`");
         if (!ctx.column_name().isEmpty()) {
             List<MapleParser.Column_nameContext> columnNameContexts = ctx.column_name();
             int columns = 0;
@@ -82,10 +82,10 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
                 insertStmt.append(columns == 0 ? "" : ", ").append("`").append(columnNameCtx.getText()).append("`");
                 columns++;
             }
-            insertStmt.append(") ");
+            insertStmt.append(")");
         }
 
-        insertStmt.append("VALUES ");
+        insertStmt.append(" VALUES");
         List<MapleParser.Insert_value_setContext> valueSetsContexts = ctx.insert_value_set();
         int valueSets = 0;
         for (MapleParser.Insert_value_setContext valueSetCtx : valueSetsContexts) {
@@ -132,7 +132,7 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
                 pkStmt.append(pks == 0 ? "" : ",").append("`").append(pkColumnName).append("`");
                 pks++;
             }
-            pkStmt.append(")\n");
+            pkStmt.append(")");
             columnDefinitionsStmt.append(pkStmt);
         } else {
             columnDefinitionsStmt.insert(0, "`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY" + (columnDefinitionsStmt.length() == 0 ? "" : ",\n"));
@@ -162,13 +162,15 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
                     dataTypeLength = new StringBuilder("11");
                     break;
                 case "double":
-                    dataTypeLength = new StringBuilder("10,2");
+                case "decimal":
+                case "float":
+                    dataTypeLength = new StringBuilder("10, 2");
                     break;
             }
         } else {
             int numbers = 0;
             for (MapleParser.Signed_numberContext numberContext : signedNumberContexts) {
-                dataTypeLength.append(numbers == 0 ? "" : ",").append(numberContext.getText());
+                dataTypeLength.append(numbers == 0 ? "" : ", ").append(numberContext.getText());
                 numbers++;
             }
         }
@@ -180,18 +182,18 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
         String tableName = visit(ctx.table_name());
         String tableAlias = ctx.table_alias() == null ? "" : ctx.table_alias().getText();
         List<MapleParser.Result_columnContext> columnContexts = ctx.result_column();
-        StringBuilder selectStmt = new StringBuilder("SELECT ");
+        StringBuilder selectStmt = new StringBuilder("SELECT");
         if (columnContexts.isEmpty()) {
-            selectStmt.append("*");
+            selectStmt.append(" *");
         } else {
             int columnCount = 0;
             for (MapleParser.Result_columnContext columnCtx : columnContexts) {
-                selectStmt.append(columnCount == 0 ? "" : ", ").append(visit(columnCtx));
+                selectStmt.append(columnCount == 0 ? "" : ",").append(visit(columnCtx));
                 columnCount++;
             }
         }
 
-        selectStmt.append(" FROM ").append(tableName).append(" ").append(tableAlias.isEmpty() ? "" : tableAlias + " ");
+        selectStmt.append(" FROM").append(" ").append(tableName).append(tableAlias.isEmpty() ? "" : " " + tableAlias);
 
         selectStmt.append(processExplicitJoins(ctx.join_stmt()));
         selectStmt.append(processImplicitJoins(columnContexts, tableName, tableAlias));
@@ -210,7 +212,7 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
 
         StringBuilder joinStmts = new StringBuilder();
         for (MapleParser.Join_stmtContext joinCtx : joinContexts) {
-            joinStmts.append(visit(joinCtx));
+            joinStmts.append("\n").append(visit(joinCtx));
         }
         return joinStmts.toString();
     }
@@ -222,7 +224,6 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
         String innerJoins = "";
         List<String> tableJoins = new ArrayList<>();
         List<String> tableAliases = new ArrayList<>();
-        int joins = 0;
         for (MapleParser.Result_columnContext resultColumn : resultColumnContexts) {
             if (resultColumn.expr().table_name() == null) {
                 continue;
@@ -236,9 +237,8 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
                 tableJoins.add(tableName);
                 String tableAlias = Utils.createTableAlias(tableName);
                 tableAliases.add(tableAlias);
-                innerJoins += "\nJOIN " + tableName + " " + tableAlias + " ON id_" + tableName + " = " + tableAlias + ".id " + (joins == 0 ? "" : "\n");
+                innerJoins += "\nJOIN " + tableName + (tableAlias.equals("") ? "" : " " + tableAlias) + " ON id_" + tableName + " = " + (tableAlias.equals("") ? tableName : tableAlias) + ".id";
             }
-            joins++;
         }
 
         return innerJoins;
@@ -251,16 +251,16 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
 
     @Override
     public String visitJoin_stmt(MapleParser.Join_stmtContext ctx) {
-        String join = (ctx.left != null ? "LEFT JOIN " : ctx.right != null ? "RIGHT JOIN " : "INNER JOIN ");
+        String join = (ctx.left != null ? "LEFT JOIN" : ctx.right != null ? "RIGHT JOIN" : "INNER JOIN");
 
         MapleParser.Select_stmtContext selectStmtCtx = ctx.select_stmt();
 
         if (ctx.table_name() != null) {
-            join += ctx.table_name().getText();
+            join += " " + ctx.table_name().getText();
         }
 
         if (selectStmtCtx != null) {
-            join += "(" + visit(selectStmtCtx) + ")";
+            join += " (" + visit(selectStmtCtx) + ")";
         }
 
         if (ctx.table_alias() != null) {
@@ -276,7 +276,7 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
 
     @Override
     public String visitJoin_constraint(MapleParser.Join_constraintContext ctx) {
-        return " ON " + visit(ctx.expr());
+        return " ON" + visit(ctx.expr());
     }
 
     @Override
@@ -293,36 +293,36 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
 
     @Override
     public String visitConditional(MapleParser.ConditionalContext ctx) {
-        return "WHERE " + visit(ctx.expr());
+        return " WHERE" + visit(ctx.expr());
     }
 
     @Override
     public String visitExpr(MapleParser.ExprContext ctx) {
         if (ctx.select_stmt() != null) {
-            return "(" + visit(ctx.select_stmt()) + ")";
+            return " (" + visit(ctx.select_stmt()) + ")";
         }
         if (ctx.function() != null) {
-            return visit(ctx.function());
+            return " " + visit(ctx.function());
         }
         if (ctx.database_name() != null || ctx.table_name() != null || ctx.column_name() != null) {
             MapleParser.Database_nameContext databaseName = ctx.database_name();
             MapleParser.Table_nameContext tableName = ctx.table_name();
             MapleParser.Column_nameContext columnName = ctx.column_name();
 
-            return (databaseName != null ? databaseName.getText() + "." : "")
+            return " " + (databaseName != null ? databaseName.getText() + "." : "")
                     + (tableName != null ? tableName.getText() + "." : "")
                     + (columnName != null ? columnName.getText() : "");
         }
         if (ctx.literal_value() != null) {
-            return ctx.literal_value().getText();
+            return " " + ctx.literal_value().getText();
         }
 
         //an expression enclosed in parentheses would fall into this category
         if (ctx.left == null && ctx.right == null && ctx.operator == null) {
-            return "(" + visit(ctx.expr(0)) + ")";
+            return " (" + visit(ctx.expr(0)).trim() + ")";
         }
 
-        return (ctx.left != null ? visit(ctx.left) : ctx.getText()) + (ctx.operator != null ? " " + ctx.operator.getText() : "") + (ctx.right != null ? " " + visit(ctx.right) : "");
+        return (ctx.left != null ? visit(ctx.left) : ctx.getText()) + (ctx.operator != null ? " " + ctx.operator.getText() + "" : "") + (ctx.right != null ? visit(ctx.right) : "");
     }
 
     @Override
@@ -331,7 +331,7 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
         StringBuilder func = new StringBuilder(ctx.function_name().getText()).append("(");
         int expressions = 0;
         for (MapleParser.ExprContext functionExprContext : functionExprContexts) {
-            func.append(expressions == 0 ? "" : ", ").append(visit(functionExprContext));
+            func.append(expressions == 0 ? "" : ", ").append(visit(functionExprContext).trim());
             expressions++;
         }
         return func + ")";
