@@ -8,7 +8,7 @@ public class Start {
         if (args.length > 0) {
             startFromCmd();
         } else {
-            String mapleStatement = "personas <-;";
+            String mapleStatement = "personas -> nombre; personas ? nombre = 5";
             start(mapleStatement);
         }
     }

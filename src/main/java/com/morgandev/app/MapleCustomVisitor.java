@@ -12,7 +12,7 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
 
     @Override
     public String visitParse(MapleParser.ParseContext ctx) {
-        return visit(ctx.maple_stmt_list(0));
+        return visit(ctx.maple_stmt_list());
     }
 
     @Override
@@ -94,6 +94,7 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
 
     @Override
     public String visitInsert_stmt(MapleParser.Insert_stmtContext ctx) {
+        //TODO: insert select
         StringBuilder insertStmt = new StringBuilder("INSERT INTO `" + (ctx.table_name().getText()) + "`");
         if (!ctx.column_name().isEmpty()) {
             List<MapleParser.Column_nameContext> columnNameContexts = ctx.column_name();
