@@ -78,6 +78,16 @@ public interface MapleListener extends ParseTreeListener {
 	 */
 	void exitUpdate_stmt(MapleParser.Update_stmtContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link MapleParser#delete_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterDelete_stmt(MapleParser.Delete_stmtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MapleParser#delete_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitDelete_stmt(MapleParser.Delete_stmtContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link MapleParser#insert_stmt}.
 	 * @param ctx the parse tree
 	 */

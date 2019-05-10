@@ -33,21 +33,30 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
 
     @Override
     public String visitMaple_stmt(MapleParser.Maple_stmtContext ctx) {
-        MapleParser.Select_stmtContext selectStmtContext = ctx.select_stmt();
-        MapleParser.Create_table_stmtContext createTableStmtContext = ctx.create_table_stmt();
-        MapleParser.Insert_stmtContext insertStmtContext = ctx.insert_stmt();
-        MapleParser.Embedded_sqlContext embeddedSqlCtx = ctx.embedded_sql();
-        MapleParser.Update_stmtContext updateStmtContext = ctx.update_stmt();
-        if (selectStmtContext != null) {
+        MapleParser.Select_stmtContext selectStmtContext;
+        MapleParser.Create_table_stmtContext createTableStmtContext;
+        MapleParser.Insert_stmtContext insertStmtContext;
+        MapleParser.Embedded_sqlContext embeddedSqlContext;
+        MapleParser.Update_stmtContext updateStmtContext;
+        MapleParser.Delete_stmtContext deleteStmtContext;
+
+        if ((selectStmtContext = ctx.select_stmt()) != null) {
             return visit(selectStmtContext);
-        } else if (embeddedSqlCtx != null) {
-            return visit(embeddedSqlCtx);
-        } else if (createTableStmtContext != null) {
+        }
+        if ((createTableStmtContext = ctx.create_table_stmt()) != null) {
             return visit(createTableStmtContext);
-        } else if (insertStmtContext != null) {
+        }
+        if ((insertStmtContext = ctx.insert_stmt()) != null) {
             return visit(insertStmtContext);
-        } else if (updateStmtContext != null) {
+        }
+        if ((embeddedSqlContext = ctx.embedded_sql()) != null) {
+            return visit(embeddedSqlContext);
+        }
+        if ((updateStmtContext = ctx.update_stmt()) != null) {
             return visit(updateStmtContext);
+        }
+        if ((deleteStmtContext = ctx.delete_stmt()) != null) {
+            return visit(deleteStmtContext);
         }
         return "";
     }
@@ -69,6 +78,18 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
             updateStmt.append(" ").append(visit(ctx.conditional()));
         }
         return updateStmt.toString();
+    }
+
+    @Override
+    public String visitDelete_stmt(MapleParser.Delete_stmtContext ctx) {
+        String tableName = ctx.table_name().getText();
+        String deleteStmt = "";
+        if (ctx.conditional() != null) {
+            deleteStmt += "DELETE FROM " + tableName + visit(ctx.conditional());
+        } else {
+            deleteStmt += "TRUNCATE TABLE " + tableName;
+        }
+        return deleteStmt;
     }
 
     @Override

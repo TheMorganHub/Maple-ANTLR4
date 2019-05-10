@@ -53,6 +53,12 @@ public interface MapleVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitUpdate_stmt(MapleParser.Update_stmtContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link MapleParser#delete_stmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDelete_stmt(MapleParser.Delete_stmtContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link MapleParser#insert_stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

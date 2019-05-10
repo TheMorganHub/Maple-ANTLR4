@@ -19,6 +19,7 @@ maple_stmt
  : ( select_stmt
  | create_table_stmt
  | insert_stmt
+ | delete_stmt
  | update_stmt
  | embedded_sql ) ';'
  ;
@@ -42,6 +43,10 @@ foreign_key_create_table
 update_stmt
  : ( database_name '.' )? table_name ( '(' column_name ( ',' column_name )* ')' )
  ( K_UPDATE update_value_set | select_stmt ) conditional?
+ ;
+
+delete_stmt
+ : ( database_name '.' )? table_name K_INSERT ( conditional )?
  ;
 
 //personas(nombre, apellido) <- ('va', 5);
