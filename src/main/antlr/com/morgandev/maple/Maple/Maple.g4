@@ -52,7 +52,7 @@ delete_stmt
 //personas(nombre, apellido) <- ('va', 5);
 insert_stmt
  : ( database_name '.' )? table_name ( '(' column_name ( ',' column_name )* ')' )?
-  K_INSERT ( select_stmt | ( insert_value_set | ( '(' insert_value_set ')' ( ',' '(' insert_value_set ')' )*? ) ) )
+  K_INSERT ( '('? select_stmt ')'? | ( insert_value_set | ( '(' insert_value_set ')' ( ',' '(' insert_value_set ')' )*? ) ) )
  ;
 
 insert_value_set
