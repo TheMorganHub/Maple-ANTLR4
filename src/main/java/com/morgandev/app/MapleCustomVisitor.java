@@ -94,8 +94,11 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
 
     @Override
     public String visitInsert_stmt(MapleParser.Insert_stmtContext ctx) {
-        //TODO: insert select
         StringBuilder insertStmt = new StringBuilder("INSERT INTO `" + (ctx.table_name().getText()) + "`");
+        if (ctx.select_stmt() != null) {
+            insertStmt.append("\n").append(visit(ctx.select_stmt()));
+            return insertStmt.toString();
+        }
         if (!ctx.column_name().isEmpty()) {
             List<MapleParser.Column_nameContext> columnNameContexts = ctx.column_name();
             int columns = 0;
