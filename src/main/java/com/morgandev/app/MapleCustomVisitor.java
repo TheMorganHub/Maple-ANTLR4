@@ -191,7 +191,7 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
         String constraintDeclaration = "";
         for (MapleParser.Fk_column_defContext fkColumnContext : fkColumnContexts) {
             String referencedTable = fkColumnContext.column_name().getText();
-            String fkColumnName = "id_" + referencedTable;
+            String fkColumnName = referencedTable + "_id";
             constraintDeclaration += ",\nCONSTRAINT `fk_" + tableName + "_" + referencedTable + " FOREIGN KEY " +
                     "(`" + fkColumnName + "`) REFERENCES `" + referencedTable + "` (`id`)"
                     + (fkColumnContext.fk_constraint() != null ? visit(fkColumnContext.fk_constraint()) : " ON DELETE CASCADE ON UPDATE CASCADE");

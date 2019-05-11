@@ -10,9 +10,8 @@ public class Start {
         } else {
             String mapleStatement = "personas(\n" +
                     "nombre varchar,\n" +
-                    "$apellido varchar," +
-                    "materia," +
-                    "ciudad" +
+                    "apellido varchar,\n" +
+                    "ciudad\n" +
                     ");";
             start(mapleStatement);
         }
