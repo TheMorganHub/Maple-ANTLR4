@@ -19,14 +19,13 @@ public class MapleLexer extends Lexer {
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
 		T__9=10, T__10=11, T__11=12, T__12=13, T__13=14, T__14=15, T__15=16, T__16=17, 
-		K_SELECT=18, K_INSERT=19, K_UPDATE=20, K_LEFT_JOIN=21, K_RIGHT_JOIN=22, 
-		K_JOIN=23, K_OPEN_SQL_STMT=24, K_CLOSE_SQL_STMT=25, K_WHERE=26, K_PK=27, 
-		K_AND=28, K_NOTBETWEEN=29, K_BETWEEN=30, K_IN=31, K_INNER=32, K_INTO=33, 
-		K_IS=34, K_ISNULL=35, K_ISNOTNULL=36, K_ISNOT=37, K_NOTIN=38, K_NOTLIKE=39, 
-		K_LIKE=40, K_LIMIT=41, K_NOT=42, K_NOTNULL=43, K_NULL=44, K_OF=45, K_ON=46, 
-		K_OR=47, K_WHEN=48, K_WITH=49, K_WITHOUT=50, IDENTIFIER=51, NUMERIC_LITERAL=52, 
-		STRING_LITERAL=53, SINGLE_LINE_COMMENT=54, MULTILINE_COMMENT=55, SPACES=56, 
-		UNEXPECTED_CHAR=57;
+		T__17=18, T__18=19, K_SELECT=20, K_INSERT=21, K_UPDATE=22, K_LEFT_JOIN=23, 
+		K_RIGHT_JOIN=24, K_JOIN=25, K_WHERE=26, K_PK=27, K_AND=28, K_NOTBETWEEN=29, 
+		K_BETWEEN=30, K_IN=31, K_INNER=32, K_INTO=33, K_IS=34, K_ISNULL=35, K_ISNOTNULL=36, 
+		K_ISNOT=37, K_NOTIN=38, K_NOTLIKE=39, K_LIKE=40, K_LIMIT=41, K_NOT=42, 
+		K_NOTNULL=43, K_NULL=44, K_OF=45, K_ON=46, K_OR=47, K_WHEN=48, K_WITH=49, 
+		K_WITHOUT=50, IDENTIFIER=51, NUMERIC_LITERAL=52, STRING_LITERAL=53, SINGLE_LINE_COMMENT=54, 
+		MULTILINE_COMMENT=55, SPACES=56, UNEXPECTED_CHAR=57;
 	public static String[] channelNames = {
 		"DEFAULT_TOKEN_CHANNEL", "HIDDEN"
 	};
@@ -39,8 +38,8 @@ public class MapleLexer extends Lexer {
 		return new String[] {
 			"T__0", "T__1", "T__2", "T__3", "T__4", "T__5", "T__6", "T__7", "T__8", 
 			"T__9", "T__10", "T__11", "T__12", "T__13", "T__14", "T__15", "T__16", 
-			"K_SELECT", "K_INSERT", "K_UPDATE", "K_LEFT_JOIN", "K_RIGHT_JOIN", "K_JOIN", 
-			"K_OPEN_SQL_STMT", "K_CLOSE_SQL_STMT", "K_WHERE", "K_PK", "K_AND", "K_NOTBETWEEN", 
+			"T__17", "T__18", "K_SELECT", "K_INSERT", "K_UPDATE", "K_LEFT_JOIN", 
+			"K_RIGHT_JOIN", "K_JOIN", "K_WHERE", "K_PK", "K_AND", "K_NOTBETWEEN", 
 			"K_BETWEEN", "K_IN", "K_INNER", "K_INTO", "K_IS", "K_ISNULL", "K_ISNOTNULL", 
 			"K_ISNOT", "K_NOTIN", "K_NOTLIKE", "K_LIKE", "K_LIMIT", "K_NOT", "K_NOTNULL", 
 			"K_NULL", "K_OF", "K_ON", "K_OR", "K_WHEN", "K_WITH", "K_WITHOUT", "IDENTIFIER", 
@@ -55,22 +54,21 @@ public class MapleLexer extends Lexer {
 	private static String[] makeLiteralNames() {
 		return new String[] {
 			null, "';'", "'('", "','", "')'", "'.'", "'*'", "'/'", "'%'", "'+'", 
-			"'-'", "'='", "'=='", "'!='", "'<'", "'<='", "'>'", "'>='", "'->'", "'<-'", 
-			"'<<-'", "'<<>'", "'<>>'", "'<>'", "'<?'", "'?>'", "'?'", "'$'"
+			"'-'", "'='", "'=='", "'!='", "'<'", "'<='", "'>'", "'>='", "'<?'", "'?>'", 
+			"'->'", "'<-'", "'<<-'", "'<<>'", "'<>>'", "'<>'", "'?'", "'$'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
 			null, null, null, null, null, null, null, null, null, null, null, null, 
-			null, null, null, null, null, null, "K_SELECT", "K_INSERT", "K_UPDATE", 
-			"K_LEFT_JOIN", "K_RIGHT_JOIN", "K_JOIN", "K_OPEN_SQL_STMT", "K_CLOSE_SQL_STMT", 
-			"K_WHERE", "K_PK", "K_AND", "K_NOTBETWEEN", "K_BETWEEN", "K_IN", "K_INNER", 
-			"K_INTO", "K_IS", "K_ISNULL", "K_ISNOTNULL", "K_ISNOT", "K_NOTIN", "K_NOTLIKE", 
-			"K_LIKE", "K_LIMIT", "K_NOT", "K_NOTNULL", "K_NULL", "K_OF", "K_ON", 
-			"K_OR", "K_WHEN", "K_WITH", "K_WITHOUT", "IDENTIFIER", "NUMERIC_LITERAL", 
-			"STRING_LITERAL", "SINGLE_LINE_COMMENT", "MULTILINE_COMMENT", "SPACES", 
-			"UNEXPECTED_CHAR"
+			null, null, null, null, null, null, null, null, "K_SELECT", "K_INSERT", 
+			"K_UPDATE", "K_LEFT_JOIN", "K_RIGHT_JOIN", "K_JOIN", "K_WHERE", "K_PK", 
+			"K_AND", "K_NOTBETWEEN", "K_BETWEEN", "K_IN", "K_INNER", "K_INTO", "K_IS", 
+			"K_ISNULL", "K_ISNOTNULL", "K_ISNOT", "K_NOTIN", "K_NOTLIKE", "K_LIKE", 
+			"K_LIMIT", "K_NOT", "K_NOTNULL", "K_NULL", "K_OF", "K_ON", "K_OR", "K_WHEN", 
+			"K_WITH", "K_WITHOUT", "IDENTIFIER", "NUMERIC_LITERAL", "STRING_LITERAL", 
+			"SINGLE_LINE_COMMENT", "MULTILINE_COMMENT", "SPACES", "UNEXPECTED_CHAR"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -145,7 +143,7 @@ public class MapleLexer extends Lexer {
 		"\4U\tU\3\2\3\2\3\3\3\3\3\4\3\4\3\5\3\5\3\6\3\6\3\7\3\7\3\b\3\b\3\t\3\t"+
 		"\3\n\3\n\3\13\3\13\3\f\3\f\3\r\3\r\3\r\3\16\3\16\3\16\3\17\3\17\3\20\3"+
 		"\20\3\20\3\21\3\21\3\22\3\22\3\22\3\23\3\23\3\23\3\24\3\24\3\24\3\25\3"+
-		"\25\3\25\3\25\3\26\3\26\3\26\3\26\3\27\3\27\3\27\3\27\3\30\3\30\3\30\3"+
+		"\25\3\25\3\26\3\26\3\26\3\27\3\27\3\27\3\27\3\30\3\30\3\30\3\30\3\31\3"+
 		"\31\3\31\3\31\3\32\3\32\3\32\3\33\3\33\3\34\3\34\3\35\3\35\3\35\3\35\3"+
 		"\36\3\36\6\36\u00f7\n\36\r\36\16\36\u00f8\3\36\3\36\3\37\3\37\3\37\3\37"+
 		"\3\37\3\37\3\37\3\37\3 \3 \3 \3!\3!\3!\3!\3!\3!\3\"\3\"\3\"\3\"\3\"\3"+
@@ -193,8 +191,8 @@ public class MapleLexer extends Lexer {
 		"\2\17\u00b7\3\2\2\2\21\u00b9\3\2\2\2\23\u00bb\3\2\2\2\25\u00bd\3\2\2\2"+
 		"\27\u00bf\3\2\2\2\31\u00c1\3\2\2\2\33\u00c4\3\2\2\2\35\u00c7\3\2\2\2\37"+
 		"\u00c9\3\2\2\2!\u00cc\3\2\2\2#\u00ce\3\2\2\2%\u00d1\3\2\2\2\'\u00d4\3"+
-		"\2\2\2)\u00d7\3\2\2\2+\u00db\3\2\2\2-\u00df\3\2\2\2/\u00e3\3\2\2\2\61"+
-		"\u00e6\3\2\2\2\63\u00e9\3\2\2\2\65\u00ec\3\2\2\2\67\u00ee\3\2\2\29\u00f0"+
+		"\2\2\2)\u00d7\3\2\2\2+\u00da\3\2\2\2-\u00dd\3\2\2\2/\u00e1\3\2\2\2\61"+
+		"\u00e5\3\2\2\2\63\u00e9\3\2\2\2\65\u00ec\3\2\2\2\67\u00ee\3\2\2\29\u00f0"+
 		"\3\2\2\2;\u00f4\3\2\2\2=\u00fc\3\2\2\2?\u0104\3\2\2\2A\u0107\3\2\2\2C"+
 		"\u010d\3\2\2\2E\u0112\3\2\2\2G\u0115\3\2\2\2I\u0121\3\2\2\2K\u0129\3\2"+
 		"\2\2M\u0134\3\2\2\2O\u013f\3\2\2\2Q\u0149\3\2\2\2S\u014e\3\2\2\2U\u0154"+
@@ -218,13 +216,13 @@ public class MapleLexer extends Lexer {
 		"\u00c5\7#\2\2\u00c5\u00c6\7?\2\2\u00c6\34\3\2\2\2\u00c7\u00c8\7>\2\2\u00c8"+
 		"\36\3\2\2\2\u00c9\u00ca\7>\2\2\u00ca\u00cb\7?\2\2\u00cb \3\2\2\2\u00cc"+
 		"\u00cd\7@\2\2\u00cd\"\3\2\2\2\u00ce\u00cf\7@\2\2\u00cf\u00d0\7?\2\2\u00d0"+
-		"$\3\2\2\2\u00d1\u00d2\7/\2\2\u00d2\u00d3\7@\2\2\u00d3&\3\2\2\2\u00d4\u00d5"+
-		"\7>\2\2\u00d5\u00d6\7/\2\2\u00d6(\3\2\2\2\u00d7\u00d8\7>\2\2\u00d8\u00d9"+
-		"\7>\2\2\u00d9\u00da\7/\2\2\u00da*\3\2\2\2\u00db\u00dc\7>\2\2\u00dc\u00dd"+
-		"\7>\2\2\u00dd\u00de\7@\2\2\u00de,\3\2\2\2\u00df\u00e0\7>\2\2\u00e0\u00e1"+
-		"\7@\2\2\u00e1\u00e2\7@\2\2\u00e2.\3\2\2\2\u00e3\u00e4\7>\2\2\u00e4\u00e5"+
-		"\7@\2\2\u00e5\60\3\2\2\2\u00e6\u00e7\7>\2\2\u00e7\u00e8\7A\2\2\u00e8\62"+
-		"\3\2\2\2\u00e9\u00ea\7A\2\2\u00ea\u00eb\7@\2\2\u00eb\64\3\2\2\2\u00ec"+
+		"$\3\2\2\2\u00d1\u00d2\7>\2\2\u00d2\u00d3\7A\2\2\u00d3&\3\2\2\2\u00d4\u00d5"+
+		"\7A\2\2\u00d5\u00d6\7@\2\2\u00d6(\3\2\2\2\u00d7\u00d8\7/\2\2\u00d8\u00d9"+
+		"\7@\2\2\u00d9*\3\2\2\2\u00da\u00db\7>\2\2\u00db\u00dc\7/\2\2\u00dc,\3"+
+		"\2\2\2\u00dd\u00de\7>\2\2\u00de\u00df\7>\2\2\u00df\u00e0\7/\2\2\u00e0"+
+		".\3\2\2\2\u00e1\u00e2\7>\2\2\u00e2\u00e3\7>\2\2\u00e3\u00e4\7@\2\2\u00e4"+
+		"\60\3\2\2\2\u00e5\u00e6\7>\2\2\u00e6\u00e7\7@\2\2\u00e7\u00e8\7@\2\2\u00e8"+
+		"\62\3\2\2\2\u00e9\u00ea\7>\2\2\u00ea\u00eb\7@\2\2\u00eb\64\3\2\2\2\u00ec"+
 		"\u00ed\7A\2\2\u00ed\66\3\2\2\2\u00ee\u00ef\7&\2\2\u00ef8\3\2\2\2\u00f0"+
 		"\u00f1\5w<\2\u00f1\u00f2\5\u0091I\2\u00f2\u00f3\5}?\2\u00f3:\3\2\2\2\u00f4"+
 		"\u00f6\5U+\2\u00f5\u00f7\5q9\2\u00f6\u00f5\3\2\2\2\u00f7\u00f8\3\2\2\2"+

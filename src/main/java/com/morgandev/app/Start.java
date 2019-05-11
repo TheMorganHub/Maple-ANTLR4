@@ -8,7 +8,7 @@ public class Start {
         if (args.length > 0) {
             startFromCmd();
         } else {
-            String mapleStatement = "personas(personas_id int, nombre varchar, bwerk varchar, roles, materias);personas";
+            String mapleStatement = "personas(personas_id int, nombre varchar, bwerk varchar, roles, materias);<?SELECT * FROM personas ?>";
             start(mapleStatement);
         }
     }

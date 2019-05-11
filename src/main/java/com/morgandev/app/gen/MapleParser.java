@@ -19,14 +19,13 @@ public class MapleParser extends Parser {
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
 		T__9=10, T__10=11, T__11=12, T__12=13, T__13=14, T__14=15, T__15=16, T__16=17, 
-		K_SELECT=18, K_INSERT=19, K_UPDATE=20, K_LEFT_JOIN=21, K_RIGHT_JOIN=22, 
-		K_JOIN=23, K_OPEN_SQL_STMT=24, K_CLOSE_SQL_STMT=25, K_WHERE=26, K_PK=27, 
-		K_AND=28, K_NOTBETWEEN=29, K_BETWEEN=30, K_IN=31, K_INNER=32, K_INTO=33, 
-		K_IS=34, K_ISNULL=35, K_ISNOTNULL=36, K_ISNOT=37, K_NOTIN=38, K_NOTLIKE=39, 
-		K_LIKE=40, K_LIMIT=41, K_NOT=42, K_NOTNULL=43, K_NULL=44, K_OF=45, K_ON=46, 
-		K_OR=47, K_WHEN=48, K_WITH=49, K_WITHOUT=50, IDENTIFIER=51, NUMERIC_LITERAL=52, 
-		STRING_LITERAL=53, SINGLE_LINE_COMMENT=54, MULTILINE_COMMENT=55, SPACES=56, 
-		UNEXPECTED_CHAR=57;
+		T__17=18, T__18=19, K_SELECT=20, K_INSERT=21, K_UPDATE=22, K_LEFT_JOIN=23, 
+		K_RIGHT_JOIN=24, K_JOIN=25, K_WHERE=26, K_PK=27, K_AND=28, K_NOTBETWEEN=29, 
+		K_BETWEEN=30, K_IN=31, K_INNER=32, K_INTO=33, K_IS=34, K_ISNULL=35, K_ISNOTNULL=36, 
+		K_ISNOT=37, K_NOTIN=38, K_NOTLIKE=39, K_LIKE=40, K_LIMIT=41, K_NOT=42, 
+		K_NOTNULL=43, K_NULL=44, K_OF=45, K_ON=46, K_OR=47, K_WHEN=48, K_WITH=49, 
+		K_WITHOUT=50, IDENTIFIER=51, NUMERIC_LITERAL=52, STRING_LITERAL=53, SINGLE_LINE_COMMENT=54, 
+		MULTILINE_COMMENT=55, SPACES=56, UNEXPECTED_CHAR=57;
 	public static final int
 		RULE_parse = 0, RULE_error = 1, RULE_maple_stmt_list = 2, RULE_maple_stmt = 3, 
 		RULE_create_table_stmt = 4, RULE_update_stmt = 5, RULE_delete_stmt = 6, 
@@ -56,22 +55,21 @@ public class MapleParser extends Parser {
 	private static String[] makeLiteralNames() {
 		return new String[] {
 			null, "';'", "'('", "','", "')'", "'.'", "'*'", "'/'", "'%'", "'+'", 
-			"'-'", "'='", "'=='", "'!='", "'<'", "'<='", "'>'", "'>='", "'->'", "'<-'", 
-			"'<<-'", "'<<>'", "'<>>'", "'<>'", "'<?'", "'?>'", "'?'", "'$'"
+			"'-'", "'='", "'=='", "'!='", "'<'", "'<='", "'>'", "'>='", "'<?'", "'?>'", 
+			"'->'", "'<-'", "'<<-'", "'<<>'", "'<>>'", "'<>'", "'?'", "'$'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
 			null, null, null, null, null, null, null, null, null, null, null, null, 
-			null, null, null, null, null, null, "K_SELECT", "K_INSERT", "K_UPDATE", 
-			"K_LEFT_JOIN", "K_RIGHT_JOIN", "K_JOIN", "K_OPEN_SQL_STMT", "K_CLOSE_SQL_STMT", 
-			"K_WHERE", "K_PK", "K_AND", "K_NOTBETWEEN", "K_BETWEEN", "K_IN", "K_INNER", 
-			"K_INTO", "K_IS", "K_ISNULL", "K_ISNOTNULL", "K_ISNOT", "K_NOTIN", "K_NOTLIKE", 
-			"K_LIKE", "K_LIMIT", "K_NOT", "K_NOTNULL", "K_NULL", "K_OF", "K_ON", 
-			"K_OR", "K_WHEN", "K_WITH", "K_WITHOUT", "IDENTIFIER", "NUMERIC_LITERAL", 
-			"STRING_LITERAL", "SINGLE_LINE_COMMENT", "MULTILINE_COMMENT", "SPACES", 
-			"UNEXPECTED_CHAR"
+			null, null, null, null, null, null, null, null, "K_SELECT", "K_INSERT", 
+			"K_UPDATE", "K_LEFT_JOIN", "K_RIGHT_JOIN", "K_JOIN", "K_WHERE", "K_PK", 
+			"K_AND", "K_NOTBETWEEN", "K_BETWEEN", "K_IN", "K_INNER", "K_INTO", "K_IS", 
+			"K_ISNULL", "K_ISNOTNULL", "K_ISNOT", "K_NOTIN", "K_NOTLIKE", "K_LIKE", 
+			"K_LIMIT", "K_NOT", "K_NOTNULL", "K_NULL", "K_OF", "K_ON", "K_OR", "K_WHEN", 
+			"K_WITH", "K_WITHOUT", "IDENTIFIER", "NUMERIC_LITERAL", "STRING_LITERAL", 
+			"SINGLE_LINE_COMMENT", "MULTILINE_COMMENT", "SPACES", "UNEXPECTED_CHAR"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -161,7 +159,7 @@ public class MapleParser extends Parser {
 			setState(72);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case K_OPEN_SQL_STMT:
+			case T__17:
 			case IDENTIFIER:
 				{
 				setState(70);
@@ -2725,11 +2723,9 @@ public class MapleParser extends Parser {
 	}
 
 	public static class Embedded_sqlContext extends ParserRuleContext {
-		public TerminalNode K_OPEN_SQL_STMT() { return getToken(MapleParser.K_OPEN_SQL_STMT, 0); }
 		public Any_stmtContext any_stmt() {
 			return getRuleContext(Any_stmtContext.class,0);
 		}
-		public TerminalNode K_CLOSE_SQL_STMT() { return getToken(MapleParser.K_CLOSE_SQL_STMT, 0); }
 		public Embedded_sqlContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -2756,11 +2752,11 @@ public class MapleParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(398);
-			match(K_OPEN_SQL_STMT);
+			match(T__17);
 			setState(399);
 			any_stmt();
 			setState(400);
-			match(K_CLOSE_SQL_STMT);
+			match(T__18);
 			}
 		}
 		catch (RecognitionException re) {
@@ -2910,12 +2906,12 @@ public class MapleParser extends Parser {
 		"\2}~\5\64\33\2~\177\7\4\2\2\177\u0084\5\62\32\2\u0080\u0081\7\5\2\2\u0081"+
 		"\u0083\5\62\32\2\u0082\u0080\3\2\2\2\u0083\u0086\3\2\2\2\u0084\u0082\3"+
 		"\2\2\2\u0084\u0085\3\2\2\2\u0085\u0087\3\2\2\2\u0086\u0084\3\2\2\2\u0087"+
-		"\u0088\7\6\2\2\u0088\u008c\3\2\2\2\u0089\u008a\7\26\2\2\u008a\u008d\5"+
+		"\u0088\7\6\2\2\u0088\u008c\3\2\2\2\u0089\u008a\7\30\2\2\u008a\u008d\5"+
 		"\24\13\2\u008b\u008d\5\26\f\2\u008c\u0089\3\2\2\2\u008c\u008b\3\2\2\2"+
 		"\u008d\u008f\3\2\2\2\u008e\u0090\5\34\17\2\u008f\u008e\3\2\2\2\u008f\u0090"+
 		"\3\2\2\2\u0090\r\3\2\2\2\u0091\u0092\5:\36\2\u0092\u0093\7\7\2\2\u0093"+
 		"\u0095\3\2\2\2\u0094\u0091\3\2\2\2\u0094\u0095\3\2\2\2\u0095\u0096\3\2"+
-		"\2\2\u0096\u0097\5\64\33\2\u0097\u0099\7\25\2\2\u0098\u009a\5\34\17\2"+
+		"\2\2\u0096\u0097\5\64\33\2\u0097\u0099\7\27\2\2\u0098\u009a\5\34\17\2"+
 		"\u0099\u0098\3\2\2\2\u0099\u009a\3\2\2\2\u009a\17\3\2\2\2\u009b\u009c"+
 		"\5:\36\2\u009c\u009d\7\7\2\2\u009d\u009f\3\2\2\2\u009e\u009b\3\2\2\2\u009e"+
 		"\u009f\3\2\2\2\u009f\u00a0\3\2\2\2\u00a0\u00ac\5\64\33\2\u00a1\u00a2\7"+
@@ -2923,7 +2919,7 @@ public class MapleParser extends Parser {
 		"\u00a5\u00a3\3\2\2\2\u00a6\u00a9\3\2\2\2\u00a7\u00a5\3\2\2\2\u00a7\u00a8"+
 		"\3\2\2\2\u00a8\u00aa\3\2\2\2\u00a9\u00a7\3\2\2\2\u00aa\u00ab\7\6\2\2\u00ab"+
 		"\u00ad\3\2\2\2\u00ac\u00a1\3\2\2\2\u00ac\u00ad\3\2\2\2\u00ad\u00ae\3\2"+
-		"\2\2\u00ae\u00c6\7\25\2\2\u00af\u00b1\7\4\2\2\u00b0\u00af\3\2\2\2\u00b0"+
+		"\2\2\u00ae\u00c6\7\27\2\2\u00af\u00b1\7\4\2\2\u00b0\u00af\3\2\2\2\u00b0"+
 		"\u00b1\3\2\2\2\u00b1\u00b2\3\2\2\2\u00b2\u00b4\5\26\f\2\u00b3\u00b5\7"+
 		"\6\2\2\u00b4\u00b3\3\2\2\2\u00b4\u00b5\3\2\2\2\u00b5\u00c7\3\2\2\2\u00b6"+
 		"\u00c5\5\22\n\2\u00b7\u00b8\7\4\2\2\u00b8\u00b9\5\22\n\2\u00b9\u00c1\7"+
@@ -2938,7 +2934,7 @@ public class MapleParser extends Parser {
 		"\5*\26\2\u00d3\u00d1\3\2\2\2\u00d4\u00d7\3\2\2\2\u00d5\u00d6\3\2\2\2\u00d5"+
 		"\u00d3\3\2\2\2\u00d6\25\3\2\2\2\u00d7\u00d5\3\2\2\2\u00d8\u00da\5\64\33"+
 		"\2\u00d9\u00db\5\66\34\2\u00da\u00d9\3\2\2\2\u00da\u00db\3\2\2\2\u00db"+
-		"\u00ed\3\2\2\2\u00dc\u00e5\7\24\2\2\u00dd\u00e2\5.\30\2\u00de\u00df\7"+
+		"\u00ed\3\2\2\2\u00dc\u00e5\7\26\2\2\u00dd\u00e2\5.\30\2\u00de\u00df\7"+
 		"\5\2\2\u00df\u00e1\5.\30\2\u00e0\u00de\3\2\2\2\u00e1\u00e4\3\2\2\2\u00e2"+
 		"\u00e3\3\2\2\2\u00e2\u00e0\3\2\2\2\u00e3\u00e6\3\2\2\2\u00e4\u00e2\3\2"+
 		"\2\2\u00e5\u00dd\3\2\2\2\u00e5\u00e6\3\2\2\2\u00e6\u00ea\3\2\2\2\u00e7"+
@@ -2946,7 +2942,7 @@ public class MapleParser extends Parser {
 		"\2\2\2\u00ea\u00e8\3\2\2\2\u00eb\u00ee\3\2\2\2\u00ec\u00ea\3\2\2\2\u00ed"+
 		"\u00dc\3\2\2\2\u00ed\u00ee\3\2\2\2\u00ee\u00f0\3\2\2\2\u00ef\u00f1\5\34"+
 		"\17\2\u00f0\u00ef\3\2\2\2\u00f0\u00f1\3\2\2\2\u00f1\27\3\2\2\2\u00f2\u00f6"+
-		"\7\31\2\2\u00f3\u00f6\7\27\2\2\u00f4\u00f6\7\30\2\2\u00f5\u00f2\3\2\2"+
+		"\7\33\2\2\u00f3\u00f6\7\31\2\2\u00f4\u00f6\7\32\2\2\u00f5\u00f2\3\2\2"+
 		"\2\u00f5\u00f3\3\2\2\2\u00f5\u00f4\3\2\2\2\u00f6\u0100\3\2\2\2\u00f7\u00f8"+
 		"\7\4\2\2\u00f8\u00f9\5\26\f\2\u00f9\u00fa\7\6\2\2\u00fa\u00fb\5\66\34"+
 		"\2\u00fb\u0101\3\2\2\2\u00fc\u00fe\5\64\33\2\u00fd\u00ff\5\66\34\2\u00fe"+
@@ -2998,8 +2994,8 @@ public class MapleParser extends Parser {
 		";\3\2\2\2\u0185\u0186\5B\"\2\u0186=\3\2\2\2\u0187\u0189\t\4\2\2\u0188"+
 		"\u0187\3\2\2\2\u0188\u0189\3\2\2\2\u0189\u018a\3\2\2\2\u018a\u018b\7\66"+
 		"\2\2\u018b?\3\2\2\2\u018c\u018d\t\2\2\2\u018dA\3\2\2\2\u018e\u018f\7\65"+
-		"\2\2\u018fC\3\2\2\2\u0190\u0191\7\32\2\2\u0191\u0192\5F$\2\u0192\u0193"+
-		"\7\33\2\2\u0193E\3\2\2\2\u0194\u0196\13\2\2\2\u0195\u0194\3\2\2\2\u0196"+
+		"\2\2\u018fC\3\2\2\2\u0190\u0191\7\24\2\2\u0191\u0192\5F$\2\u0192\u0193"+
+		"\7\25\2\2\u0193E\3\2\2\2\u0194\u0196\13\2\2\2\u0195\u0194\3\2\2\2\u0196"+
 		"\u0199\3\2\2\2\u0197\u0198\3\2\2\2\u0197\u0195\3\2\2\2\u0198G\3\2\2\2"+
 		"\u0199\u0197\3\2\2\2\66JSX\\ens{\u0084\u008c\u008f\u0094\u0099\u009e\u00a7"+
 		"\u00ac\u00b0\u00b4\u00c1\u00c4\u00c6\u00cd\u00d5\u00da\u00e2\u00e5\u00ea"+
