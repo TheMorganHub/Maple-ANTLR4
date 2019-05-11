@@ -33,11 +33,7 @@ Personas (
 */
 
 create_table_stmt
- : table_name '(' ( column_def ( ',' column_def )*? )*? ')' ( foreign_key_create_table )*?
- ;
-
-foreign_key_create_table
- : K_JOIN table_name
+ : table_name '(' ( column_def ( ',' column_def )*? )*? ')'
  ;
 
 update_stmt
@@ -81,12 +77,23 @@ conditional
  ;
 
 column_def
- : column_name ( column_modifier )? column_type ( default_value )?
+ : ( standard_column_def | fk_column_def )
+ ;
+
+fk_column_def
+ : column_name ( fk_constraint )? ( default_value )?
+ ;
+
+fk_constraint
+ : '(' any_stmt ')'
+ ;
+
+standard_column_def
+ : ( column_modifier )? column_name column_type ( default_value )?
  ;
 
 column_type
- : ( any_name ( '(' signed_number ')'
-         | '(' signed_number ',' signed_number ')' )? )
+ : ( any_name ( '(' signed_number ')' | '(' signed_number ',' signed_number ')' )? )
  ;
 
 default_value
@@ -155,11 +162,10 @@ literal_value
 
 any_name
  : IDENTIFIER
- | '(' any_name ')'
  ;
 
 embedded_sql
- : K_OPEN_SQL_STMT any_stmt K_CLOSE_SQL_STMT
+ : '<?' any_stmt '?>'
  ;
 
 any_stmt
@@ -172,8 +178,6 @@ K_UPDATE : '<<-';
 K_LEFT_JOIN : '<<>';
 K_RIGHT_JOIN : '<>>';
 K_JOIN : '<>';
-K_OPEN_SQL_STMT : '<?';
-K_CLOSE_SQL_STMT : '?>';
 K_WHERE : '?';
 K_PK : '$';
 

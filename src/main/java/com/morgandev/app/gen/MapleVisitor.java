@@ -41,12 +41,6 @@ public interface MapleVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCreate_table_stmt(MapleParser.Create_table_stmtContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link MapleParser#foreign_key_create_table}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitForeign_key_create_table(MapleParser.Foreign_key_create_tableContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link MapleParser#update_stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -106,6 +100,24 @@ public interface MapleVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitColumn_def(MapleParser.Column_defContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MapleParser#fk_column_def}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFk_column_def(MapleParser.Fk_column_defContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MapleParser#fk_constraint}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFk_constraint(MapleParser.Fk_constraintContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MapleParser#standard_column_def}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStandard_column_def(MapleParser.Standard_column_defContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MapleParser#column_type}.
 	 * @param ctx the parse tree

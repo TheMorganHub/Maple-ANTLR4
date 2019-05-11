@@ -76,18 +76,6 @@ public class MapleBaseListener implements MapleListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterForeign_key_create_table(MapleParser.Foreign_key_create_tableContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitForeign_key_create_table(MapleParser.Foreign_key_create_tableContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterUpdate_stmt(MapleParser.Update_stmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -203,6 +191,42 @@ public class MapleBaseListener implements MapleListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitColumn_def(MapleParser.Column_defContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFk_column_def(MapleParser.Fk_column_defContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFk_column_def(MapleParser.Fk_column_defContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFk_constraint(MapleParser.Fk_constraintContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFk_constraint(MapleParser.Fk_constraintContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterStandard_column_def(MapleParser.Standard_column_defContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitStandard_column_def(MapleParser.Standard_column_defContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

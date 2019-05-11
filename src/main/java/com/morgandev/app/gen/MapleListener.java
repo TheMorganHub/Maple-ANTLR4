@@ -58,16 +58,6 @@ public interface MapleListener extends ParseTreeListener {
 	 */
 	void exitCreate_table_stmt(MapleParser.Create_table_stmtContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MapleParser#foreign_key_create_table}.
-	 * @param ctx the parse tree
-	 */
-	void enterForeign_key_create_table(MapleParser.Foreign_key_create_tableContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MapleParser#foreign_key_create_table}.
-	 * @param ctx the parse tree
-	 */
-	void exitForeign_key_create_table(MapleParser.Foreign_key_create_tableContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link MapleParser#update_stmt}.
 	 * @param ctx the parse tree
 	 */
@@ -167,6 +157,36 @@ public interface MapleListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitColumn_def(MapleParser.Column_defContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MapleParser#fk_column_def}.
+	 * @param ctx the parse tree
+	 */
+	void enterFk_column_def(MapleParser.Fk_column_defContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MapleParser#fk_column_def}.
+	 * @param ctx the parse tree
+	 */
+	void exitFk_column_def(MapleParser.Fk_column_defContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MapleParser#fk_constraint}.
+	 * @param ctx the parse tree
+	 */
+	void enterFk_constraint(MapleParser.Fk_constraintContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MapleParser#fk_constraint}.
+	 * @param ctx the parse tree
+	 */
+	void exitFk_constraint(MapleParser.Fk_constraintContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MapleParser#standard_column_def}.
+	 * @param ctx the parse tree
+	 */
+	void enterStandard_column_def(MapleParser.Standard_column_defContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MapleParser#standard_column_def}.
+	 * @param ctx the parse tree
+	 */
+	void exitStandard_column_def(MapleParser.Standard_column_defContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MapleParser#column_type}.
 	 * @param ctx the parse tree
