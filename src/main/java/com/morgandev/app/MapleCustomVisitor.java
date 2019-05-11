@@ -162,7 +162,7 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
                 pkStmt.append(pks == 0 ? "" : ",").append("`").append(pkColumnName).append("`");
                 pks++;
             }
-            pkStmt.append(")").append(fkConstraints.isEmpty() ? "" : ",");
+            pkStmt.append(")");
             columnDefinitionsStmt.append(pkStmt);
         } else {
             columnDefinitionsStmt.insert(0, "`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY" + (columnDefinitionsStmt.length() == 0 ? "" : ",\n"));
@@ -189,14 +189,12 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
             return "";
         }
         String constraintDeclaration = "";
-        int fks = 0;
         for (MapleParser.Fk_column_defContext fkColumnContext : fkColumnContexts) {
             String referencedTable = fkColumnContext.column_name().getText();
             String fkColumnName = "id_" + referencedTable;
-            constraintDeclaration += (fks == 0 ? "" : ",") + "\nCONSTRAINT `fk_" + tableName + "_" + referencedTable + " FOREIGN KEY " +
+            constraintDeclaration += ",\nCONSTRAINT `fk_" + tableName + "_" + referencedTable + " FOREIGN KEY " +
                     "(`" + fkColumnName + "`) REFERENCES `" + referencedTable + "` (`id`)"
                     + (fkColumnContext.fk_constraint() != null ? visit(fkColumnContext.fk_constraint()) : " ON DELETE CASCADE ON UPDATE CASCADE");
-            fks++;
         }
         return constraintDeclaration;
     }
