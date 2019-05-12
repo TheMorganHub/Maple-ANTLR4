@@ -12,34 +12,35 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
 
     @Override
     public String visitParse(MapleParser.ParseContext ctx) {
-        return visit(ctx.maple_stmt_list());
+        return visit(ctx.maple_all_stmt_list());
     }
 
     @Override
-    public String visitMaple_stmt_list(MapleParser.Maple_stmt_listContext ctx) {
+    public String visitMaple_all_stmt_list(MapleParser.Maple_all_stmt_listContext ctx) {
         StringBuilder mapleStmts = new StringBuilder();
-        List<MapleParser.Maple_stmtContext> mapleStmtsContexts = ctx.maple_stmt();
-        for (MapleParser.Maple_stmtContext mapleStmtCtx : mapleStmtsContexts) {
-            mapleStmts.append(visit(mapleStmtCtx)).append(";\n");
+        List<MapleParser.Maple_all_stmtContext> mapleStmtsContexts = ctx.maple_all_stmt();
+        for (MapleParser.Maple_all_stmtContext mapleStmtCtx : mapleStmtsContexts) {
+            if (mapleStmtCtx.maple_standard_stmt() != null) {
+                mapleStmts.append(visit(mapleStmtCtx.maple_standard_stmt())).append(";\n");
+            } else if (mapleStmtCtx.maple_block() != null) {
+                //TODO: not supported yet!
+            }
         }
         return mapleStmts.toString();
     }
 
     @Override
-    public String visitEmbedded_sql(MapleParser.Embedded_sqlContext ctx) {
-        return visit(ctx.any_stmt());
+    public String visitMaple_standard_stmt_list(MapleParser.Maple_standard_stmt_listContext ctx) {
+        StringBuilder mapleStmts = new StringBuilder();
+        List<MapleParser.Maple_standard_stmtContext> mapleStmtsContexts = ctx.maple_standard_stmt();
+        for (MapleParser.Maple_standard_stmtContext mapleStmtsContext : mapleStmtsContexts) {
+            mapleStmts.append(visit(mapleStmtsContext)).append(";\n");
+        }
+        return mapleStmts.toString();
     }
 
     @Override
-    public String visitAny_stmt(MapleParser.Any_stmtContext ctx) {
-        int startIndex = ctx.start.getStartIndex();
-        int stopIndex = ctx.stop.getStopIndex();
-        Interval interval = new Interval(startIndex, stopIndex);
-        return ctx.start.getInputStream().getText(interval);
-    }
-
-    @Override
-    public String visitMaple_stmt(MapleParser.Maple_stmtContext ctx) {
+    public String visitMaple_standard_stmt(MapleParser.Maple_standard_stmtContext ctx) {
         MapleParser.Select_stmtContext selectStmtContext;
         MapleParser.Create_table_stmtContext createTableStmtContext;
         MapleParser.Insert_stmtContext insertStmtContext;
@@ -66,6 +67,19 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
             return visit(deleteStmtContext);
         }
         return "";
+    }
+
+    @Override
+    public String visitEmbedded_sql(MapleParser.Embedded_sqlContext ctx) {
+        return visit(ctx.any_stmt());
+    }
+
+    @Override
+    public String visitAny_stmt(MapleParser.Any_stmtContext ctx) {
+        int startIndex = ctx.start.getStartIndex();
+        int stopIndex = ctx.stop.getStopIndex();
+        Interval interval = new Interval(startIndex, stopIndex);
+        return ctx.start.getInputStream().getText(interval);
     }
 
     @Override

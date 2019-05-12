@@ -12,7 +12,7 @@ public class Start {
                     "nombre varchar,\n" +
                     "apellido varchar,\n" +
                     "ciudad\n" +
-                    ");";
+                    ");personas -> nombre;";
             start(mapleStatement);
         }
     }

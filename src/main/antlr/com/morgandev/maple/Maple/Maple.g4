@@ -1,7 +1,7 @@
 grammar Maple;
 
 parse
- : ( maple_stmt_list | error ) EOF
+ : ( maple_all_stmt_list | error ) EOF
  ;
 
 error
@@ -11,17 +11,29 @@ error
    }
  ;
 
-maple_stmt_list
- : maple_stmt ( ';' )? ( ';' maple_stmt ( ';' )? )*?
+maple_all_stmt_list
+ : maple_all_stmt ( ';' )? ( ';' maple_all_stmt ( ';' )? )*?
  ;
 
-maple_stmt
+maple_standard_stmt_list
+ : maple_standard_stmt ( ';' )? ( ';' maple_standard_stmt ( ';' )? )*?
+ ;
+
+maple_all_stmt
+ : ( maple_standard_stmt | maple_block )
+ ;
+
+maple_standard_stmt
  : ( select_stmt
  | create_table_stmt
  | insert_stmt
  | delete_stmt
  | update_stmt
  | embedded_sql )
+ ;
+
+maple_block
+ : block_action_name '{' maple_standard_stmt_list '}'
  ;
 
 /*
@@ -125,6 +137,10 @@ result_column
 column_modifier
  : nullable_column='?'
  | primary_key='$'
+ ;
+
+block_action_name
+ : any_name
  ;
 
 column_name

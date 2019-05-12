@@ -40,25 +40,61 @@ public class MapleBaseListener implements MapleListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMaple_stmt_list(MapleParser.Maple_stmt_listContext ctx) { }
+	@Override public void enterMaple_all_stmt_list(MapleParser.Maple_all_stmt_listContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitMaple_stmt_list(MapleParser.Maple_stmt_listContext ctx) { }
+	@Override public void exitMaple_all_stmt_list(MapleParser.Maple_all_stmt_listContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMaple_stmt(MapleParser.Maple_stmtContext ctx) { }
+	@Override public void enterMaple_standard_stmt_list(MapleParser.Maple_standard_stmt_listContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitMaple_stmt(MapleParser.Maple_stmtContext ctx) { }
+	@Override public void exitMaple_standard_stmt_list(MapleParser.Maple_standard_stmt_listContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterMaple_all_stmt(MapleParser.Maple_all_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMaple_all_stmt(MapleParser.Maple_all_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterMaple_standard_stmt(MapleParser.Maple_standard_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMaple_standard_stmt(MapleParser.Maple_standard_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterMaple_block(MapleParser.Maple_blockContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMaple_block(MapleParser.Maple_blockContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -299,6 +335,18 @@ public class MapleBaseListener implements MapleListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitColumn_modifier(MapleParser.Column_modifierContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterBlock_action_name(MapleParser.Block_action_nameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBlock_action_name(MapleParser.Block_action_nameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
