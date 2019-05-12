@@ -1,7 +1,7 @@
 grammar Maple;
 
 parse
- : ( maple_all_stmt_list | error ) EOF
+ : ( maple_stmt_list | error ) EOF
  ;
 
 error
@@ -11,29 +11,22 @@ error
    }
  ;
 
-maple_all_stmt_list
- : maple_all_stmt ( ';' )? ( ';' maple_all_stmt ( ';' )? )*?
+maple_stmt_list
+ : maple_stmt ( ';' )? ( ';' maple_stmt ( ';' )? )*?
  ;
 
-maple_standard_stmt_list
- : maple_standard_stmt ( ';' )? ( ';' maple_standard_stmt ( ';' )? )*?
- ;
-
-maple_all_stmt
- : ( maple_standard_stmt | maple_block )
- ;
-
-maple_standard_stmt
+maple_stmt
  : ( select_stmt
  | create_table_stmt
  | insert_stmt
  | delete_stmt
  | update_stmt
- | embedded_sql )
+ | embedded_sql
+ | maple_block )
  ;
 
 maple_block
- : block_action_name '{' maple_standard_stmt_list '}'
+ : block_action_name '{' maple_stmt_list '}'
  ;
 
 /*
@@ -60,11 +53,11 @@ delete_stmt
 //personas(nombre, apellido) <- ('va', 5);
 insert_stmt
  : ( database_name '.' )? table_name ( '(' column_name ( ',' column_name )* ')' )?
-  K_INSERT ( '('? select_stmt ')'? | ( insert_value_set | ( '(' insert_value_set ')' ( ',' '(' insert_value_set ')' )*? ) ) )
+  K_INSERT ( '('? select_stmt ')'? | ( ( insert_value_set ( ',' insert_value_set )*? ) ) )
  ;
 
 insert_value_set
- : expr ( ',' expr )*?
+ : '(' expr ( ',' expr )*? ')'
  ;
 
 update_value_set

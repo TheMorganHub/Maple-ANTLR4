@@ -31,28 +31,14 @@ public class MapleBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitMaple_all_stmt_list(MapleParser.Maple_all_stmt_listContext ctx) { return visitChildren(ctx); }
+	@Override public T visitMaple_stmt_list(MapleParser.Maple_stmt_listContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitMaple_standard_stmt_list(MapleParser.Maple_standard_stmt_listContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitMaple_all_stmt(MapleParser.Maple_all_stmtContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitMaple_standard_stmt(MapleParser.Maple_standard_stmtContext ctx) { return visitChildren(ctx); }
+	@Override public T visitMaple_stmt(MapleParser.Maple_stmtContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

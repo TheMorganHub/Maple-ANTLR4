@@ -10,43 +10,55 @@ import java.util.List;
 
 public class MapleCustomVisitor extends MapleBaseVisitor<String> {
 
+    private boolean preparedMode;
+    private List<String> literals;
+
+    /**
+     * If prepared mode is enabled, the Maple engine will replace all literals it encounters with a '?' and store them
+     * in order in a list for processing at a later time. This mode is necessary for prepared blocks.
+     *
+     * @param flag
+     */
+    public void setPreparedMode(boolean flag) {
+        this.preparedMode = flag;
+        literals = !flag ? null : new ArrayList<>();
+    }
+
+    public List<String> getLiterals() {
+        return literals;
+    }
+
     @Override
     public String visitParse(MapleParser.ParseContext ctx) {
-        return visit(ctx.maple_all_stmt_list());
+        return visit(ctx.maple_stmt_list());
     }
 
     @Override
-    public String visitMaple_all_stmt_list(MapleParser.Maple_all_stmt_listContext ctx) {
+    public String visitMaple_stmt_list(MapleParser.Maple_stmt_listContext ctx) {
         StringBuilder mapleStmts = new StringBuilder();
-        List<MapleParser.Maple_all_stmtContext> mapleStmtsContexts = ctx.maple_all_stmt();
-        for (MapleParser.Maple_all_stmtContext mapleStmtCtx : mapleStmtsContexts) {
-            if (mapleStmtCtx.maple_standard_stmt() != null) {
-                mapleStmts.append(visit(mapleStmtCtx.maple_standard_stmt())).append(";\n");
-            } else if (mapleStmtCtx.maple_block() != null) {
-                //TODO: not supported yet!
-            }
+        List<MapleParser.Maple_stmtContext> mapleStmtsContexts = ctx.maple_stmt();
+        for (MapleParser.Maple_stmtContext mapleStmtCtx : mapleStmtsContexts) {
+            mapleStmts.append(visit(mapleStmtCtx)).append(";\n");
         }
         return mapleStmts.toString();
     }
 
     @Override
-    public String visitMaple_standard_stmt_list(MapleParser.Maple_standard_stmt_listContext ctx) {
-        StringBuilder mapleStmts = new StringBuilder();
-        List<MapleParser.Maple_standard_stmtContext> mapleStmtsContexts = ctx.maple_standard_stmt();
-        for (MapleParser.Maple_standard_stmtContext mapleStmtsContext : mapleStmtsContexts) {
-            mapleStmts.append(visit(mapleStmtsContext)).append(";\n");
-        }
-        return mapleStmts.toString();
+    public String visitMaple_block(MapleParser.Maple_blockContext ctx) {
+        String actionName = ctx.block_action_name().getText();
+        BlockAction action = new BlockAction(this);
+        return action.processAction(actionName, ctx);
     }
 
     @Override
-    public String visitMaple_standard_stmt(MapleParser.Maple_standard_stmtContext ctx) {
+    public String visitMaple_stmt(MapleParser.Maple_stmtContext ctx) {
         MapleParser.Select_stmtContext selectStmtContext;
         MapleParser.Create_table_stmtContext createTableStmtContext;
         MapleParser.Insert_stmtContext insertStmtContext;
         MapleParser.Embedded_sqlContext embeddedSqlContext;
         MapleParser.Update_stmtContext updateStmtContext;
         MapleParser.Delete_stmtContext deleteStmtContext;
+        MapleParser.Maple_blockContext mapleBlockContext;
 
         if ((selectStmtContext = ctx.select_stmt()) != null) {
             return visit(selectStmtContext);
@@ -65,6 +77,9 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
         }
         if ((deleteStmtContext = ctx.delete_stmt()) != null) {
             return visit(deleteStmtContext);
+        }
+        if ((mapleBlockContext = ctx.maple_block()) != null) {
+            return visit(mapleBlockContext);
         }
         return "";
     }
@@ -398,6 +413,14 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
     }
 
     @Override
+    public String visitLiteral_value(MapleParser.Literal_valueContext ctx) {
+        if (preparedMode) {
+            literals.add(ctx.getText());
+        }
+        return (preparedMode ? "?" : ctx.getText());
+    }
+
+    @Override
     public String visitExpr(MapleParser.ExprContext ctx) {
         if (ctx.select_stmt() != null) {
             return " (" + visit(ctx.select_stmt()) + ")";
@@ -415,7 +438,7 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
                     + (columnName != null ? columnName.getText() : "");
         }
         if (ctx.literal_value() != null) {
-            return " " + ctx.literal_value().getText();
+            return " " + visit(ctx.literal_value());
         }
 
         //an expression enclosed in parentheses would fall into this category

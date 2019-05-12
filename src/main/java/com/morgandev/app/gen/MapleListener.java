@@ -28,45 +28,25 @@ public interface MapleListener extends ParseTreeListener {
 	 */
 	void exitError(MapleParser.ErrorContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MapleParser#maple_all_stmt_list}.
+	 * Enter a parse tree produced by {@link MapleParser#maple_stmt_list}.
 	 * @param ctx the parse tree
 	 */
-	void enterMaple_all_stmt_list(MapleParser.Maple_all_stmt_listContext ctx);
+	void enterMaple_stmt_list(MapleParser.Maple_stmt_listContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MapleParser#maple_all_stmt_list}.
+	 * Exit a parse tree produced by {@link MapleParser#maple_stmt_list}.
 	 * @param ctx the parse tree
 	 */
-	void exitMaple_all_stmt_list(MapleParser.Maple_all_stmt_listContext ctx);
+	void exitMaple_stmt_list(MapleParser.Maple_stmt_listContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MapleParser#maple_standard_stmt_list}.
+	 * Enter a parse tree produced by {@link MapleParser#maple_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void enterMaple_standard_stmt_list(MapleParser.Maple_standard_stmt_listContext ctx);
+	void enterMaple_stmt(MapleParser.Maple_stmtContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MapleParser#maple_standard_stmt_list}.
+	 * Exit a parse tree produced by {@link MapleParser#maple_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void exitMaple_standard_stmt_list(MapleParser.Maple_standard_stmt_listContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link MapleParser#maple_all_stmt}.
-	 * @param ctx the parse tree
-	 */
-	void enterMaple_all_stmt(MapleParser.Maple_all_stmtContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MapleParser#maple_all_stmt}.
-	 * @param ctx the parse tree
-	 */
-	void exitMaple_all_stmt(MapleParser.Maple_all_stmtContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link MapleParser#maple_standard_stmt}.
-	 * @param ctx the parse tree
-	 */
-	void enterMaple_standard_stmt(MapleParser.Maple_standard_stmtContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MapleParser#maple_standard_stmt}.
-	 * @param ctx the parse tree
-	 */
-	void exitMaple_standard_stmt(MapleParser.Maple_standard_stmtContext ctx);
+	void exitMaple_stmt(MapleParser.Maple_stmtContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MapleParser#maple_block}.
 	 * @param ctx the parse tree

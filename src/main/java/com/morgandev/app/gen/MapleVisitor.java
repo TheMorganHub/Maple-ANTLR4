@@ -23,29 +23,17 @@ public interface MapleVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitError(MapleParser.ErrorContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link MapleParser#maple_all_stmt_list}.
+	 * Visit a parse tree produced by {@link MapleParser#maple_stmt_list}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitMaple_all_stmt_list(MapleParser.Maple_all_stmt_listContext ctx);
+	T visitMaple_stmt_list(MapleParser.Maple_stmt_listContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link MapleParser#maple_standard_stmt_list}.
+	 * Visit a parse tree produced by {@link MapleParser#maple_stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitMaple_standard_stmt_list(MapleParser.Maple_standard_stmt_listContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link MapleParser#maple_all_stmt}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitMaple_all_stmt(MapleParser.Maple_all_stmtContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link MapleParser#maple_standard_stmt}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitMaple_standard_stmt(MapleParser.Maple_standard_stmtContext ctx);
+	T visitMaple_stmt(MapleParser.Maple_stmtContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MapleParser#maple_block}.
 	 * @param ctx the parse tree

@@ -8,11 +8,9 @@ public class Start {
         if (args.length > 0) {
             startFromCmd();
         } else {
-            String mapleStatement = "personas(\n" +
-                    "nombre varchar,\n" +
-                    "apellido varchar,\n" +
-                    "ciudad\n" +
-                    ");personas -> nombre;";
+            String mapleStatement = "prepare {\n" +
+                    "personas(nombre, apellido, edad) <- ('david', 'o', 5)\n" +
+                    "}";
             start(mapleStatement);
         }
     }
