@@ -25,28 +25,28 @@ public class BlockAction {
     }
 
     private String transactionAction(MapleParser.Maple_blockContext blockContext) {
-        String transactionStmt = "DROP PROCEDURE IF EXISTS `maple_temp_trans`;\n" +
-                "DELIMITER $$\n" +
-                "CREATE PROCEDURE `maple_temp_trans`()\n" +
-                "BEGIN\n" +
-                "    DECLARE EXIT HANDLER FOR SQLEXCEPTION\n" +
-                "    BEGIN\n" +
-                "        ROLLBACK;\n" +
-                "        RESIGNAL;\n" +
-                "    END;\n" +
-                "\n" +
-                "    START TRANSACTION;";
-        String mapleStmts = visitor.visit(blockContext.maple_stmt_list());
-        transactionStmt += mapleStmts;
-        transactionStmt += "IF fail_condition_meet THEN\n" +
-                "        SIGNAL SQLSTATE '45000';\n" +
-                "    END IF;\n" +
-                "    COMMIT; -- this will not be executed\n" +
-                "END$$\n" +
-                "DELIMITER ;\n" +
-                "CALL `maple_temp_trans`;\n" +
-                "DROP PROCEDURE IF EXISTS `maple_temp_trans`";
-        return transactionStmt;
+//        String transactionStmt = "DROP PROCEDURE IF EXISTS `maple_temp_trans`;\n" +
+//                "DELIMITER $$\n" +
+//                "CREATE PROCEDURE `maple_temp_trans`()\n" +
+//                "BEGIN\n" +
+//                "    DECLARE EXIT HANDLER FOR SQLEXCEPTION\n" +
+//                "    BEGIN\n" +
+//                "        ROLLBACK;\n" +
+//                "        RESIGNAL;\n" +
+//                "    END;\n" +
+//                "\n" +
+//                "    START TRANSACTION;";
+//        String mapleStmts = visitor.visit(blockContext.maple_stmt_list());
+//        transactionStmt += mapleStmts;
+//        transactionStmt += "IF fail_condition_meet THEN\n" +
+//                "        SIGNAL SQLSTATE '45000';\n" +
+//                "    END IF;\n" +
+//                "    COMMIT; -- this will not be executed\n" +
+//                "END$$\n" +
+//                "DELIMITER ;\n" +
+//                "CALL `maple_temp_trans`;\n" +
+//                "DROP PROCEDURE IF EXISTS `maple_temp_trans`";
+        return null;
     }
 
     private String prepareAction(MapleParser.Maple_blockContext blockContext) {
