@@ -24,7 +24,7 @@ public class BlockAction {
         }
     }
 
-    private String transactionAction(MapleParser.Maple_blockContext blockContext) {
+//    private String transactionAction(MapleParser.Maple_blockContext blockContext) {
 //        String transactionStmt = "DROP PROCEDURE IF EXISTS `maple_temp_trans`;\n" +
 //                "DELIMITER $$\n" +
 //                "CREATE PROCEDURE `maple_temp_trans`()\n" +
@@ -46,19 +46,24 @@ public class BlockAction {
 //                "DELIMITER ;\n" +
 //                "CALL `maple_temp_trans`;\n" +
 //                "DROP PROCEDURE IF EXISTS `maple_temp_trans`";
-        return null;
-    }
+//        return null;
+//    }
 
     private String prepareAction(MapleParser.Maple_blockContext blockContext) {
         String preparedStmt = "";
         visitor.setPreparedMode(true);
-        List<MapleParser.Maple_stmtContext> stmtList = blockContext.maple_stmt_list().maple_stmt();
+        List<MapleParser.Block_statementContext> stmtList = blockContext.block_statement();
         if (stmtList.isEmpty()) {
             //TODO: return error
             return "";
         }
         if (stmtList.get(0).maple_block() != null) {
             //TODO: return error. Block not allowed here
+            return "";
+        }
+        if (stmtList.size() > 1) {
+            //TODO: return error. Only one statement allowed
+            return "";
         }
         preparedStmt += "PREPARE stmt1 FROM '" + visitor.visit(stmtList.get(0)) + "';";
         List<String> literals = visitor.getLiterals();

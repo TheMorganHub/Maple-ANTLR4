@@ -1,4 +1,4 @@
-// Generated from /home/david/IdeaProjects/Maple-ANTLR4/src/main/antlr/com/morgandev/maple/Maple/Maple.g4 by ANTLR 4.7.2
+// Generated from C:/Users/Morgan/IdeaProjects/MapleAntlr/src/main/antlr/com/morgandev/maple/Maple\Maple.g4 by ANTLR 4.7.2
 package com.morgandev.app.gen;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -40,6 +40,24 @@ public interface MapleVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitMaple_block(MapleParser.Maple_blockContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MapleParser#block_statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBlock_statement(MapleParser.Block_statementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MapleParser#block_params}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBlock_params(MapleParser.Block_paramsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MapleParser#assignment_stmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAssignment_stmt(MapleParser.Assignment_stmtContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MapleParser#create_table_stmt}.
 	 * @param ctx the parse tree

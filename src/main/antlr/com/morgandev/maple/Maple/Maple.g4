@@ -12,21 +12,30 @@ error
  ;
 
 maple_stmt_list
- : maple_stmt ( ';' )? ( ';' maple_stmt ( ';' )? )*?
+ : maple_stmt*
  ;
 
 maple_stmt
- : ( select_stmt
- | create_table_stmt
- | insert_stmt
- | delete_stmt
- | update_stmt
- | embedded_sql
- | maple_block )
+ : ( ( select_stmt | create_table_stmt | insert_stmt
+ | delete_stmt | update_stmt | embedded_sql ) ( ';' )? ) | maple_block
  ;
 
 maple_block
- : block_action_name '{' maple_stmt_list '}'
+ : block_action_name block_params? '{' block_statement+ '}'
+ ;
+
+block_statement
+ : ( select_stmt | create_table_stmt | insert_stmt
+ | delete_stmt | update_stmt | embedded_sql
+ | maple_block | assignment_stmt ) ( ';' )?
+ ;
+
+block_params
+ : '(' ( ( literal_value | expr ) ( ',' ( literal_value | expr ) )*? ) ')'
+ ;
+
+assignment_stmt
+ : any_name '=' literal_value
  ;
 
 /*

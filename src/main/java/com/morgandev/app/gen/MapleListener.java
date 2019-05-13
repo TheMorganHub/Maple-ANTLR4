@@ -1,4 +1,4 @@
-// Generated from /home/david/IdeaProjects/Maple-ANTLR4/src/main/antlr/com/morgandev/maple/Maple/Maple.g4 by ANTLR 4.7.2
+// Generated from C:/Users/Morgan/IdeaProjects/MapleAntlr/src/main/antlr/com/morgandev/maple/Maple\Maple.g4 by ANTLR 4.7.2
 package com.morgandev.app.gen;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -57,6 +57,36 @@ public interface MapleListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitMaple_block(MapleParser.Maple_blockContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MapleParser#block_statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterBlock_statement(MapleParser.Block_statementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MapleParser#block_statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitBlock_statement(MapleParser.Block_statementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MapleParser#block_params}.
+	 * @param ctx the parse tree
+	 */
+	void enterBlock_params(MapleParser.Block_paramsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MapleParser#block_params}.
+	 * @param ctx the parse tree
+	 */
+	void exitBlock_params(MapleParser.Block_paramsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MapleParser#assignment_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterAssignment_stmt(MapleParser.Assignment_stmtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MapleParser#assignment_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitAssignment_stmt(MapleParser.Assignment_stmtContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MapleParser#create_table_stmt}.
 	 * @param ctx the parse tree
