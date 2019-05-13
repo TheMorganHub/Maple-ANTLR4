@@ -235,7 +235,7 @@ NUMERIC_LITERAL
  ;
 
 STRING_LITERAL
- : '\'' ( ~'\'' | '\'\'' )* '\''
+ : '\'' ('\\'. | '\'\'' | ~('\'' | '\\'))* '\''
  ;
 
 SINGLE_LINE_COMMENT

@@ -8,7 +8,9 @@ public class Start {
         if (args.length > 0) {
             startFromCmd();
         } else {
-            String mapleStatement = "personas -> nombre;";
+            String mapleStatement = "prepare {\n" +
+                    "personas <- ('--\\' da')\n" +
+                    "}";
             start(mapleStatement);
         }
     }
