@@ -16,26 +16,59 @@ maple_stmt_list
  ;
 
 maple_stmt
- : ( ( select_stmt | create_table_stmt | insert_stmt
- | delete_stmt | update_stmt | embedded_sql ) ( ';' )? ) | maple_block
+ : maple_block | ( ( create_table_stmt | insert_stmt
+ | delete_stmt | update_stmt | embedded_sql | select_stmt ) ( ';' )? )
  ;
 
 maple_block
- : block_action_name block_params? '{' block_statement+ '}'
- ;
-
-block_statement
- : ( select_stmt | create_table_stmt | insert_stmt
- | delete_stmt | update_stmt | embedded_sql
- | maple_block | assignment_stmt ) ( ';' )?
+ : block_action_name block_name? block_params? '{' block_statement+ '}'
  ;
 
 block_params
- : '(' ( ( literal_value | expr ) ( ',' ( literal_value | expr ) )*? ) ')'
+ : block_params_declaration | block_params_expr_declaration
  ;
 
-assignment_stmt
- : any_name '=' literal_value
+block_params_declaration
+ : '(' ( block_datatype_param ( ',' block_datatype_param )*? ) ')' | '(' ')'
+ ;
+
+block_datatype_param
+ : parameter_type any_name
+ ;
+
+block_params_expr_declaration
+ : '(' expr ( ',' expr )*? ')'
+ ;
+
+block_statement
+ : ( create_table_stmt | insert_stmt
+ | delete_stmt | update_stmt | embedded_sql
+ | maple_block | variable_stmt | utility_stmt
+ | select_stmt ) ( ';' )?
+ ;
+
+utility_stmt
+ : print_stmt
+ ;
+
+variable_stmt
+ : variable_assignment_stmt | variable_declaration_stmt | variable_inc_dec_stmt
+ ;
+
+variable_declaration_stmt
+ : variable_type any_name ( '=' expr )?
+ ;
+
+variable_assignment_stmt
+ : any_name '=' expr
+ ;
+
+variable_inc_dec_stmt
+ : any_name op='++' | any_name op='--' | any_name op='+=' literal_value | any_name op='-=' literal_value
+ ;
+
+variable_type
+ : any_name
  ;
 
 /*
@@ -82,14 +115,6 @@ join_stmt
  | table_name table_alias? ) join_constraint?
  ;
 
-join_constraint
- : K_ON expr
- ;
-
-conditional
- : K_WHERE expr
- ;
-
 column_def
  : ( standard_column_def | fk_column_def )
  ;
@@ -107,11 +132,31 @@ standard_column_def
  ;
 
 column_type
+ : data_type
+ ;
+
+parameter_type
+ : data_type
+ ;
+
+data_type
  : ( any_name ( '(' signed_number ')' | '(' signed_number ',' signed_number ')' )? )
  ;
 
 default_value
  : ( STRING_LITERAL | NUMERIC_LITERAL )
+ ;
+
+join_constraint
+ : K_ON expr
+ ;
+
+conditional
+ : K_WHERE expr
+ ;
+
+print_stmt
+ : K_PRINT expr
  ;
 
 expr
@@ -139,6 +184,10 @@ result_column
 column_modifier
  : nullable_column='?'
  | primary_key='$'
+ ;
+
+block_name
+ : any_name
  ;
 
 block_action_name
@@ -219,6 +268,7 @@ K_NULL : N U L L;
 K_OF : O F;
 K_ON : O N;
 K_OR : O R;
+K_PRINT : P R I N T;
 K_WHEN : W H E N;
 K_WITH : W I T H;
 K_WITHOUT : W I T H O U T;

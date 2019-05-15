@@ -8,8 +8,13 @@ public class Start {
         if (args.length > 0) {
             startFromCmd();
         } else {
-            String mapleStatement = "prepare {\n" +
-                    "personas <- ('--\\' da')\n" +
+            String mapleStatement = "procedure test(varchar nombre) {\n" +
+                    "\tint x = 1;\n" +
+                    "    string var = '';\n" +
+                    "\twhile(x <= 5) {\n" +
+                    "        x++; \n" +
+                    "\t}\n" +
+                    "    print var;\n" +
                     "}";
             start(mapleStatement);
         }

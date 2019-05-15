@@ -24,30 +24,16 @@ public class BlockAction {
         }
     }
 
-//    private String transactionAction(MapleParser.Maple_blockContext blockContext) {
-//        String transactionStmt = "DROP PROCEDURE IF EXISTS `maple_temp_trans`;\n" +
-//                "DELIMITER $$\n" +
-//                "CREATE PROCEDURE `maple_temp_trans`()\n" +
-//                "BEGIN\n" +
-//                "    DECLARE EXIT HANDLER FOR SQLEXCEPTION\n" +
-//                "    BEGIN\n" +
-//                "        ROLLBACK;\n" +
-//                "        RESIGNAL;\n" +
-//                "    END;\n" +
-//                "\n" +
-//                "    START TRANSACTION;";
-//        String mapleStmts = visitor.visit(blockContext.maple_stmt_list());
-//        transactionStmt += mapleStmts;
-//        transactionStmt += "IF fail_condition_meet THEN\n" +
-//                "        SIGNAL SQLSTATE '45000';\n" +
-//                "    END IF;\n" +
-//                "    COMMIT; -- this will not be executed\n" +
-//                "END$$\n" +
-//                "DELIMITER ;\n" +
-//                "CALL `maple_temp_trans`;\n" +
-//                "DROP PROCEDURE IF EXISTS `maple_temp_trans`";
-//        return null;
-//    }
+    private String procedureAction(MapleParser.Maple_blockContext blockContext) {
+        if (blockContext.block_name() == null) {
+            //TODO: return error
+            return "";
+        }
+        String procedureStmt = "DELIMITER //\n CREATE PROCEDURE `" + blockContext.block_name().getText() + "`";
+        String paramsStmt = "(" + visitor.visit(blockContext.block_params().block_params_declaration()) + ")";
+        String procedureBody = "\nBEGIN" + parseFreeBlockBody(blockContext) + "\nEND//\nDELIMITER ;";
+        return procedureStmt + paramsStmt + procedureBody;
+    }
 
     private String prepareAction(MapleParser.Maple_blockContext blockContext) {
         String preparedStmt = "";
@@ -84,6 +70,29 @@ public class BlockAction {
 
         visitor.setPreparedMode(false);
         return preparedStmt;
+    }
+
+    private String whileAction(MapleParser.Maple_blockContext blockContext) {
+        String whileStmt = "WHILE";
+        if (blockContext.block_params() != null) {
+            //TODO: return error. WHILE needs condition
+        }
+        MapleParser.Block_params_expr_declarationContext paramsExprDeclarationContext = blockContext.block_params().block_params_expr_declaration();
+        whileStmt += visitor.visit(paramsExprDeclarationContext) + " DO" + parseFreeBlockBody(blockContext) + "\nEND WHILE";
+        return whileStmt;
+    }
+
+    private String testAction(MapleParser.Maple_blockContext blockContext) {
+        return parseFreeBlockBody(blockContext);
+    }
+
+    private String parseFreeBlockBody(MapleParser.Maple_blockContext blockContext) {
+        String freeStmt = "";
+        List<MapleParser.Block_statementContext> blockStmtContext = blockContext.block_statement();
+        for (int i = 0; i < blockStmtContext.size(); i++) {
+            freeStmt += (i == 0 ? "" : ";") + "\n" + visitor.visit(blockStmtContext.get(i));
+        }
+        return freeStmt.endsWith(";") ? freeStmt : freeStmt + ";";
     }
 
 }

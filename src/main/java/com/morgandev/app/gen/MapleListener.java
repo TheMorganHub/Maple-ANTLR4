@@ -58,16 +58,6 @@ public interface MapleListener extends ParseTreeListener {
 	 */
 	void exitMaple_block(MapleParser.Maple_blockContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MapleParser#block_statement}.
-	 * @param ctx the parse tree
-	 */
-	void enterBlock_statement(MapleParser.Block_statementContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MapleParser#block_statement}.
-	 * @param ctx the parse tree
-	 */
-	void exitBlock_statement(MapleParser.Block_statementContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link MapleParser#block_params}.
 	 * @param ctx the parse tree
 	 */
@@ -78,15 +68,105 @@ public interface MapleListener extends ParseTreeListener {
 	 */
 	void exitBlock_params(MapleParser.Block_paramsContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MapleParser#assignment_stmt}.
+	 * Enter a parse tree produced by {@link MapleParser#block_params_declaration}.
 	 * @param ctx the parse tree
 	 */
-	void enterAssignment_stmt(MapleParser.Assignment_stmtContext ctx);
+	void enterBlock_params_declaration(MapleParser.Block_params_declarationContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MapleParser#assignment_stmt}.
+	 * Exit a parse tree produced by {@link MapleParser#block_params_declaration}.
 	 * @param ctx the parse tree
 	 */
-	void exitAssignment_stmt(MapleParser.Assignment_stmtContext ctx);
+	void exitBlock_params_declaration(MapleParser.Block_params_declarationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MapleParser#block_datatype_param}.
+	 * @param ctx the parse tree
+	 */
+	void enterBlock_datatype_param(MapleParser.Block_datatype_paramContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MapleParser#block_datatype_param}.
+	 * @param ctx the parse tree
+	 */
+	void exitBlock_datatype_param(MapleParser.Block_datatype_paramContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MapleParser#block_params_expr_declaration}.
+	 * @param ctx the parse tree
+	 */
+	void enterBlock_params_expr_declaration(MapleParser.Block_params_expr_declarationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MapleParser#block_params_expr_declaration}.
+	 * @param ctx the parse tree
+	 */
+	void exitBlock_params_expr_declaration(MapleParser.Block_params_expr_declarationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MapleParser#block_statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterBlock_statement(MapleParser.Block_statementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MapleParser#block_statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitBlock_statement(MapleParser.Block_statementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MapleParser#utility_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterUtility_stmt(MapleParser.Utility_stmtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MapleParser#utility_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitUtility_stmt(MapleParser.Utility_stmtContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MapleParser#variable_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterVariable_stmt(MapleParser.Variable_stmtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MapleParser#variable_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitVariable_stmt(MapleParser.Variable_stmtContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MapleParser#variable_declaration_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterVariable_declaration_stmt(MapleParser.Variable_declaration_stmtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MapleParser#variable_declaration_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitVariable_declaration_stmt(MapleParser.Variable_declaration_stmtContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MapleParser#variable_assignment_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterVariable_assignment_stmt(MapleParser.Variable_assignment_stmtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MapleParser#variable_assignment_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitVariable_assignment_stmt(MapleParser.Variable_assignment_stmtContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MapleParser#variable_inc_dec_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterVariable_inc_dec_stmt(MapleParser.Variable_inc_dec_stmtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MapleParser#variable_inc_dec_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitVariable_inc_dec_stmt(MapleParser.Variable_inc_dec_stmtContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MapleParser#variable_type}.
+	 * @param ctx the parse tree
+	 */
+	void enterVariable_type(MapleParser.Variable_typeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MapleParser#variable_type}.
+	 * @param ctx the parse tree
+	 */
+	void exitVariable_type(MapleParser.Variable_typeContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MapleParser#create_table_stmt}.
 	 * @param ctx the parse tree
@@ -168,26 +248,6 @@ public interface MapleListener extends ParseTreeListener {
 	 */
 	void exitJoin_stmt(MapleParser.Join_stmtContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MapleParser#join_constraint}.
-	 * @param ctx the parse tree
-	 */
-	void enterJoin_constraint(MapleParser.Join_constraintContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MapleParser#join_constraint}.
-	 * @param ctx the parse tree
-	 */
-	void exitJoin_constraint(MapleParser.Join_constraintContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link MapleParser#conditional}.
-	 * @param ctx the parse tree
-	 */
-	void enterConditional(MapleParser.ConditionalContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MapleParser#conditional}.
-	 * @param ctx the parse tree
-	 */
-	void exitConditional(MapleParser.ConditionalContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link MapleParser#column_def}.
 	 * @param ctx the parse tree
 	 */
@@ -238,6 +298,26 @@ public interface MapleListener extends ParseTreeListener {
 	 */
 	void exitColumn_type(MapleParser.Column_typeContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link MapleParser#parameter_type}.
+	 * @param ctx the parse tree
+	 */
+	void enterParameter_type(MapleParser.Parameter_typeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MapleParser#parameter_type}.
+	 * @param ctx the parse tree
+	 */
+	void exitParameter_type(MapleParser.Parameter_typeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MapleParser#data_type}.
+	 * @param ctx the parse tree
+	 */
+	void enterData_type(MapleParser.Data_typeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MapleParser#data_type}.
+	 * @param ctx the parse tree
+	 */
+	void exitData_type(MapleParser.Data_typeContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link MapleParser#default_value}.
 	 * @param ctx the parse tree
 	 */
@@ -247,6 +327,36 @@ public interface MapleListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitDefault_value(MapleParser.Default_valueContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MapleParser#join_constraint}.
+	 * @param ctx the parse tree
+	 */
+	void enterJoin_constraint(MapleParser.Join_constraintContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MapleParser#join_constraint}.
+	 * @param ctx the parse tree
+	 */
+	void exitJoin_constraint(MapleParser.Join_constraintContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MapleParser#conditional}.
+	 * @param ctx the parse tree
+	 */
+	void enterConditional(MapleParser.ConditionalContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MapleParser#conditional}.
+	 * @param ctx the parse tree
+	 */
+	void exitConditional(MapleParser.ConditionalContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MapleParser#print_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrint_stmt(MapleParser.Print_stmtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MapleParser#print_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrint_stmt(MapleParser.Print_stmtContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MapleParser#expr}.
 	 * @param ctx the parse tree
@@ -287,6 +397,16 @@ public interface MapleListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitColumn_modifier(MapleParser.Column_modifierContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MapleParser#block_name}.
+	 * @param ctx the parse tree
+	 */
+	void enterBlock_name(MapleParser.Block_nameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MapleParser#block_name}.
+	 * @param ctx the parse tree
+	 */
+	void exitBlock_name(MapleParser.Block_nameContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MapleParser#block_action_name}.
 	 * @param ctx the parse tree

@@ -2,7 +2,6 @@ package com.morgandev.app;
 
 import com.morgandev.app.gen.MapleBaseVisitor;
 import com.morgandev.app.gen.MapleParser;
-import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.misc.Interval;
 
 import java.util.ArrayList;
@@ -35,12 +34,13 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
 
     @Override
     public String visitMaple_stmt_list(MapleParser.Maple_stmt_listContext ctx) {
-        StringBuilder mapleStmts = new StringBuilder();
+        String mapleStmts = "";
         List<MapleParser.Maple_stmtContext> mapleStmtsContexts = ctx.maple_stmt();
         for (MapleParser.Maple_stmtContext mapleStmtCtx : mapleStmtsContexts) {
-            mapleStmts.append(visit(mapleStmtCtx)).append(";\n");
+            String mapleStmt = visit(mapleStmtCtx);
+            mapleStmts += mapleStmt + (mapleStmt.endsWith(";") ? "" : ";") + "\n";
         }
-        return mapleStmts.toString();
+        return mapleStmts;
     }
 
     @Override
@@ -48,6 +48,64 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
         String actionName = ctx.block_action_name().getText();
         BlockAction action = new BlockAction(this);
         return action.processAction(actionName, ctx);
+    }
+
+    @Override
+    public String visitBlock_params_declaration(MapleParser.Block_params_declarationContext ctx) {
+        List<MapleParser.Block_datatype_paramContext> blockParamsDataContexts = ctx.block_datatype_param();
+        if (blockParamsDataContexts.isEmpty()) {
+            return "";
+        }
+        String paramsDeclaration = "";
+        int params = 0;
+        for (MapleParser.Block_datatype_paramContext blockParamsDataContext : blockParamsDataContexts) {
+            paramsDeclaration += (params == 0 ? "" : ",") + " " + visit(blockParamsDataContext);
+            params++;
+        }
+        return paramsDeclaration;
+    }
+
+    @Override
+    public String visitBlock_datatype_param(MapleParser.Block_datatype_paramContext ctx) {
+        return ctx.any_name().getText() + " " + visit(ctx.parameter_type());
+    }
+
+    @Override
+    public String visitBlock_params_expr_declaration(MapleParser.Block_params_expr_declarationContext ctx) {
+        String exprStmt = "";
+        for (MapleParser.ExprContext exprContext : ctx.expr()) {
+            exprStmt += visit(exprContext);
+        }
+        return exprStmt;
+    }
+
+    @Override
+    public String visitData_type(MapleParser.Data_typeContext ctx) {
+        String dataTypeName = ctx.any_name().getText();
+        StringBuilder dataTypeLength = new StringBuilder();
+        List<MapleParser.Signed_numberContext> signedNumberContexts = ctx.signed_number();
+        if (signedNumberContexts.isEmpty()) {
+            switch (dataTypeName) {
+                case "varchar":
+                    dataTypeLength = new StringBuilder("255");
+                    break;
+                case "int":
+                    dataTypeLength = new StringBuilder("11");
+                    break;
+                case "double":
+                case "decimal":
+                case "float":
+                    dataTypeLength = new StringBuilder("10, 2");
+                    break;
+            }
+        } else {
+            int numbers = 0;
+            for (MapleParser.Signed_numberContext numberContext : signedNumberContexts) {
+                dataTypeLength.append(numbers == 0 ? "" : ", ").append(numberContext.getText());
+                numbers++;
+            }
+        }
+        return dataTypeName + (dataTypeLength.length() == 0 ? "" : "(" + dataTypeLength + ")");
     }
 
     @Override
@@ -129,6 +187,35 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
     }
 
     @Override
+    public String visitBlock_statement(MapleParser.Block_statementContext ctx) {
+        if (ctx.variable_stmt() != null) {
+            return visit(ctx.variable_stmt());
+        }
+        if (ctx.select_stmt() != null) {
+            return visit(ctx.select_stmt());
+        }
+        if (ctx.insert_stmt() != null) {
+            return visit(ctx.insert_stmt());
+        }
+        if (ctx.delete_stmt() != null) {
+            return visit(ctx.delete_stmt());
+        }
+        if (ctx.update_stmt() != null) {
+            return visit(ctx.update_stmt());
+        }
+        if (ctx.maple_block() != null) {
+            return visit(ctx.maple_block());
+        }
+        if (ctx.embedded_sql() != null) {
+            return visit(ctx.embedded_sql());
+        }
+        if (ctx.utility_stmt() != null) {
+            return visit(ctx.utility_stmt());
+        }
+        return null;
+    }
+
+    @Override
     public String visitInsert_stmt(MapleParser.Insert_stmtContext ctx) {
         StringBuilder insertStmt = new StringBuilder("INSERT INTO `" + (ctx.table_name().getText()) + "`");
         if (ctx.select_stmt() != null) {
@@ -165,6 +252,57 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
             expressions++;
         }
         return valueSet.append(")").toString();
+    }
+
+    @Override
+    public String visitVariable_declaration_stmt(MapleParser.Variable_declaration_stmtContext ctx) {
+        String variableName = ctx.any_name().getText();
+        String assignmentStmt = "DECLARE " + variableName + visit(ctx.variable_type()) + (ctx.expr() != null ? " DEFAULT" + visit(ctx.expr()) : "");
+        return assignmentStmt;
+    }
+
+    @Override
+    public String visitVariable_assignment_stmt(MapleParser.Variable_assignment_stmtContext ctx) {
+        return "SET " + ctx.any_name().getText() + " =" + visit(ctx.expr());
+    }
+
+    @Override
+    public String visitVariable_type(MapleParser.Variable_typeContext ctx) {
+        switch (ctx.getText().toLowerCase()) {
+            case "string":
+                return " VARCHAR(255)";
+            case "int":
+                return " INT";
+            case "uint":
+                return " INT UNSIGNED";
+        }
+        return ctx.getText();
+    }
+
+    @Override
+    public String visitVariable_inc_dec_stmt(MapleParser.Variable_inc_dec_stmtContext ctx) {
+        String incStmt = "";
+        String variableName = ctx.any_name().getText();
+        switch (ctx.op.getText()) {
+            case "++":
+                incStmt += variableName + " + 1";
+                break;
+            case "--":
+                incStmt += variableName + " - 1";
+                break;
+            case "+=":
+                incStmt += variableName + " + " + visit(ctx.literal_value());
+                break;
+            case "-=":
+                incStmt += variableName + " - " + visit(ctx.literal_value());
+                break;
+        }
+        return "SET " + variableName + " = " + incStmt;
+    }
+
+    @Override
+    public String visitPrint_stmt(MapleParser.Print_stmtContext ctx) {
+        return "SELECT" + visit(ctx.expr());
     }
 
     @Override
@@ -262,35 +400,6 @@ public class MapleCustomVisitor extends MapleBaseVisitor<String> {
     @Override
     public String visitFk_constraint(MapleParser.Fk_constraintContext ctx) {
         return " " + visit(ctx.any_stmt());
-    }
-
-    @Override
-    public String visitColumn_type(MapleParser.Column_typeContext ctx) {
-        String dataTypeName = ctx.any_name().getText();
-        StringBuilder dataTypeLength = new StringBuilder();
-        List<MapleParser.Signed_numberContext> signedNumberContexts = ctx.signed_number();
-        if (signedNumberContexts.isEmpty()) {
-            switch (dataTypeName) {
-                case "varchar":
-                    dataTypeLength = new StringBuilder("255");
-                    break;
-                case "int":
-                    dataTypeLength = new StringBuilder("11");
-                    break;
-                case "double":
-                case "decimal":
-                case "float":
-                    dataTypeLength = new StringBuilder("10, 2");
-                    break;
-            }
-        } else {
-            int numbers = 0;
-            for (MapleParser.Signed_numberContext numberContext : signedNumberContexts) {
-                dataTypeLength.append(numbers == 0 ? "" : ", ").append(numberContext.getText());
-                numbers++;
-            }
-        }
-        return dataTypeName + (dataTypeLength.length() == 0 ? "" : "(" + dataTypeLength + ")");
     }
 
     @Override

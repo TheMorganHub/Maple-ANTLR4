@@ -76,18 +76,6 @@ public class MapleBaseListener implements MapleListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterBlock_statement(MapleParser.Block_statementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitBlock_statement(MapleParser.Block_statementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterBlock_params(MapleParser.Block_paramsContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -100,13 +88,121 @@ public class MapleBaseListener implements MapleListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAssignment_stmt(MapleParser.Assignment_stmtContext ctx) { }
+	@Override public void enterBlock_params_declaration(MapleParser.Block_params_declarationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAssignment_stmt(MapleParser.Assignment_stmtContext ctx) { }
+	@Override public void exitBlock_params_declaration(MapleParser.Block_params_declarationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterBlock_datatype_param(MapleParser.Block_datatype_paramContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBlock_datatype_param(MapleParser.Block_datatype_paramContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterBlock_params_expr_declaration(MapleParser.Block_params_expr_declarationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBlock_params_expr_declaration(MapleParser.Block_params_expr_declarationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterBlock_statement(MapleParser.Block_statementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBlock_statement(MapleParser.Block_statementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterUtility_stmt(MapleParser.Utility_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitUtility_stmt(MapleParser.Utility_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterVariable_stmt(MapleParser.Variable_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitVariable_stmt(MapleParser.Variable_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterVariable_declaration_stmt(MapleParser.Variable_declaration_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitVariable_declaration_stmt(MapleParser.Variable_declaration_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterVariable_assignment_stmt(MapleParser.Variable_assignment_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitVariable_assignment_stmt(MapleParser.Variable_assignment_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterVariable_inc_dec_stmt(MapleParser.Variable_inc_dec_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitVariable_inc_dec_stmt(MapleParser.Variable_inc_dec_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterVariable_type(MapleParser.Variable_typeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitVariable_type(MapleParser.Variable_typeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -208,30 +304,6 @@ public class MapleBaseListener implements MapleListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterJoin_constraint(MapleParser.Join_constraintContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitJoin_constraint(MapleParser.Join_constraintContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterConditional(MapleParser.ConditionalContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitConditional(MapleParser.ConditionalContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterColumn_def(MapleParser.Column_defContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -292,6 +364,30 @@ public class MapleBaseListener implements MapleListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterParameter_type(MapleParser.Parameter_typeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitParameter_type(MapleParser.Parameter_typeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterData_type(MapleParser.Data_typeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitData_type(MapleParser.Data_typeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterDefault_value(MapleParser.Default_valueContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -299,6 +395,42 @@ public class MapleBaseListener implements MapleListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitDefault_value(MapleParser.Default_valueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterJoin_constraint(MapleParser.Join_constraintContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitJoin_constraint(MapleParser.Join_constraintContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterConditional(MapleParser.ConditionalContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitConditional(MapleParser.ConditionalContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPrint_stmt(MapleParser.Print_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPrint_stmt(MapleParser.Print_stmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -347,6 +479,18 @@ public class MapleBaseListener implements MapleListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitColumn_modifier(MapleParser.Column_modifierContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterBlock_name(MapleParser.Block_nameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBlock_name(MapleParser.Block_nameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

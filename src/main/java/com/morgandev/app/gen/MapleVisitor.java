@@ -41,23 +41,71 @@ public interface MapleVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitMaple_block(MapleParser.Maple_blockContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link MapleParser#block_statement}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitBlock_statement(MapleParser.Block_statementContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link MapleParser#block_params}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitBlock_params(MapleParser.Block_paramsContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link MapleParser#assignment_stmt}.
+	 * Visit a parse tree produced by {@link MapleParser#block_params_declaration}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAssignment_stmt(MapleParser.Assignment_stmtContext ctx);
+	T visitBlock_params_declaration(MapleParser.Block_params_declarationContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MapleParser#block_datatype_param}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBlock_datatype_param(MapleParser.Block_datatype_paramContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MapleParser#block_params_expr_declaration}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBlock_params_expr_declaration(MapleParser.Block_params_expr_declarationContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MapleParser#block_statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBlock_statement(MapleParser.Block_statementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MapleParser#utility_stmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUtility_stmt(MapleParser.Utility_stmtContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MapleParser#variable_stmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVariable_stmt(MapleParser.Variable_stmtContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MapleParser#variable_declaration_stmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVariable_declaration_stmt(MapleParser.Variable_declaration_stmtContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MapleParser#variable_assignment_stmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVariable_assignment_stmt(MapleParser.Variable_assignment_stmtContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MapleParser#variable_inc_dec_stmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVariable_inc_dec_stmt(MapleParser.Variable_inc_dec_stmtContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MapleParser#variable_type}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVariable_type(MapleParser.Variable_typeContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MapleParser#create_table_stmt}.
 	 * @param ctx the parse tree
@@ -107,18 +155,6 @@ public interface MapleVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitJoin_stmt(MapleParser.Join_stmtContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link MapleParser#join_constraint}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitJoin_constraint(MapleParser.Join_constraintContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link MapleParser#conditional}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitConditional(MapleParser.ConditionalContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link MapleParser#column_def}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -149,11 +185,41 @@ public interface MapleVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitColumn_type(MapleParser.Column_typeContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link MapleParser#parameter_type}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitParameter_type(MapleParser.Parameter_typeContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MapleParser#data_type}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitData_type(MapleParser.Data_typeContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link MapleParser#default_value}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitDefault_value(MapleParser.Default_valueContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MapleParser#join_constraint}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJoin_constraint(MapleParser.Join_constraintContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MapleParser#conditional}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitConditional(MapleParser.ConditionalContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MapleParser#print_stmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPrint_stmt(MapleParser.Print_stmtContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MapleParser#expr}.
 	 * @param ctx the parse tree
@@ -178,6 +244,12 @@ public interface MapleVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitColumn_modifier(MapleParser.Column_modifierContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MapleParser#block_name}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBlock_name(MapleParser.Block_nameContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MapleParser#block_action_name}.
 	 * @param ctx the parse tree
