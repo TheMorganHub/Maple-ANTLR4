@@ -47,14 +47,6 @@ block_statement
  | select_stmt ) ( ';' )?
  ;
 
-utility_stmt
- : print_stmt
- ;
-
-variable_stmt
- : variable_assignment_stmt | variable_declaration_stmt | variable_inc_dec_stmt
- ;
-
 variable_declaration_stmt
  : variable_type any_name ( '=' expr )?
  ;
@@ -67,8 +59,12 @@ variable_inc_dec_stmt
  : any_name op='++' | any_name op='--' | any_name op='+=' literal_value | any_name op='-=' literal_value
  ;
 
-variable_type
- : any_name
+utility_stmt
+ : print_stmt
+ ;
+
+variable_stmt
+ : variable_assignment_stmt | variable_declaration_stmt | variable_inc_dec_stmt
  ;
 
 /*
@@ -98,14 +94,6 @@ insert_stmt
   K_INSERT ( '('? select_stmt ')'? | ( ( insert_value_set ( ',' insert_value_set )*? ) ) )
  ;
 
-insert_value_set
- : '(' expr ( ',' expr )*? ')'
- ;
-
-update_value_set
- : expr ( ',' expr )*?
- ;
-
 select_stmt
  : table_name table_alias? ( K_SELECT ( result_column ( ',' result_column )*? )? ( join_stmt )*? )? ( conditional )?
  ;
@@ -113,6 +101,14 @@ select_stmt
 join_stmt
  : ( K_JOIN | left=K_LEFT_JOIN | right=K_RIGHT_JOIN ) ('(' select_stmt ')' table_alias
  | table_name table_alias? ) join_constraint?
+ ;
+
+insert_value_set
+ : '(' expr ( ',' expr )*? ')'
+ ;
+
+update_value_set
+ : expr ( ',' expr )*?
  ;
 
 column_def
@@ -143,6 +139,10 @@ data_type
  : ( any_name ( '(' signed_number ')' | '(' signed_number ',' signed_number ')' )? )
  ;
 
+variable_type
+ : any_name
+ ;
+
 default_value
  : ( STRING_LITERAL | NUMERIC_LITERAL )
  ;
@@ -159,6 +159,14 @@ print_stmt
  : K_PRINT expr
  ;
 
+function
+ : function_name '(' ( expr ( ',' expr )* | '*')? ')'
+ ;
+
+result_column
+ : expr | expr column_alias?
+ ;
+
 expr
  : literal_value
  | ( ( database_name '.' )? table_name '.' )? column_name
@@ -173,18 +181,12 @@ expr
  | '(' expr ')'
  ;
 
-function
- : function_name '(' ( expr ( ',' expr )* | '*')? ')'
- ;
-
-result_column
- : expr | expr column_alias?
- ;
-
 column_modifier
  : nullable_column='?'
  | primary_key='$'
  ;
+
+//NAMES
 
 block_name
  : any_name
@@ -202,19 +204,19 @@ table_name
  : any_name
  ;
 
-table_alias
- : any_name
- ;
-
-column_alias
- : any_name
- ;
-
 database_name
  : any_name
  ;
 
 function_name
+ : any_name
+ ;
+
+table_alias
+ : any_name
+ ;
+
+column_alias
  : any_name
  ;
 

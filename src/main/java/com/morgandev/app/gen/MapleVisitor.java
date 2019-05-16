@@ -71,18 +71,6 @@ public interface MapleVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitBlock_statement(MapleParser.Block_statementContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link MapleParser#utility_stmt}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitUtility_stmt(MapleParser.Utility_stmtContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link MapleParser#variable_stmt}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitVariable_stmt(MapleParser.Variable_stmtContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link MapleParser#variable_declaration_stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -101,11 +89,17 @@ public interface MapleVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitVariable_inc_dec_stmt(MapleParser.Variable_inc_dec_stmtContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link MapleParser#variable_type}.
+	 * Visit a parse tree produced by {@link MapleParser#utility_stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitVariable_type(MapleParser.Variable_typeContext ctx);
+	T visitUtility_stmt(MapleParser.Utility_stmtContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MapleParser#variable_stmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVariable_stmt(MapleParser.Variable_stmtContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MapleParser#create_table_stmt}.
 	 * @param ctx the parse tree
@@ -131,18 +125,6 @@ public interface MapleVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitInsert_stmt(MapleParser.Insert_stmtContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link MapleParser#insert_value_set}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitInsert_value_set(MapleParser.Insert_value_setContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link MapleParser#update_value_set}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitUpdate_value_set(MapleParser.Update_value_setContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link MapleParser#select_stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -154,6 +136,18 @@ public interface MapleVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitJoin_stmt(MapleParser.Join_stmtContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MapleParser#insert_value_set}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInsert_value_set(MapleParser.Insert_value_setContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MapleParser#update_value_set}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUpdate_value_set(MapleParser.Update_value_setContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MapleParser#column_def}.
 	 * @param ctx the parse tree
@@ -197,6 +191,12 @@ public interface MapleVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitData_type(MapleParser.Data_typeContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link MapleParser#variable_type}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVariable_type(MapleParser.Variable_typeContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link MapleParser#default_value}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -221,12 +221,6 @@ public interface MapleVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPrint_stmt(MapleParser.Print_stmtContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link MapleParser#expr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitExpr(MapleParser.ExprContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link MapleParser#function}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -238,6 +232,12 @@ public interface MapleVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitResult_column(MapleParser.Result_columnContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MapleParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExpr(MapleParser.ExprContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MapleParser#column_modifier}.
 	 * @param ctx the parse tree
@@ -269,18 +269,6 @@ public interface MapleVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitTable_name(MapleParser.Table_nameContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link MapleParser#table_alias}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitTable_alias(MapleParser.Table_aliasContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link MapleParser#column_alias}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitColumn_alias(MapleParser.Column_aliasContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link MapleParser#database_name}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -292,6 +280,18 @@ public interface MapleVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitFunction_name(MapleParser.Function_nameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MapleParser#table_alias}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTable_alias(MapleParser.Table_aliasContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MapleParser#column_alias}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitColumn_alias(MapleParser.Column_aliasContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MapleParser#signed_number}.
 	 * @param ctx the parse tree
