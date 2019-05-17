@@ -41,10 +41,9 @@ block_params_expr_declaration
  ;
 
 block_statement
- : ( create_table_stmt | insert_stmt
- | delete_stmt | update_stmt | embedded_sql
- | maple_block | variable_stmt | utility_stmt
- | select_stmt ) ( ';' )?
+ : ( insert_stmt | delete_stmt | update_stmt
+ | embedded_sql | maple_block | variable_stmt
+ | utility_stmt | select_stmt ) ( ';' )?
  ;
 
 variable_declaration_stmt
@@ -57,10 +56,6 @@ variable_assignment_stmt
 
 variable_inc_dec_stmt
  : any_name op='++' | any_name op='--' | any_name op='+=' literal_value | any_name op='-=' literal_value
- ;
-
-utility_stmt
- : print_stmt
  ;
 
 variable_stmt
@@ -77,38 +72,6 @@ Personas (
 
 create_table_stmt
  : table_name '(' ( column_def ( ',' column_def )*? )*? ')'
- ;
-
-update_stmt
- : ( database_name '.' )? table_name ( '(' column_name ( ',' column_name )* ')' )
- ( K_UPDATE update_value_set | select_stmt ) conditional?
- ;
-
-delete_stmt
- : ( database_name '.' )? table_name K_INSERT ( conditional )?
- ;
-
-//personas(nombre, apellido) <- ('va', 5);
-insert_stmt
- : ( database_name '.' )? table_name ( '(' column_name ( ',' column_name )* ')' )?
-  K_INSERT ( '('? select_stmt ')'? | ( ( insert_value_set ( ',' insert_value_set )*? ) ) )
- ;
-
-select_stmt
- : table_name table_alias? ( K_SELECT ( result_column ( ',' result_column )*? )? ( join_stmt )*? )? ( conditional )?
- ;
-
-join_stmt
- : ( K_JOIN | left=K_LEFT_JOIN | right=K_RIGHT_JOIN ) ('(' select_stmt ')' table_alias
- | table_name table_alias? ) join_constraint?
- ;
-
-insert_value_set
- : '(' expr ( ',' expr )*? ')'
- ;
-
-update_value_set
- : expr ( ',' expr )*?
  ;
 
 column_def
@@ -129,6 +92,42 @@ standard_column_def
 
 column_type
  : data_type
+ ;
+
+update_stmt
+ : ( database_name '.' )? table_name ( '(' column_name ( ',' column_name )* ')' )
+ ( K_UPDATE update_value_set | select_stmt ) conditional?
+ ;
+
+update_value_set
+ : expr ( ',' expr )*?
+ ;
+
+delete_stmt
+ : ( database_name '.' )? table_name K_INSERT ( conditional )?
+ ;
+
+//personas(nombre, apellido) <- ('va', 5);
+insert_stmt
+ : ( database_name '.' )? table_name ( '(' column_name ( ',' column_name )* ')' )?
+  K_INSERT ( '('? select_stmt ')'? | ( ( insert_value_set ( ',' insert_value_set )*? ) ) )
+ ;
+
+insert_value_set
+ : '(' expr ( ',' expr )*? ')'
+ ;
+
+select_stmt
+ : table_name table_alias? ( K_SELECT ( result_column ( ',' result_column )*? )? ( join_stmt )*? )? ( conditional )?
+ ;
+
+join_stmt
+ : ( K_JOIN | left=K_LEFT_JOIN | right=K_RIGHT_JOIN ) ('(' select_stmt ')' table_alias
+ | table_name table_alias? ) join_constraint?
+ ;
+
+utility_stmt
+ : print_stmt
  ;
 
 parameter_type

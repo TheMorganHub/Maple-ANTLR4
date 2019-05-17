@@ -89,12 +89,6 @@ public interface MapleVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitVariable_inc_dec_stmt(MapleParser.Variable_inc_dec_stmtContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link MapleParser#utility_stmt}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitUtility_stmt(MapleParser.Utility_stmtContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link MapleParser#variable_stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -106,48 +100,6 @@ public interface MapleVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitCreate_table_stmt(MapleParser.Create_table_stmtContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link MapleParser#update_stmt}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitUpdate_stmt(MapleParser.Update_stmtContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link MapleParser#delete_stmt}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDelete_stmt(MapleParser.Delete_stmtContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link MapleParser#insert_stmt}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitInsert_stmt(MapleParser.Insert_stmtContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link MapleParser#select_stmt}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitSelect_stmt(MapleParser.Select_stmtContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link MapleParser#join_stmt}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitJoin_stmt(MapleParser.Join_stmtContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link MapleParser#insert_value_set}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitInsert_value_set(MapleParser.Insert_value_setContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link MapleParser#update_value_set}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitUpdate_value_set(MapleParser.Update_value_setContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MapleParser#column_def}.
 	 * @param ctx the parse tree
@@ -178,6 +130,54 @@ public interface MapleVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitColumn_type(MapleParser.Column_typeContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MapleParser#update_stmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUpdate_stmt(MapleParser.Update_stmtContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MapleParser#update_value_set}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUpdate_value_set(MapleParser.Update_value_setContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MapleParser#delete_stmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDelete_stmt(MapleParser.Delete_stmtContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MapleParser#insert_stmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInsert_stmt(MapleParser.Insert_stmtContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MapleParser#insert_value_set}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInsert_value_set(MapleParser.Insert_value_setContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MapleParser#select_stmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSelect_stmt(MapleParser.Select_stmtContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MapleParser#join_stmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJoin_stmt(MapleParser.Join_stmtContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MapleParser#utility_stmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUtility_stmt(MapleParser.Utility_stmtContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MapleParser#parameter_type}.
 	 * @param ctx the parse tree

@@ -1,18 +1,19 @@
-package com.morgandev.app;
+package com.morgandev.app.bootstrap;
 
 import com.morgandev.app.gen.MapleLexer;
 import com.morgandev.app.gen.MapleParser;
+import com.morgandev.app.visitors.MapleMainVisitor;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 
-public class MapleInstance {
+public class MapleRuntime {
 
-    private MapleCustomVisitor visitor;
+    private MapleMainVisitor visitor;
 
-    public MapleInstance() {
-        visitor = new MapleCustomVisitor();
+    public MapleRuntime() {
+        visitor = MapleMainVisitor.getInstance();
     }
 
     public String convert(String mapleStatement) {

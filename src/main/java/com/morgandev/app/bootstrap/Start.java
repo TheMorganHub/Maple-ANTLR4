@@ -1,4 +1,4 @@
-package com.morgandev.app;
+package com.morgandev.app.bootstrap;
 
 import java.util.Scanner;
 
@@ -8,20 +8,13 @@ public class Start {
         if (args.length > 0) {
             startFromCmd();
         } else {
-            String mapleStatement = "procedure test(varchar nombre) {\n" +
-                    "\tint x = 1;\n" +
-                    "    string var = '';\n" +
-                    "\twhile(x <= 5) {\n" +
-                    "        x++; \n" +
-                    "\t}\n" +
-                    "    print var;\n" +
-                    "}";
+            String mapleStatement = "people ? id = 6 AND age > 5 OR (AVG(age) > 5) AND dob BETWEEN '1993-03-07' AND '1994-03-04'";
             start(mapleStatement);
         }
     }
 
     public static void start(String mapleStatement) {
-        MapleInstance instance = new MapleInstance();
+        MapleRuntime instance = new MapleRuntime();
         System.out.println(instance.convert(mapleStatement));
     }
 

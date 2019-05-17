@@ -1,5 +1,6 @@
-package com.morgandev.app;
+package com.morgandev.app.blocks;
 
+import com.morgandev.app.visitors.MapleMainVisitor;
 import com.morgandev.app.gen.MapleParser;
 
 import java.lang.reflect.InvocationTargetException;
@@ -8,10 +9,10 @@ import java.util.List;
 
 public class BlockAction {
 
-    private MapleCustomVisitor visitor;
+    private MapleMainVisitor visitor;
 
-    public BlockAction(MapleCustomVisitor visitor) {
-        this.visitor = visitor;
+    public BlockAction() {
+        this.visitor = MapleMainVisitor.getInstance();
     }
 
     public String processAction(String actionName, MapleParser.Maple_blockContext blockContext) {
