@@ -46,7 +46,7 @@ public class MapleParseException extends RuntimeException {
         ResourceBundleHandler errorHandler = new ResourceBundleHandler("com.morgandev.ErrorMessages");
         String nearLine = "";
         if (parseContext != null) {
-            int line = parseContext.getStart().getLine() + 1;
+            int line = parseContext.getStart().getLine();
             int col = parseContext.getStart().getCharPositionInLine();
             nearLine = " At line " + line + ":" + col + ".";
         }
