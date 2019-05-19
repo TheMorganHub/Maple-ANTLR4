@@ -2,6 +2,7 @@ package com.morgandev.app.visitors;
 
 import com.morgandev.app.gen.MapleBaseVisitor;
 import com.morgandev.app.gen.MapleParser;
+import com.morgandev.app.errorhandling.MapleParseException;
 import org.antlr.v4.runtime.misc.Interval;
 
 import java.util.ArrayList;
@@ -45,9 +46,15 @@ public class MapleMainVisitor extends MapleBaseVisitor<String> {
     public String visitMaple_stmt_list(MapleParser.Maple_stmt_listContext ctx) {
         String mapleStmts = "";
         List<MapleParser.Maple_stmtContext> mapleStmtsContexts = ctx.maple_stmt();
+        if (mapleStmtsContexts.isEmpty()) {
+            throw new MapleParseException(10002);
+        }
         int count = 0;
         for (MapleParser.Maple_stmtContext mapleStmtCtx : mapleStmtsContexts) {
             String mapleStmt = visit(mapleStmtCtx);
+            if (mapleStmt.isEmpty()) {
+                continue;
+            }
             mapleStmts += (count == 0 ? "" : "\n") + mapleStmt + (mapleStmt.endsWith(";") ? "" : ";");
             count++;
         }
@@ -255,6 +262,9 @@ public class MapleMainVisitor extends MapleBaseVisitor<String> {
 
     @Override
     public String visitAny_stmt(MapleParser.Any_stmtContext ctx) {
+        if (ctx.getText().isEmpty()) {
+            return "";
+        }
         int startIndex = ctx.start.getStartIndex();
         int stopIndex = ctx.stop.getStopIndex();
         Interval interval = new Interval(startIndex, stopIndex);

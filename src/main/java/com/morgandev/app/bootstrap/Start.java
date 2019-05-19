@@ -1,5 +1,7 @@
 package com.morgandev.app.bootstrap;
 
+import com.morgandev.app.result.MapleResult;
+
 import java.util.Scanner;
 
 public class Start {
@@ -8,14 +10,15 @@ public class Start {
         if (args.length > 0) {
             startFromCmd();
         } else {
-            String mapleStatement = "people ? id = 6 AND age > 5 OR (AVG(age) > 5) AND dob BETWEEN '1993-03-07' AND '1994-03-04'";
+            String mapleStatement = "test{print }";
             start(mapleStatement);
         }
     }
 
     public static void start(String mapleStatement) {
         MapleRuntime instance = new MapleRuntime();
-        System.out.println(instance.convert(mapleStatement));
+        MapleResult result = instance.convert(mapleStatement);
+        System.out.println(result);
     }
 
     public static void startFromCmd() {

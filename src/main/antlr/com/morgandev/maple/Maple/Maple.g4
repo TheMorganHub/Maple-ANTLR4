@@ -6,9 +6,6 @@ parse
 
 error
  : UNEXPECTED_CHAR
-   {
-     throw new RuntimeException("UNEXPECTED_CHAR=" + $UNEXPECTED_CHAR.text);
-   }
  ;
 
 maple_stmt_list
@@ -21,7 +18,7 @@ maple_stmt
  ;
 
 maple_block
- : block_action_name block_name? block_params? '{' block_statement+ '}'
+ : block_action_name block_name? block_params? '{' block_statement* '}'
  ;
 
 block_params

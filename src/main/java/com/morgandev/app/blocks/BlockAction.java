@@ -1,5 +1,6 @@
 package com.morgandev.app.blocks;
 
+import com.morgandev.app.errorhandling.MapleParseException;
 import com.morgandev.app.visitors.MapleMainVisitor;
 import com.morgandev.app.gen.MapleParser;
 
@@ -20,8 +21,14 @@ public class BlockAction {
         try {
             method = getClass().getDeclaredMethod(actionName + "Action", MapleParser.Maple_blockContext.class);
             return (String) method.invoke(this, blockContext);
-        } catch (SecurityException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            return null;
+        } catch (InvocationTargetException e) {
+            if (e.getCause() instanceof MapleParseException) {
+                throw (MapleParseException) e.getCause();
+            } else {
+                throw new RuntimeException(e.getCause() != null ? e.getCause() : e);
+            }
+        } catch (SecurityException | NoSuchMethodException | IllegalAccessException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -41,22 +48,18 @@ public class BlockAction {
         visitor.setPreparedMode(true);
         List<MapleParser.Block_statementContext> stmtList = blockContext.block_statement();
         if (stmtList.isEmpty()) {
-            //TODO: return error
-            return "";
+            throw new MapleParseException(10100);
         }
         if (stmtList.get(0).maple_block() != null) {
-            //TODO: return error. Block not allowed here
-            return "";
+            throw new MapleParseException(10101, blockContext, "Prepare");
         }
         if (stmtList.size() > 1) {
-            //TODO: return error. Only one statement allowed
-            return "";
+            throw new MapleParseException(10102, blockContext, "Prepare", 1, stmtList.size());
         }
         preparedStmt += "PREPARE stmt1 FROM '" + visitor.visit(stmtList.get(0)) + "';";
         List<String> literals = visitor.getLiterals();
         if (literals == null || literals.isEmpty()) {
-            //TODO: return error
-            return "";
+            throw new MapleParseException(10103);
         }
         String assignments = "";
         String executeStmt = "\nEXECUTE stmt1 USING ";
@@ -76,7 +79,7 @@ public class BlockAction {
     private String whileAction(MapleParser.Maple_blockContext blockContext) {
         String whileStmt = "WHILE";
         if (blockContext.block_params() != null) {
-            //TODO: return error. WHILE needs condition
+            throw new MapleParseException(10104, blockContext, "While");
         }
         MapleParser.Block_params_expr_declarationContext paramsExprDeclarationContext = blockContext.block_params().block_params_expr_declaration();
         whileStmt += visitor.visit(paramsExprDeclarationContext) + " DO" + parseFreeBlockBody(blockContext) + "\nEND WHILE";

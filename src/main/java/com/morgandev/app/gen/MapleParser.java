@@ -197,7 +197,6 @@ public class MapleParser extends Parser {
 	}
 
 	public static class ErrorContext extends ParserRuleContext {
-		public Token UNEXPECTED_CHAR;
 		public TerminalNode UNEXPECTED_CHAR() { return getToken(MapleParser.UNEXPECTED_CHAR, 0); }
 		public ErrorContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -217,10 +216,7 @@ public class MapleParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(110);
-			((ErrorContext)_localctx).UNEXPECTED_CHAR = match(UNEXPECTED_CHAR);
-
-			     throw new RuntimeException("UNEXPECTED_CHAR=" + (((ErrorContext)_localctx).UNEXPECTED_CHAR!=null?((ErrorContext)_localctx).UNEXPECTED_CHAR.getText():null));
-			   
+			match(UNEXPECTED_CHAR);
 			}
 		}
 		catch (RecognitionException re) {
@@ -259,17 +255,17 @@ public class MapleParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(116);
+			setState(115);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==T__23 || _la==IDENTIFIER) {
 				{
 				{
-				setState(113);
+				setState(112);
 				maple_stmt();
 				}
 				}
-				setState(118);
+				setState(117);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -324,13 +320,13 @@ public class MapleParser extends Parser {
 		enterRule(_localctx, 6, RULE_maple_stmt);
 		int _la;
 		try {
-			setState(131);
+			setState(130);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,4,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(119);
+				setState(118);
 				maple_block();
 				}
 				break;
@@ -338,52 +334,52 @@ public class MapleParser extends Parser {
 				enterOuterAlt(_localctx, 2);
 				{
 				{
-				setState(126);
+				setState(125);
 				_errHandler.sync(this);
 				switch ( getInterpreter().adaptivePredict(_input,2,_ctx) ) {
 				case 1:
 					{
-					setState(120);
+					setState(119);
 					create_table_stmt();
 					}
 					break;
 				case 2:
 					{
-					setState(121);
+					setState(120);
 					insert_stmt();
 					}
 					break;
 				case 3:
 					{
-					setState(122);
+					setState(121);
 					delete_stmt();
 					}
 					break;
 				case 4:
 					{
-					setState(123);
+					setState(122);
 					update_stmt();
 					}
 					break;
 				case 5:
 					{
-					setState(124);
+					setState(123);
 					embedded_sql();
 					}
 					break;
 				case 6:
 					{
-					setState(125);
+					setState(124);
 					select_stmt();
 					}
 					break;
 				}
-				setState(129);
+				setState(128);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==T__0) {
 					{
-					setState(128);
+					setState(127);
 					match(T__0);
 					}
 				}
@@ -438,44 +434,44 @@ public class MapleParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(133);
+			setState(132);
 			block_action_name();
-			setState(135);
+			setState(134);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==IDENTIFIER) {
 				{
-				setState(134);
+				setState(133);
 				block_name();
 				}
 			}
 
-			setState(138);
+			setState(137);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==T__3) {
 				{
-				setState(137);
+				setState(136);
 				block_params();
 				}
 			}
 
-			setState(140);
+			setState(139);
 			match(T__1);
-			setState(142); 
+			setState(143);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			do {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__23) | (1L << K_PRINT) | (1L << IDENTIFIER))) != 0)) {
 				{
 				{
-				setState(141);
+				setState(140);
 				block_statement();
 				}
 				}
-				setState(144); 
+				setState(145);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__23) | (1L << K_PRINT) | (1L << IDENTIFIER))) != 0) );
+			}
 			setState(146);
 			match(T__2);
 			}
@@ -3514,14 +3510,14 @@ public class MapleParser extends Parser {
 		"\4\32\t\32\4\33\t\33\4\34\t\34\4\35\t\35\4\36\t\36\4\37\t\37\4 \t \4!"+
 		"\t!\4\"\t\"\4#\t#\4$\t$\4%\t%\4&\t&\4\'\t\'\4(\t(\4)\t)\4*\t*\4+\t+\4"+
 		",\t,\4-\t-\4.\t.\4/\t/\4\60\t\60\4\61\t\61\4\62\t\62\4\63\t\63\4\64\t"+
-		"\64\4\65\t\65\3\2\3\2\5\2m\n\2\3\2\3\2\3\3\3\3\3\3\3\4\7\4u\n\4\f\4\16"+
-		"\4x\13\4\3\5\3\5\3\5\3\5\3\5\3\5\3\5\5\5\u0081\n\5\3\5\5\5\u0084\n\5\5"+
-		"\5\u0086\n\5\3\6\3\6\5\6\u008a\n\6\3\6\5\6\u008d\n\6\3\6\3\6\6\6\u0091"+
-		"\n\6\r\6\16\6\u0092\3\6\3\6\3\7\3\7\5\7\u0099\n\7\3\b\3\b\3\b\3\b\7\b"+
-		"\u009f\n\b\f\b\16\b\u00a2\13\b\3\b\3\b\3\b\3\b\5\b\u00a8\n\b\3\t\3\t\3"+
-		"\t\3\n\3\n\3\n\3\n\7\n\u00b1\n\n\f\n\16\n\u00b4\13\n\3\n\3\n\3\13\3\13"+
-		"\3\13\3\13\3\13\3\13\3\13\3\13\5\13\u00c0\n\13\3\13\5\13\u00c3\n\13\3"+
-		"\f\3\f\3\f\3\f\5\f\u00c9\n\f\3\r\3\r\3\r\3\r\3\16\3\16\3\16\3\16\3\16"+
+		"\64\4\65\t\65\3\2\3\2\5\2m\n\2\3\2\3\2\3\3\3\3\3\4\7\4t\n\4\f\4\16\4w"+
+		"\13\4\3\5\3\5\3\5\3\5\3\5\3\5\3\5\5\5\u0080\n\5\3\5\5\5\u0083\n\5\5\5"+
+		"\u0085\n\5\3\6\3\6\5\6\u0089\n\6\3\6\5\6\u008c\n\6\3\6\3\6\7\6\u0090\n"+
+		"\6\f\6\16\6\u0093\13\6\3\6\3\6\3\7\3\7\5\7\u0099\n\7\3\b\3\b\3\b\3\b\7"+
+		"\b\u009f\n\b\f\b\16\b\u00a2\13\b\3\b\3\b\3\b\3\b\5\b\u00a8\n\b\3\t\3\t"+
+		"\3\t\3\n\3\n\3\n\3\n\7\n\u00b1\n\n\f\n\16\n\u00b4\13\n\3\n\3\n\3\13\3"+
+		"\13\3\13\3\13\3\13\3\13\3\13\3\13\5\13\u00c0\n\13\3\13\5\13\u00c3\n\13"+
+		"\3\f\3\f\3\f\3\f\5\f\u00c9\n\f\3\r\3\r\3\r\3\r\3\16\3\16\3\16\3\16\3\16"+
 		"\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\5\16\u00dd\n\16\3\17\3\17"+
 		"\3\17\5\17\u00e2\n\17\3\20\3\20\3\20\3\20\3\20\7\20\u00e9\n\20\f\20\16"+
 		"\20\u00ec\13\20\7\20\u00ee\n\20\f\20\16\20\u00f1\13\20\3\20\3\20\3\21"+
@@ -3552,8 +3548,8 @@ public class MapleParser extends Parser {
 		"\3\65\f\u00a0\u00b2\u00ea\u00ef\u012b\u0158\u0163\u0172\u017a\u021d\3"+
 		"L\66\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*,.\60\62\64\668:<>@"+
 		"BDFHJLNPRTVXZ\\^`bdfh\2\7\3\2=>\3\2\17\21\3\2\22\23\7\2\t\t\24\31%\'*"+
-		"*-\60\3\2+,\2\u0242\2l\3\2\2\2\4p\3\2\2\2\6v\3\2\2\2\b\u0085\3\2\2\2\n"+
-		"\u0087\3\2\2\2\f\u0098\3\2\2\2\16\u00a7\3\2\2\2\20\u00a9\3\2\2\2\22\u00ac"+
+		"*-\60\3\2+,\2\u0242\2l\3\2\2\2\4p\3\2\2\2\6u\3\2\2\2\b\u0084\3\2\2\2\n"+
+		"\u0086\3\2\2\2\f\u0098\3\2\2\2\16\u00a7\3\2\2\2\20\u00a9\3\2\2\2\22\u00ac"+
 		"\3\2\2\2\24\u00bf\3\2\2\2\26\u00c4\3\2\2\2\30\u00ca\3\2\2\2\32\u00dc\3"+
 		"\2\2\2\34\u00e1\3\2\2\2\36\u00e3\3\2\2\2 \u00f6\3\2\2\2\"\u00f8\3\2\2"+
 		"\2$\u00ff\3\2\2\2&\u0104\3\2\2\2(\u010b\3\2\2\2*\u0110\3\2\2\2,\u0126"+
@@ -3564,23 +3560,23 @@ public class MapleParser extends Parser {
 		"\2\2R\u01fd\3\2\2\2T\u0201\3\2\2\2V\u0203\3\2\2\2X\u0205\3\2\2\2Z\u0207"+
 		"\3\2\2\2\\\u0209\3\2\2\2^\u020b\3\2\2\2`\u020e\3\2\2\2b\u0212\3\2\2\2"+
 		"d\u0214\3\2\2\2f\u0216\3\2\2\2h\u021d\3\2\2\2jm\5\6\4\2km\5\4\3\2lj\3"+
-		"\2\2\2lk\3\2\2\2mn\3\2\2\2no\7\2\2\3o\3\3\2\2\2pq\7B\2\2qr\b\3\1\2r\5"+
-		"\3\2\2\2su\5\b\5\2ts\3\2\2\2ux\3\2\2\2vt\3\2\2\2vw\3\2\2\2w\7\3\2\2\2"+
-		"xv\3\2\2\2y\u0086\5\n\6\2z\u0081\5\36\20\2{\u0081\5\60\31\2|\u0081\5."+
-		"\30\2}\u0081\5*\26\2~\u0081\5f\64\2\177\u0081\5\64\33\2\u0080z\3\2\2\2"+
-		"\u0080{\3\2\2\2\u0080|\3\2\2\2\u0080}\3\2\2\2\u0080~\3\2\2\2\u0080\177"+
-		"\3\2\2\2\u0081\u0083\3\2\2\2\u0082\u0084\7\3\2\2\u0083\u0082\3\2\2\2\u0083"+
-		"\u0084\3\2\2\2\u0084\u0086\3\2\2\2\u0085y\3\2\2\2\u0085\u0080\3\2\2\2"+
-		"\u0086\t\3\2\2\2\u0087\u0089\5R*\2\u0088\u008a\5P)\2\u0089\u0088\3\2\2"+
-		"\2\u0089\u008a\3\2\2\2\u008a\u008c\3\2\2\2\u008b\u008d\5\f\7\2\u008c\u008b"+
-		"\3\2\2\2\u008c\u008d\3\2\2\2\u008d\u008e\3\2\2\2\u008e\u0090\7\4\2\2\u008f"+
-		"\u0091\5\24\13\2\u0090\u008f\3\2\2\2\u0091\u0092\3\2\2\2\u0092\u0090\3"+
-		"\2\2\2\u0092\u0093\3\2\2\2\u0093\u0094\3\2\2\2\u0094\u0095\7\5\2\2\u0095"+
-		"\13\3\2\2\2\u0096\u0099\5\16\b\2\u0097\u0099\5\22\n\2\u0098\u0096\3\2"+
-		"\2\2\u0098\u0097\3\2\2\2\u0099\r\3\2\2\2\u009a\u009b\7\6\2\2\u009b\u00a0"+
-		"\5\20\t\2\u009c\u009d\7\7\2\2\u009d\u009f\5\20\t\2\u009e\u009c\3\2\2\2"+
-		"\u009f\u00a2\3\2\2\2\u00a0\u00a1\3\2\2\2\u00a0\u009e\3\2\2\2\u00a1\u00a3"+
-		"\3\2\2\2\u00a2\u00a0\3\2\2\2\u00a3\u00a4\7\b\2\2\u00a4\u00a8\3\2\2\2\u00a5"+
+		"\2\2\2lk\3\2\2\2mn\3\2\2\2no\7\2\2\3o\3\3\2\2\2pq\7B\2\2q\5\3\2\2\2rt"+
+		"\5\b\5\2sr\3\2\2\2tw\3\2\2\2us\3\2\2\2uv\3\2\2\2v\7\3\2\2\2wu\3\2\2\2"+
+		"x\u0085\5\n\6\2y\u0080\5\36\20\2z\u0080\5\60\31\2{\u0080\5.\30\2|\u0080"+
+		"\5*\26\2}\u0080\5f\64\2~\u0080\5\64\33\2\177y\3\2\2\2\177z\3\2\2\2\177"+
+		"{\3\2\2\2\177|\3\2\2\2\177}\3\2\2\2\177~\3\2\2\2\u0080\u0082\3\2\2\2\u0081"+
+		"\u0083\7\3\2\2\u0082\u0081\3\2\2\2\u0082\u0083\3\2\2\2\u0083\u0085\3\2"+
+		"\2\2\u0084x\3\2\2\2\u0084\177\3\2\2\2\u0085\t\3\2\2\2\u0086\u0088\5R*"+
+		"\2\u0087\u0089\5P)\2\u0088\u0087\3\2\2\2\u0088\u0089\3\2\2\2\u0089\u008b"+
+		"\3\2\2\2\u008a\u008c\5\f\7\2\u008b\u008a\3\2\2\2\u008b\u008c\3\2\2\2\u008c"+
+		"\u008d\3\2\2\2\u008d\u0091\7\4\2\2\u008e\u0090\5\24\13\2\u008f\u008e\3"+
+		"\2\2\2\u0090\u0093\3\2\2\2\u0091\u008f\3\2\2\2\u0091\u0092\3\2\2\2\u0092"+
+		"\u0094\3\2\2\2\u0093\u0091\3\2\2\2\u0094\u0095\7\5\2\2\u0095\13\3\2\2"+
+		"\2\u0096\u0099\5\16\b\2\u0097\u0099\5\22\n\2\u0098\u0096\3\2\2\2\u0098"+
+		"\u0097\3\2\2\2\u0099\r\3\2\2\2\u009a\u009b\7\6\2\2\u009b\u00a0\5\20\t"+
+		"\2\u009c\u009d\7\7\2\2\u009d\u009f\5\20\t\2\u009e\u009c\3\2\2\2\u009f"+
+		"\u00a2\3\2\2\2\u00a0\u00a1\3\2\2\2\u00a0\u009e\3\2\2\2\u00a1\u00a3\3\2"+
+		"\2\2\u00a2\u00a0\3\2\2\2\u00a3\u00a4\7\b\2\2\u00a4\u00a8\3\2\2\2\u00a5"+
 		"\u00a6\7\6\2\2\u00a6\u00a8\7\b\2\2\u00a7\u009a\3\2\2\2\u00a7\u00a5\3\2"+
 		"\2\2\u00a8\17\3\2\2\2\u00a9\u00aa\5:\36\2\u00aa\u00ab\5d\63\2\u00ab\21"+
 		"\3\2\2\2\u00ac\u00ad\7\6\2\2\u00ad\u00b2\5L\'\2\u00ae\u00af\7\7\2\2\u00af"+
@@ -3704,7 +3700,7 @@ public class MapleParser extends Parser {
 		"\7<\2\2\u0215e\3\2\2\2\u0216\u0217\7\32\2\2\u0217\u0218\5h\65\2\u0218"+
 		"\u0219\7\33\2\2\u0219g\3\2\2\2\u021a\u021c\13\2\2\2\u021b\u021a\3\2\2"+
 		"\2\u021c\u021f\3\2\2\2\u021d\u021e\3\2\2\2\u021d\u021b\3\2\2\2\u021ei"+
-		"\3\2\2\2\u021f\u021d\3\2\2\2Alv\u0080\u0083\u0085\u0089\u008c\u0092\u0098"+
+		"\3\2\2\2\u021f\u021d\3\2\2\2Alu\177\u0082\u0084\u0088\u008b\u0091\u0098"+
 		"\u00a0\u00a7\u00b2\u00bf\u00c2\u00c8\u00dc\u00e1\u00ea\u00ef\u00f6\u00fa"+
 		"\u00fd\u0104\u0109\u0110\u0119\u0121\u0124\u012b\u0131\u0136\u013b\u0144"+
 		"\u0149\u014d\u0151\u0158\u015b\u0163\u016a\u0172\u0175\u017a\u017d\u0180"+

@@ -1,5 +1,6 @@
 package com.morgandev.app.visitors;
 
+import com.morgandev.app.errorhandling.MapleParseException;
 import com.morgandev.app.gen.MapleParser;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public class UpdateVisitor extends AbstractMapleVisitor {
         List<MapleParser.Column_nameContext> columnNameContexts = ctx.column_name();
         List<MapleParser.ExprContext> exprContexts = ctx.update_value_set().expr();
         if (exprContexts.size() != columnNameContexts.size()) {
-            //TODO: ERROR hay más valores que columnas o viceversa
+            throw new MapleParseException(10200, ctx);
         }
         int columnCount = 0;
         for (MapleParser.Column_nameContext columnNameCtx : columnNameContexts) {
