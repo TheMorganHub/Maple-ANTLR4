@@ -48,7 +48,7 @@ public class BlockAction {
         visitor.setPreparedMode(true);
         List<MapleParser.Block_statementContext> stmtList = blockContext.block_statement();
         if (stmtList.isEmpty()) {
-            throw new MapleParseException(10100);
+            throw new MapleParseException(10100, blockContext, "Prepare");
         }
         if (stmtList.get(0).maple_block() != null) {
             throw new MapleParseException(10101, blockContext, "Prepare");

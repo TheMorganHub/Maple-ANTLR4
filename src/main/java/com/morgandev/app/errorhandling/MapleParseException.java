@@ -48,7 +48,7 @@ public class MapleParseException extends RuntimeException {
         if (parseContext != null) {
             int line = parseContext.getStart().getLine() + 1;
             int col = parseContext.getStart().getCharPositionInLine();
-            nearLine = "(" + line + ":" + col + ")";
+            nearLine = " At line " + line + ":" + col + ".";
         }
         return errorHandler.getMessage(errorCode, args) + nearLine;
     }

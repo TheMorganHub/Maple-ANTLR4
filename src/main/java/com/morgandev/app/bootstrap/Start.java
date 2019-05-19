@@ -10,7 +10,7 @@ public class Start {
         if (args.length > 0) {
             startFromCmd();
         } else {
-            String mapleStatement = "test{print }";
+            String mapleStatement = "prepare {}";
             start(mapleStatement);
         }
     }
