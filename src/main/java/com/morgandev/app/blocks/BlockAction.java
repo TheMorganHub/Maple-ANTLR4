@@ -81,7 +81,9 @@ public class BlockAction {
 
     private String whileAction(MapleParser.Maple_blockContext blockContext) {
         String whileStmt = "WHILE";
-        if (blockContext.block_params() != null) {
+        MapleParser.Block_paramsContext blockParams = blockContext.block_params();
+        MapleParser.Block_params_expr_declarationContext blockParamsExprDeclaration = blockParams != null ? blockParams.block_params_expr_declaration() : null;
+        if (blockParams == null || blockParamsExprDeclaration == null) {
             throw new MapleParseException(10104, blockContext, "While");
         }
         MapleParser.Block_params_expr_declarationContext paramsExprDeclarationContext = blockContext.block_params().block_params_expr_declaration();
