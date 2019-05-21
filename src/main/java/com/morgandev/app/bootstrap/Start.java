@@ -10,7 +10,7 @@ public class Start {
         if (args.length > 0) {
             startFromCmd();
         } else {
-            String mapleStatement = "prepare {}";
+            String mapleStatement = "prepare(1) {people -> name ? age > :?}";
             start(mapleStatement);
         }
     }

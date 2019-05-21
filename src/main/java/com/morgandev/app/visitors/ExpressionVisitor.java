@@ -33,6 +33,9 @@ public class ExpressionVisitor extends AbstractMapleVisitor {
         if (ctx.literal_value() != null) {
             return " " + visit(ctx.literal_value());
         }
+        if (ctx.prepared_literal_value() != null) {
+            return " " + visit(ctx.prepared_literal_value());
+        }
 
         //an expression enclosed in parentheses would fall into this category
         if (ctx.left == null && ctx.right == null && ctx.operator == null) {

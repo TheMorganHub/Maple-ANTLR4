@@ -1,6 +1,7 @@
 package com.morgandev.app.blocks;
 
 import com.morgandev.app.errorhandling.MapleParseException;
+import com.morgandev.app.visitors.BlockVisitor;
 import com.morgandev.app.visitors.MapleMainVisitor;
 import com.morgandev.app.gen.MapleParser;
 
@@ -45,7 +46,6 @@ public class BlockAction {
 
     private String prepareAction(MapleParser.Maple_blockContext blockContext) {
         String preparedStmt = "";
-        visitor.setPreparedMode(true);
         List<MapleParser.Block_statementContext> stmtList = blockContext.block_statement();
         if (stmtList.isEmpty()) {
             throw new MapleParseException(10100, blockContext, "Prepare");
@@ -56,23 +56,26 @@ public class BlockAction {
         if (stmtList.size() > 1) {
             throw new MapleParseException(10102, blockContext, "Prepare", 1, stmtList.size());
         }
-        preparedStmt += "PREPARE stmt1 FROM '" + visitor.visit(stmtList.get(0)) + "';";
-        List<String> literals = visitor.getLiterals();
-        if (literals == null || literals.isEmpty()) {
-            throw new MapleParseException(10103);
+        MapleParser.Block_paramsContext paramsContext = blockContext.block_params();
+        MapleParser.Block_params_expr_declarationContext paramsExprDeclarationContext = paramsContext != null ? blockContext.block_params().block_params_expr_declaration() : null;
+        if (paramsContext == null || paramsExprDeclarationContext == null) {
+            throw new MapleParseException(10105, blockContext, "Prepare");
         }
+
+        preparedStmt += "PREPARE stmt1 FROM '" + BlockVisitor.getInstance().visitStatementAsPrepared(stmtList.get(0)) + "';";
+
         String assignments = "";
         String executeStmt = "\nEXECUTE stmt1 USING ";
         String deallocateStmt = "\nDEALLOCATE PREPARE stmt1";
-        for (int i = 0; i < literals.size(); i++) {
-            String valName = "@val" + i;
-            assignments += "\nSET " + valName + " = " + literals.get(i) + ";";
+        List<MapleParser.ExprContext> paramsExpressions = paramsExprDeclarationContext.expr();
+        for (int i = 0; i < paramsExpressions.size(); i++) {
+            String valName = "@val" + (i + 1);
+            assignments += "\nSET " + valName + " =" + visitor.visit(paramsExpressions.get(i)) + ";";
             executeStmt += (i == 0 ? "" : ", ") + valName;
         }
         executeStmt += ";";
         preparedStmt += assignments + executeStmt + deallocateStmt;
 
-        visitor.setPreparedMode(false);
         return preparedStmt;
     }
 

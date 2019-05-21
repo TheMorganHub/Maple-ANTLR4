@@ -5,13 +5,9 @@ import com.morgandev.app.gen.MapleParser;
 import com.morgandev.app.errorhandling.MapleParseException;
 import org.antlr.v4.runtime.misc.Interval;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MapleMainVisitor extends MapleBaseVisitor<String> {
-
-    private boolean preparedMode;
-    private List<String> literals;
 
     private static MapleMainVisitor ourInstance = new MapleMainVisitor();
 
@@ -20,21 +16,6 @@ public class MapleMainVisitor extends MapleBaseVisitor<String> {
     }
 
     private MapleMainVisitor() {
-    }
-
-    /**
-     * If prepared mode is enabled, the Maple engine will replace all literals it encounters with a '?' and store them
-     * in order in a list for processing at a later time. This mode is necessary for prepared blocks.
-     *
-     * @param flag
-     */
-    public void setPreparedMode(boolean flag) {
-        this.preparedMode = flag;
-        literals = !flag ? null : new ArrayList<>();
-    }
-
-    public List<String> getLiterals() {
-        return literals;
     }
 
     @Override
@@ -118,6 +99,11 @@ public class MapleMainVisitor extends MapleBaseVisitor<String> {
     @Override
     public String visitBlock_statement(MapleParser.Block_statementContext ctx) {
         return BlockVisitor.getInstance().visitBlock_statement(ctx);
+    }
+
+    @Override
+    public String visitPrepared_literal_value(MapleParser.Prepared_literal_valueContext ctx) {
+        return BlockVisitor.getInstance().visitPrepared_literal_value(ctx);
     }
 
     @Override
@@ -254,10 +240,7 @@ public class MapleMainVisitor extends MapleBaseVisitor<String> {
 
     @Override
     public String visitLiteral_value(MapleParser.Literal_valueContext ctx) {
-        if (preparedMode) {
-            literals.add(ctx.getText());
-        }
-        return (preparedMode ? "?" : ctx.getText());
+        return ctx.getText();
     }
 
     @Override

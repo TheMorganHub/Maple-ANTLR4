@@ -1,12 +1,14 @@
 package com.morgandev.app.visitors;
 
 import com.morgandev.app.blocks.BlockAction;
+import com.morgandev.app.errorhandling.MapleParseException;
 import com.morgandev.app.gen.MapleParser;
 
 import java.util.List;
 
 public class BlockVisitor extends AbstractMapleVisitor {
 
+    private boolean preparedMode;
     private static BlockVisitor ourInstance = new BlockVisitor();
 
     public static BlockVisitor getInstance() {
@@ -14,6 +16,10 @@ public class BlockVisitor extends AbstractMapleVisitor {
     }
 
     private BlockVisitor() {
+    }
+
+    public boolean isPreparedMode() {
+        return preparedMode;
     }
 
     @Override
@@ -79,5 +85,36 @@ public class BlockVisitor extends AbstractMapleVisitor {
     @Override
     public String visitBlock_datatype_param(MapleParser.Block_datatype_paramContext ctx) {
         return ctx.any_name().getText() + " " + visit(ctx.parameter_type());
+    }
+
+    /**
+     * Returns '?' for every prepared variable ':?' it encounters during parsing. If this method is called and <code>preparedMode</code>
+     * is <code>false</code>, a {@link MapleParseException} with error code 10103 will be raised. Ideally, this method
+     * will only be called while parsing prepared blocks.
+     *
+     * @param ctx the context
+     * @return '?' if <code>preparedMode</code> is <code>true</code>, otherwise an MapleParseException is raised.
+     */
+    @Override
+    public String visitPrepared_literal_value(MapleParser.Prepared_literal_valueContext ctx) {
+        if (!preparedMode) {
+            throw new MapleParseException(10103, ctx);
+        }
+        return "?";
+    }
+
+    /**
+     * Visits the statement within the given {@link com.morgandev.app.gen.MapleParser.Block_statementContext} treating
+     * it as prepared. If a statement is prepared, all prepared literal values ':?' found within the statement will be
+     * replaced with '?'. Used for prepared blocks.
+     *
+     * @param blockStatementContext
+     * @return
+     */
+    public String visitStatementAsPrepared(MapleParser.Block_statementContext blockStatementContext) {
+        preparedMode = true;
+        String stmt = visitBlock_statement(blockStatementContext);
+        preparedMode = false;
+        return stmt;
     }
 }

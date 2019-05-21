@@ -299,6 +299,12 @@ public interface MapleVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSigned_number(MapleParser.Signed_numberContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link MapleParser#prepared_literal_value}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPrepared_literal_value(MapleParser.Prepared_literal_valueContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link MapleParser#literal_value}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

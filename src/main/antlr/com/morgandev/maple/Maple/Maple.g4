@@ -164,7 +164,7 @@ result_column
  ;
 
 expr
- : literal_value
+ : literal_value | prepared_literal_value
  | ( ( database_name '.' )? table_name '.' )? column_name
  | left=expr operator=( '*' | '/' | '%' ) right=expr
  | left=expr operator=( '+' | '-' ) right=expr
@@ -218,6 +218,10 @@ column_alias
 
 signed_number
  : ( '+' | '-' )? NUMERIC_LITERAL
+ ;
+
+prepared_literal_value
+ : ':?'
  ;
 
 literal_value
