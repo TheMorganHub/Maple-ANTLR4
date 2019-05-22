@@ -13,12 +13,28 @@ maple_stmt_list
  ;
 
 maple_stmt
- : maple_block | ( ( create_table_stmt | insert_stmt
+ : maple_block | complex_block | ( ( create_table_stmt | insert_stmt
  | delete_stmt | update_stmt | embedded_sql | select_stmt ) ( ';' )? )
+ ;
+
+complex_block
+ : if_block
  ;
 
 maple_block
  : block_action_name block_name? block_params? '{' block_statement* '}'
+ ;
+
+if_block
+ : K_IF block_params_expr_declaration '{' block_statement* '}' ( elseif_block )*? ( else_block )?
+ ;
+
+elseif_block
+ : K_ELSEIF block_params_expr_declaration '{' block_statement* '}'
+ ;
+
+else_block
+ : K_ELSE '{' block_statement* '}'
  ;
 
 block_params
@@ -39,8 +55,8 @@ block_params_expr_declaration
 
 block_statement
  : ( insert_stmt | delete_stmt | update_stmt
- | embedded_sql | maple_block | variable_stmt
- | utility_stmt | select_stmt ) ( ';' )?
+ | embedded_sql | maple_block | complex_block
+ | variable_stmt | utility_stmt | select_stmt ) ( ';' )?
  ;
 
 variable_declaration_stmt
@@ -253,6 +269,9 @@ K_PK : '$';
 K_AND : A N D;
 K_NOTBETWEEN : K_NOT SPACES+ K_BETWEEN;
 K_BETWEEN : B E T W E E N;
+K_IF : I F;
+K_ELSEIF : E L S E I F;
+K_ELSE : E L S E;
 K_IN : I N;
 K_INNER : I N N E R;
 K_INTO : I N T O;

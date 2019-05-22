@@ -1,5 +1,10 @@
 package com.morgandev.app.utils;
 
+import com.morgandev.app.gen.MapleParser;
+import com.morgandev.app.visitors.MapleMainVisitor;
+
+import java.util.List;
+
 public class MapleUtils {
 
     /**
@@ -27,5 +32,16 @@ public class MapleUtils {
         }
 
         return alias;
+    }
+
+    public static String parseFreeBlockBody(List<MapleParser.Block_statementContext> blockStmtList) {
+        if (blockStmtList.isEmpty()) {
+            return "";
+        }
+        String freeStmt = "";
+        for (int i = 0; i < blockStmtList.size(); i++) {
+            freeStmt += (i == 0 ? "" : ";") + "\n" + MapleMainVisitor.getInstance().visit(blockStmtList.get(i));
+        }
+        return freeStmt.endsWith(";") ? freeStmt : freeStmt + ";";
     }
 }

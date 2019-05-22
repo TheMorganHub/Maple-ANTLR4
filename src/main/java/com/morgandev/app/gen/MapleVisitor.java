@@ -35,11 +35,35 @@ public interface MapleVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitMaple_stmt(MapleParser.Maple_stmtContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link MapleParser#complex_block}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitComplex_block(MapleParser.Complex_blockContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link MapleParser#maple_block}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitMaple_block(MapleParser.Maple_blockContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MapleParser#if_block}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIf_block(MapleParser.If_blockContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MapleParser#elseif_block}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitElseif_block(MapleParser.Elseif_blockContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MapleParser#else_block}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitElse_block(MapleParser.Else_blockContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MapleParser#block_params}.
 	 * @param ctx the parse tree

@@ -51,6 +51,7 @@ public class MapleMainVisitor extends MapleBaseVisitor<String> {
         MapleParser.Update_stmtContext updateStmtContext;
         MapleParser.Delete_stmtContext deleteStmtContext;
         MapleParser.Maple_blockContext mapleBlockContext;
+        MapleParser.Complex_blockContext complexBlockContext;
 
         if ((selectStmtContext = ctx.select_stmt()) != null) {
             return visit(selectStmtContext);
@@ -73,7 +74,15 @@ public class MapleMainVisitor extends MapleBaseVisitor<String> {
         if ((mapleBlockContext = ctx.maple_block()) != null) {
             return visit(mapleBlockContext);
         }
+        if ((complexBlockContext = ctx.complex_block()) != null) {
+            return visit(complexBlockContext);
+        }
         return "";
+    }
+
+    @Override
+    public String visitComplex_block(MapleParser.Complex_blockContext ctx) {
+        return ComplexBlockVisitor.getInstance().visitComplex_block(ctx);
     }
 
     @Override
@@ -199,6 +208,11 @@ public class MapleMainVisitor extends MapleBaseVisitor<String> {
     @Override
     public String visitJoin_constraint(MapleParser.Join_constraintContext ctx) {
         return JoinVisitor.getInstance().visitJoin_constraint(ctx);
+    }
+
+    @Override
+    public String visitIf_block(MapleParser.If_blockContext ctx) {
+        return ComplexBlockVisitor.getInstance().visitIf_block(ctx);
     }
 
     @Override

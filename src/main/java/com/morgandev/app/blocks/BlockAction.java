@@ -1,6 +1,7 @@
 package com.morgandev.app.blocks;
 
 import com.morgandev.app.errorhandling.MapleParseException;
+import com.morgandev.app.utils.MapleUtils;
 import com.morgandev.app.visitors.BlockVisitor;
 import com.morgandev.app.visitors.MapleMainVisitor;
 import com.morgandev.app.gen.MapleParser;
@@ -40,7 +41,7 @@ public class BlockAction {
         }
         String procedureStmt = "DELIMITER //\n CREATE PROCEDURE `" + blockContext.block_name().getText() + "`";
         String paramsStmt = "(" + visitor.visit(blockContext.block_params().block_params_declaration()) + ")";
-        String procedureBody = "\nBEGIN" + parseFreeBlockBody(blockContext) + "\nEND//\nDELIMITER ;";
+        String procedureBody = "\nBEGIN" + MapleUtils.parseFreeBlockBody(blockContext.block_statement()) + "\nEND//\nDELIMITER ;";
         return procedureStmt + paramsStmt + procedureBody;
     }
 
@@ -87,21 +88,14 @@ public class BlockAction {
             throw new MapleParseException(10104, blockContext, "While");
         }
         MapleParser.Block_params_expr_declarationContext paramsExprDeclarationContext = blockContext.block_params().block_params_expr_declaration();
-        whileStmt += visitor.visit(paramsExprDeclarationContext) + " DO" + parseFreeBlockBody(blockContext) + "\nEND WHILE";
+        whileStmt += " " + visitor.visit(paramsExprDeclarationContext) + " DO" + MapleUtils.parseFreeBlockBody(blockContext.block_statement()) + "\nEND WHILE";
         return whileStmt;
     }
 
     private String testAction(MapleParser.Maple_blockContext blockContext) {
-        return parseFreeBlockBody(blockContext);
+        return MapleUtils.parseFreeBlockBody(blockContext.block_statement());
     }
 
-    private String parseFreeBlockBody(MapleParser.Maple_blockContext blockContext) {
-        String freeStmt = "";
-        List<MapleParser.Block_statementContext> blockStmtContext = blockContext.block_statement();
-        for (int i = 0; i < blockStmtContext.size(); i++) {
-            freeStmt += (i == 0 ? "" : ";") + "\n" + visitor.visit(blockStmtContext.get(i));
-        }
-        return freeStmt.endsWith(";") ? freeStmt : freeStmt + ";";
-    }
+
 
 }

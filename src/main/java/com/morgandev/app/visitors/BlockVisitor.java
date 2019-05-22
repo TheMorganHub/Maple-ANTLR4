@@ -42,6 +42,9 @@ public class BlockVisitor extends AbstractMapleVisitor {
         if (ctx.maple_block() != null) {
             return visit(ctx.maple_block());
         }
+        if (ctx.complex_block() != null) {
+            return visit(ctx.complex_block());
+        }
         if (ctx.embedded_sql() != null) {
             return visit(ctx.embedded_sql());
         }
