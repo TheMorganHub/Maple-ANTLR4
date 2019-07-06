@@ -10,15 +10,7 @@ public class Start {
         if (args.length > 0) {
             startFromCmd();
         } else {
-            String mapleStatement = "procedure calcularNota(int nota) {\n" +
-                    "\tif (nota >= 4 and nota <= 10) {\n" +
-                    "    \tprint 'Aprobado';\n" +
-                    "    } elseif (nota >= 1 and nota <= 3) {\n" +
-                    "    \tprint 'Reprobado';\n" +
-                    "    } else {\n" +
-                    "    \tprint 'Nota invalida';\n" +
-                    "    }\n" +
-                    "}";
+            String mapleStatement = "personas(nombre varchar, ciudad)";
             start(mapleStatement);
         }
     }
